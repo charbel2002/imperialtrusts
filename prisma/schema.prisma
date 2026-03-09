@@ -1,0 +1,288 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Users ────────────────────────────────────────────────
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  email           String    @unique
+  password        String
+  role            Role      @default(CLIENT)
+  language        String    @default("en") @db.VarChar(5)
+  isActive        Boolean   @default(true) @map("is_active")
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  account         Account?
+  cards           Card[]
+  beneficiaries   Beneficiary[]
+  transactions    Transaction[]
+  kycDocument     KycDocument?
+  notifications   Notification[]
+  loanApplications LoanApplication[]
+  adminLogs       AdminLog[]    @relation("AdminLogs")
+
+  @@map("users")
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+// ─── Accounts ─────────────────────────────────────────────
+
+model Account {
+  id            String        @id @default(cuid())
+  userId        String        @unique @map("user_id")
+  accountNumber String        @unique @map("account_number")
+  iban          String?       @unique
+  balance       Decimal       @default(0) @db.Decimal(16, 2)
+  currency      String        @default("USD") @db.VarChar(3)
+  status        AccountStatus @default(ACTIVE)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions  Transaction[]
+
+  @@map("accounts")
+}
+
+enum AccountStatus {
+  ACTIVE
+  LOCKED
+  SUSPENDED
+}
+
+// ─── Cards ────────────────────────────────────────────────
+
+model Card {
+  id             String     @id @default(cuid())
+  userId         String     @map("user_id")
+  cardNumber     String     @unique @map("card_number")
+  cardType       CardType   @default(VISA) @map("card_type")
+  expirationDate DateTime   @map("expiration_date")
+  cvv            String
+  balance        Decimal    @default(0) @db.Decimal(16, 2)
+  status         CardStatus @default(ACTIVE)
+  createdAt      DateTime   @default(now()) @map("created_at")
+  updatedAt      DateTime   @updatedAt @map("updated_at")
+
+  user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("cards")
+}
+
+enum CardType {
+  VISA
+  MASTERCARD
+}
+
+enum CardStatus {
+  ACTIVE
+  FROZEN
+  EXPIRED
+  CANCELLED
+}
+
+// ─── Beneficiaries ────────────────────────────────────────
+
+model Beneficiary {
+  id            String   @id @default(cuid())
+  userId        String   @map("user_id")
+  name          String
+  bankName      String   @map("bank_name")
+  accountNumber String   @map("account_number")
+  swift         String?
+  country       String
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions  Transaction[]
+
+  @@map("beneficiaries")
+}
+
+// ─── Transactions ─────────────────────────────────────────
+
+model Transaction {
+  id            String            @id @default(cuid())
+  userId        String            @map("user_id")
+  accountId     String            @map("account_id")
+  beneficiaryId String?           @map("beneficiary_id")
+  type          TransactionType
+  amount        Decimal           @db.Decimal(16, 2)
+  currency      String            @default("USD") @db.VarChar(3)
+  description   String?           @db.Text
+  reference     String            @unique
+  status        TransactionStatus @default(INITIALIZED)
+  progress      Int               @default(0)
+  adminNote     String?           @map("admin_note") @db.Text
+  processedAt   DateTime?         @map("processed_at")
+  createdAt     DateTime          @default(now()) @map("created_at")
+  updatedAt     DateTime          @updatedAt @map("updated_at")
+
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account       Account           @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  beneficiary   Beneficiary?      @relation(fields: [beneficiaryId], references: [id], onDelete: SetNull)
+  locks         TransactionLock[]
+
+  @@index([userId, status])
+  @@index([accountId, type])
+  @@map("transactions")
+}
+
+enum TransactionType {
+  TRANSFER
+  DEPOSIT
+  WITHDRAWAL
+  ADMIN_CREDIT
+  ADMIN_DEBIT
+  CARD_TRANSFER
+  LOAN_DISBURSEMENT
+}
+
+enum TransactionStatus {
+  INITIALIZED
+  PENDING
+  LOCKED
+  PROCESSING
+  COMPLETED
+  REJECTED
+  CANCELLED
+}
+
+// ─── Transaction Locks ────────────────────────────────────
+
+model TransactionLock {
+  id            String    @id @default(cuid())
+  transactionId String    @map("transaction_id")
+  motif         String
+  securityCode  String    @map("security_code")
+  percentage    Int       @default(50)
+  isResolved    Boolean   @default(false) @map("is_resolved")
+  resolvedAt    DateTime? @map("resolved_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@map("transaction_locks")
+}
+
+// ─── KYC Documents ────────────────────────────────────────
+
+model KycDocument {
+  id              String    @id @default(cuid())
+  userId          String    @unique @map("user_id")
+  fullLegalName   String    @map("full_legal_name")
+  dateOfBirth     DateTime  @map("date_of_birth")
+  address         String    @db.Text
+  nationalId      String    @map("national_id")
+  idDocumentPath  String    @map("id_document_path")
+  selfiePath      String    @map("selfie_path")
+  status          KycStatus @default(PENDING)
+  rejectionReason String?   @map("rejection_reason") @db.Text
+  reviewedAt      DateTime? @map("reviewed_at")
+  reviewedBy      String?   @map("reviewed_by")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("kyc_documents")
+}
+
+enum KycStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ─── Notifications ────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  title     String
+  message   String   @db.Text
+  type      String   @default("info")
+  isRead    Boolean  @default(false) @map("is_read")
+  readAt    DateTime? @map("read_at")
+  data      Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+// ─── Loan Applications ────────────────────────────────────
+
+model LoanApplication {
+  id             String         @id @default(cuid())
+  userId         String?        @map("user_id")
+  email          String
+  amount         Decimal        @db.Decimal(16, 2)
+  durationMonths Int            @map("duration_months")
+  interestRate   Decimal        @map("interest_rate") @db.Decimal(5, 2)
+  monthlyPayment Decimal        @map("monthly_payment") @db.Decimal(16, 2)
+  totalRepayment Decimal        @map("total_repayment") @db.Decimal(16, 2)
+  status         LoanStatus     @default(PENDING)
+  adminNote      String?        @map("admin_note") @db.Text
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  user           User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("loan_applications")
+}
+
+enum LoanStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ─── System Settings ──────────────────────────────────────
+
+model SystemSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String?  @db.Text
+  type      String   @default("string")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("system_settings")
+}
+
+// ─── Admin Logs ───────────────────────────────────────────
+
+model AdminLog {
+  id          String   @id @default(cuid())
+  adminId     String   @map("admin_id")
+  action      String
+  targetType  String?  @map("target_type")
+  targetId    String?  @map("target_id")
+  description String?  @db.Text
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  admin       User     @relation("AdminLogs", fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([targetType, targetId])
+  @@map("admin_logs")
+}

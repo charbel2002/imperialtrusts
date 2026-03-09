@@ -1,0 +1,77 @@
+# Node
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Next.js
+.next/
+out/
+build/
+.next/cache/
+
+# Production
+dist/
+
+# Environment files (keep example files tracked)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env.*.local
+*.secret
+!.env.example
+
+# Prisma local DB files
+prisma/dev.db
+prisma/dev.db-journal
+*.sqlite
+*.db
+
+# Uploaded files and generated media (do not commit large user uploads)
+/public/uploads/
+/public/avatars/
+
+# Coverage
+coverage/
+.nyc_output/
+.coverage
+.c8/
+
+# Build caches
+.cache/
+.cache-loader/
+dist/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+.env.*.local
+.firebase/
+.vercel/
+.netlify/
+.parcel-cache/
+
+# Optional: lockfile for pnpm plugin
+.pnp.*
