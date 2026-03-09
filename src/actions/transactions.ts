@@ -208,7 +208,7 @@ export async function adminApproveTransaction(transactionId: string) {
 
   const txn = await prisma.transaction.findUnique({
     where: { id: transactionId },
-    include: { account: true, user: true, locks: true },
+    include: { account: true, user: true, locks: true, beneficiary: true },
   });
   if (!txn) return { error: "Transaction not found" };
   if (txn.status !== "PENDING") return { error: "Only pending transactions can be approved" };

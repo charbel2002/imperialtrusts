@@ -37,6 +37,7 @@ export async function updateSetting(key: string, value: string) {
 
 export async function bulkUpdateSettings(settings: Record<string, string>) {
   const session = await getAdminSession();
+  if (!session) return { error: "Unauthorized or session expired. Please sign in again." };
 
   const keys = Object.keys(settings);
   if (keys.length === 0) return { error: "No settings provided" };
@@ -69,6 +70,7 @@ export async function bulkUpdateSettings(settings: Record<string, string>) {
 
 export async function createSetting(key: string, value: string, type: string) {
   const session = await getAdminSession();
+  if (!session) return { error: "Unauthorized or session expired. Please sign in again." };
 
   if (!key.trim() || !key.match(/^[a-z_]+$/)) {
     return { error: "Key must be lowercase letters and underscores only" };
@@ -98,6 +100,7 @@ export async function createSetting(key: string, value: string, type: string) {
 
 export async function deleteSetting(key: string) {
   const session = await getAdminSession();
+  if (!session) return { error: "Unauthorized or session expired. Please sign in again." };
 
   const protectedKeys = ["kyc_required", "platform_name", "platform_tagline", "platform_email", "platform_phone", "platform_address", "platform_mail_from", "platform_mail_name", "platform_logo_url", "default_currency"];
   if (protectedKeys.includes(key)) {
@@ -126,6 +129,7 @@ export async function deleteSetting(key: string) {
 
 export async function resetSettingsToDefaults() {
   const session = await getAdminSession();
+  if (!session) return { error: "Unauthorized or session expired. Please sign in again." };
 
   const defaults: Record<string, { value: string; type: string }> = {
     kyc_required: { value: "true", type: "boolean" },
