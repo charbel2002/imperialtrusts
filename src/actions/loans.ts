@@ -6,6 +6,12 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { loanApplicationSchema } from "@/lib/validations";
 import { calculateMonthlyPayment } from "@/lib/utils";
+import {
+  sendLoanApplicationConfirmation,
+  sendLoanApplicationAdminNotice,
+  sendLoanApprovedEmail,
+  sendLoanRejectedEmail,
+} from "@/lib/email";
 import { revalidatePath } from "next/cache";
 
 export async function submitLoanApplication(data: {
@@ -34,6 +40,23 @@ export async function submitLoanApplication(data: {
       totalRepayment,
       status: "PENDING",
     },
+  });
+
+  // Send confirmation email to the applicant
+  await sendLoanApplicationConfirmation({
+    to: email,
+    amount,
+    durationMonths,
+    interestRate,
+    monthlyPayment,
+    totalRepayment,
+  });
+
+  // Notify admin about the new application
+  await sendLoanApplicationAdminNotice({
+    applicantEmail: email,
+    amount,
+    durationMonths,
   });
 
   return { success: true };
@@ -113,6 +136,15 @@ export async function adminApproveLoan(loanId: string, disburse: boolean) {
 
   await prisma.$transaction(ops);
 
+  // Email the applicant about the approval
+  await sendLoanApprovedEmail({
+    to: loan.email,
+    amount: Number(loan.amount),
+    durationMonths: loan.durationMonths,
+    monthlyPayment: Number(loan.monthlyPayment),
+    disbursed: disburse && !!loan.user?.account,
+  });
+
   revalidatePath("/admin/loans");
   return { success: true };
 }
@@ -162,6 +194,13 @@ export async function adminRejectLoan(loanId: string, reason: string) {
   }
 
   await prisma.$transaction(ops);
+
+  // Email the applicant about the rejection
+  await sendLoanRejectedEmail({
+    to: loan.email,
+    amount: Number(loan.amount),
+    reason: reason.trim(),
+  });
 
   revalidatePath("/admin/loans");
   return { success: true };
