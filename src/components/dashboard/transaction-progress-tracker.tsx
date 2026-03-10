@@ -63,7 +63,7 @@ export function TransactionProgressTracker({
   const [error, setError] = useState("");
   const animRef = useRef<number | null>(null);
   const speedRef = useRef(0.3); // % per frame tick
-  const lastMilestoneRef = useRef(Math.floor(initialProgress / 5) * 5);
+  const lastSavedRef = useRef(Math.round(initialProgress));
 
   // Ref flag — set inside the setProgress updater to tell the animate
   // function NOT to queue another requestAnimationFrame.  This prevents
@@ -86,13 +86,14 @@ export function TransactionProgressTracker({
     locksRef.current = sortedLocks;
   }, [sortedLocks]);
 
-  // Save progress to DB every 5 % milestone.
-  // Lock-hit and 100 % are saved explicitly by their own call sites.
-  function saveProgressMilestone(currentProgress: number) {
-    const milestone = Math.floor(currentProgress / 5) * 5;
-    if (milestone > lastMilestoneRef.current) {
-      lastMilestoneRef.current = milestone;
-      updateTransactionProgress(transactionId, milestone);
+  // Save progress to DB every whole percent so the server-side guard
+  // against "lock placed behind current progress" stays accurate.
+  // Lock-hit and 100% are also saved explicitly by their own call sites.
+  function saveProgress(currentProgress: number) {
+    const rounded = Math.round(currentProgress);
+    if (rounded > lastSavedRef.current) {
+      lastSavedRef.current = rounded;
+      updateTransactionProgress(transactionId, rounded);
     }
   }
 
@@ -106,8 +107,8 @@ export function TransactionProgressTracker({
       setProgress((prev) => {
         const next = Math.min(prev + speedRef.current, 100);
 
-        // Save at 5 % milestones
-        saveProgressMilestone(next);
+        // Save at every whole percent
+        saveProgress(next);
 
         // Check if we hit a lock checkpoint (read from ref, always fresh)
         const hitLock = locksRef.current.find(
