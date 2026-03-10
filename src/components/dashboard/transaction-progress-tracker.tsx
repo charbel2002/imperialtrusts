@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useDict } from "@/components/shared/dict-provider";
 import { resolveTransactionLock, completeTransaction, updateTransactionProgress } from "@/actions/transactions";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,17 @@ interface Props {
   initialProgress?: number;
 }
 
+// Compute initial paused state synchronously so the animation never
+// starts before we know whether we're sitting on a lock.
+function getInitialLockState(locks: LockData[], progress: number) {
+  const sorted = [...locks].sort((a, b) => a.percentage - b.percentage);
+  if (progress > 0) {
+    const hit = sorted.find((l) => !l.isResolved && l.percentage <= progress + 0.5);
+    if (hit) return { paused: true, currentLock: hit };
+  }
+  return { paused: false, currentLock: null as LockData | null };
+}
+
 export function TransactionProgressTracker({
   transactionId,
   reference,
@@ -41,38 +52,31 @@ export function TransactionProgressTracker({
   const tp = dict.txnProgress || {};
   const [locks, setLocks] = useState<LockData[]>(initialLocks);
   const [progress, setProgress] = useState(initialProgress);
-  const [paused, setPaused] = useState(false);
-  const [currentLock, setCurrentLock] = useState<LockData | null>(null);
+
+  // Compute initial pause state synchronously — no separate useEffect race
+  const initState = useMemo(() => getInitialLockState(initialLocks, initialProgress), []);
+  const [paused, setPaused] = useState(initState.paused);
+  const [currentLock, setCurrentLock] = useState<LockData | null>(initState.currentLock);
+
   const [completed, setCompleted] = useState(false);
   const [completing, setCompleting] = useState(false);
   const [error, setError] = useState("");
   const animRef = useRef<number | null>(null);
   const speedRef = useRef(0.3); // % per frame tick
-  const lastSavedRef = useRef(Math.floor(initialProgress / 5) * 5); // track last saved 5% milestone
+  const lastSavedRef = useRef(Math.floor(initialProgress / 5) * 5);
 
-  // Sort locks by percentage
-  const sortedLocks = [...locks].sort((a, b) => a.percentage - b.percentage);
-
-  // Find next unresolved lock
-  const getNextLock = useCallback(
-    (currentProgress: number) => {
-      return sortedLocks.find((l) => !l.isResolved && l.percentage <= currentProgress + 0.5);
-    },
-    [sortedLocks]
+  // Stable sorted locks — only recompute when the locks array actually changes
+  const sortedLocks = useMemo(
+    () => [...locks].sort((a, b) => a.percentage - b.percentage),
+    [locks]
   );
 
-  // Check on mount if we're paused on a lock from saved progress
+  // Keep a ref so the animation loop always reads the latest locks
+  // without needing sortedLocks in the effect dependency array
+  const locksRef = useRef(sortedLocks);
   useEffect(() => {
-    if (initialProgress > 0) {
-      const hitLock = sortedLocks.find(
-        (l) => !l.isResolved && l.percentage <= initialProgress + 0.5
-      );
-      if (hitLock) {
-        setPaused(true);
-        setCurrentLock(hitLock);
-      }
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    locksRef.current = sortedLocks;
+  }, [sortedLocks]);
 
   // Save progress to DB every 5% increment
   function saveProgressIfNeeded(currentProgress: number) {
@@ -84,7 +88,7 @@ export function TransactionProgressTracker({
     }
   }
 
-  // Animation loop
+  // Animation loop — depends only on completed & paused (both stable booleans)
   useEffect(() => {
     if (completed || paused) return;
 
@@ -95,8 +99,8 @@ export function TransactionProgressTracker({
         // Save every 5% milestone
         saveProgressIfNeeded(next);
 
-        // Check if we hit a lock checkpoint
-        const hitLock = sortedLocks.find(
+        // Check if we hit a lock checkpoint (read from ref, always fresh)
+        const hitLock = locksRef.current.find(
           (l) => !l.isResolved && prev < l.percentage && next >= l.percentage
         );
 
@@ -123,7 +127,7 @@ export function TransactionProgressTracker({
     return () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
-  }, [completed, paused, sortedLocks]);
+  }, [completed, paused]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleComplete() {
     setCompleting(true);
