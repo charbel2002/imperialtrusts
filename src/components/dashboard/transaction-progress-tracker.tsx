@@ -32,11 +32,16 @@ interface Props {
 // starts before we know whether we're sitting on a lock.
 function getInitialLockState(locks: LockData[], progress: number) {
   const sorted = [...locks].sort((a, b) => a.percentage - b.percentage);
-  if (progress > 0) {
-    const hit = sorted.find((l) => !l.isResolved && l.percentage <= progress + 0.5);
-    if (hit) return { paused: true, currentLock: hit };
-  }
+  // If progress is at or past an unresolved lock, pause immediately
+  const hit = sorted.find((l) => !l.isResolved && l.percentage <= progress);
+  if (hit) return { paused: true, currentLock: hit };
   return { paused: false, currentLock: null as LockData | null };
+}
+
+/** Find the next unresolved lock strictly ahead of current progress */
+function findNextCheckpoint(locks: LockData[], progress: number): LockData | null {
+  const sorted = [...locks].sort((a, b) => a.percentage - b.percentage);
+  return sorted.find((l) => !l.isResolved && l.percentage > progress) ?? null;
 }
 
 export function TransactionProgressTracker({
@@ -61,91 +66,54 @@ export function TransactionProgressTracker({
   const [completed, setCompleted] = useState(false);
   const [completing, setCompleting] = useState(false);
   const [error, setError] = useState("");
-  const animRef = useRef<number | null>(null);
-  const speedRef = useRef(0.3); // % per frame tick
-  const lastSavedRef = useRef(Math.round(initialProgress));
 
-  // Ref flag — set inside the setProgress updater to tell the animate
-  // function NOT to queue another requestAnimationFrame.  This prevents
-  // the extra frame that would otherwise run after a lock hit or 100%.
-  const shouldStopRef = useRef(false);
-
-  // Guard so handleComplete only fires once even if two frames see 100%
+  // Guard so handleComplete fires exactly once
   const completingRef = useRef(false);
 
-  // Stable sorted locks — only recompute when the locks array actually changes
-  const sortedLocks = useMemo(
-    () => [...locks].sort((a, b) => a.percentage - b.percentage),
-    [locks]
-  );
+  // Refs so the interval callback always reads the latest values
+  const progressRef = useRef(initialProgress);
+  const locksRef = useRef(initialLocks);
+  useEffect(() => { locksRef.current = locks; }, [locks]);
 
-  // Keep a ref so the animation loop always reads the latest locks
-  // without needing sortedLocks in the effect dependency array
-  const locksRef = useRef(sortedLocks);
-  useEffect(() => {
-    locksRef.current = sortedLocks;
-  }, [sortedLocks]);
-
-  // Save progress to DB every whole percent so the server-side guard
-  // against "lock placed behind current progress" stays accurate.
-  // Lock-hit and 100% are also saved explicitly by their own call sites.
-  function saveProgress(currentProgress: number) {
-    const rounded = Math.round(currentProgress);
-    if (rounded > lastSavedRef.current) {
-      lastSavedRef.current = rounded;
-      updateTransactionProgress(transactionId, rounded);
-    }
-  }
-
-  // ── Animation loop ────────────────────────────────────────
+  // ── Tick-based animation: +1 % every 500 ms ──────────────
   useEffect(() => {
     if (completed || paused) return;
 
-    shouldStopRef.current = false;
+    const interval = setInterval(() => {
+      const prev = progressRef.current;
+      const next = Math.min(prev + 1, 100);
 
-    const animate = () => {
-      setProgress((prev) => {
-        const next = Math.min(prev + speedRef.current, 100);
+      // Find the next unresolved checkpoint ahead
+      const checkpoint = findNextCheckpoint(locksRef.current, prev);
 
-        // Save at every whole percent
-        saveProgress(next);
-
-        // Check if we hit a lock checkpoint (read from ref, always fresh)
-        const hitLock = locksRef.current.find(
-          (l) => !l.isResolved && prev < l.percentage && next >= l.percentage
-        );
-
-        if (hitLock) {
-          shouldStopRef.current = true;          // ← stop before next rAF
-          setPaused(true);
-          setCurrentLock(hitLock);
-          updateTransactionProgress(transactionId, hitLock.percentage);
-          return hitLock.percentage;
-        }
-
-        // Reached 100 %
-        if (next >= 100) {
-          shouldStopRef.current = true;          // ← stop before next rAF
-          if (!completingRef.current) {
-            completingRef.current = true;
-            handleComplete();
-          }
-          return 100;
-        }
-
-        return next;
-      });
-
-      // Only queue next frame if the updater didn't signal a stop
-      if (!shouldStopRef.current) {
-        animRef.current = requestAnimationFrame(animate);
+      // If this tick reaches a checkpoint, stop exactly there
+      if (checkpoint && next >= checkpoint.percentage) {
+        progressRef.current = checkpoint.percentage;
+        setProgress(checkpoint.percentage);
+        updateTransactionProgress(transactionId, checkpoint.percentage);
+        setPaused(true);
+        setCurrentLock(checkpoint);
+        return;
       }
-    };
 
-    animRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-    };
+      // If we've reached 100 %, settle
+      if (next >= 100) {
+        progressRef.current = 100;
+        setProgress(100);
+        if (!completingRef.current) {
+          completingRef.current = true;
+          handleComplete();
+        }
+        return;
+      }
+
+      // Normal tick — advance by 1 %
+      progressRef.current = next;
+      setProgress(next);
+      updateTransactionProgress(transactionId, next);
+    }, 500);
+
+    return () => clearInterval(interval);
   }, [completed, paused]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleComplete() {
@@ -240,7 +208,7 @@ export function TransactionProgressTracker({
         <div className="h-4 bg-slate-100 rounded-full overflow-hidden relative">
           {/* Filled portion */}
           <div
-            className="h-full rounded-full transition-all duration-75 ease-linear relative"
+            className="h-full rounded-full transition-all duration-500 ease-linear relative"
             style={{
               width: `${progress}%`,
               background: paused
