@@ -208,7 +208,7 @@
     "title": "कानूनी सूचनाएं",
     "updated": "अंतिम अपडेट",
     "publisherTitle": "प्रकाशक",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "पंजीकरण",
     "registration": "Delaware के कानूनों के तहत पंजीकृत।",
     "ipTitle": "बौद्धिक संपदा",
@@ -233,7 +233,7 @@
     "rightsTitle": "आपके अधिकार",
     "rights": "आप अपना डेटा एक्सेस, सही या हटा सकते हैं।",
     "contactTitle": "संपर्क",
-    "contact": "ईमेल: privacy@bankvault.com"
+    "contact": "ईमेल: {{platformEmail}}"
   },
   "terms": {
     "title": "सेवा की शर्तें",
@@ -257,7 +257,7 @@
     "lawTitle": "लागू कानून",
     "law": "Delaware के कानून।",
     "contactTitle": "संपर्क",
-    "contact": "ईमेल: legal@bankvault.com"
+    "contact": "ईमेल: {{platformEmail}}"
   },
   "dashboard": {
     "overview": "अवलोकन",

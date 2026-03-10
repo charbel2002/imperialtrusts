@@ -208,7 +208,7 @@
     "title": "Právní informace",
     "updated": "Poslední aktualizace",
     "publisherTitle": "Vydavatel",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "Registrace",
     "registration": "Registrována dle zákonů Delaware.",
     "ipTitle": "Duševní vlastnictví",
@@ -233,7 +233,7 @@
     "rightsTitle": "Vaše práva",
     "rights": "Můžete přistupovat k údajům nebo je smazat.",
     "contactTitle": "Kontakt",
-    "contact": "E-mail: privacy@bankvault.com"
+    "contact": "E-mail: {{platformEmail}}"
   },
   "terms": {
     "title": "Podmínky služby",
@@ -257,7 +257,7 @@
     "lawTitle": "Rozhodné právo",
     "law": "Zákony Delaware.",
     "contactTitle": "Kontakt",
-    "contact": "E-mail: legal@bankvault.com"
+    "contact": "E-mail: {{platformEmail}}"
   },
   "dashboard": {
     "overview": "Přehled",

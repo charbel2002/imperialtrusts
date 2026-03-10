@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getDictionary } from "@/lib/dictionary";
+import { getPlatformSettings } from "@/lib/platform";
 import type { Locale } from "@/lib/i18n";
 import type { Metadata } from "next";
 
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 
 export default async function ServicesPage({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
-  const dict = await getDictionary(locale);
+  const platform = await getPlatformSettings();
+  const dict = await getDictionary(locale, platform);
   const t = dict.services;
 
   function FeatureList({ items }: { items: string[] }) {

@@ -208,7 +208,7 @@
     "title": "Note legale",
     "updated": "Ultima actualizare",
     "publisherTitle": "Editor",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "Înregistrare",
     "registration": "Înregistrată conform legilor Delaware.",
     "ipTitle": "Proprietate intelectuală",
@@ -233,7 +233,7 @@
     "rightsTitle": "Drepturile tale",
     "rights": "Poți accesa, corecta sau șterge datele.",
     "contactTitle": "Contact",
-    "contact": "Email: privacy@bankvault.com"
+    "contact": "Email: {{platformEmail}}"
   },
   "terms": {
     "title": "Termeni și condiții",
@@ -257,7 +257,7 @@
     "lawTitle": "Lege aplicabilă",
     "law": "Legile Delaware.",
     "contactTitle": "Contact",
-    "contact": "Email: legal@bankvault.com"
+    "contact": "Email: {{platformEmail}}"
   },
   "dashboard": {
     "overview": "Prezentare generală",

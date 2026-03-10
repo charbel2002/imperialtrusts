@@ -208,7 +208,7 @@
     "title": "Rechtliche Hinweise",
     "updated": "Letzte Aktualisierung",
     "publisherTitle": "Herausgeber",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "Handelsregistereintrag",
     "registration": "Eingetragen nach den Gesetzen des Staates Delaware. Registernummer: BV-2024-00381.",
     "ipTitle": "Geistiges Eigentum",
@@ -231,9 +231,9 @@
     "securityTitle": "Datensicherheit",
     "security": "256-Bit SSL/TLS-Verschlüsselung, verschlüsselte Speicherung, Mehrfaktorauthentifizierung.",
     "rightsTitle": "Ihre Rechte",
-    "rights": "Sie können Ihre Daten einsehen, korrigieren, löschen oder übertragen. Kontakt: privacy@bankvault.com",
+    "rights": "Sie können Ihre Daten einsehen, korrigieren, löschen oder übertragen. Kontakt: {{platformEmail}}",
     "contactTitle": "Kontakt",
-    "contact": "E-Mail: privacy@bankvault.com\nAdresse: {{platformName}} Inc., 350 Fifth Avenue, Suite 3200, New York, NY 10118"
+    "contact": "E-Mail: {{platformEmail}}\nAdresse: {{platformName}} Inc., {{platformAddress}}"
   },
   "terms": {
     "title": "Nutzungsbedingungen",
@@ -257,7 +257,7 @@
     "lawTitle": "Anwendbares Recht",
     "law": "Diese Bedingungen unterliegen den Gesetzen des Staates Delaware.",
     "contactTitle": "Kontakt",
-    "contact": "E-Mail: legal@bankvault.com\nAdresse: {{platformName}} Inc., 350 Fifth Avenue, Suite 3200, New York, NY 10118"
+    "contact": "E-Mail: {{platformEmail}}\nAdresse: {{platformName}} Inc., {{platformAddress}}"
   },
   "dashboard": {
     "overview": "Übersicht",

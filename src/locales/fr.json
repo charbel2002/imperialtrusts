@@ -208,7 +208,7 @@
     "title": "Mentions légales",
     "updated": "Dernière mise à jour",
     "publisherTitle": "Éditeur",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "Immatriculation",
     "registration": "Enregistrée conformément aux lois de l'État du Delaware. Numéro d'immatriculation : BV-2024-00381.",
     "ipTitle": "Propriété intellectuelle",
@@ -231,9 +231,9 @@
     "securityTitle": "Sécurité des données",
     "security": "Nous mettons en œuvre un chiffrement SSL/TLS 256 bits, un stockage chiffré, une authentification multifacteur, des audits de sécurité réguliers et des contrôles d'accès basés sur les rôles.",
     "rightsTitle": "Vos droits",
-    "rights": "Vous pouvez avoir le droit d'accéder, de corriger, de supprimer ou de transférer vos données. Contactez privacy@bankvault.com pour exercer ces droits.",
+    "rights": "Vous pouvez avoir le droit d'accéder, de corriger, de supprimer ou de transférer vos données. Contactez {{platformEmail}} pour exercer ces droits.",
     "contactTitle": "Contact",
-    "contact": "E-mail : privacy@bankvault.com\nAdresse : {{platformName}} Inc., 350 Fifth Avenue, Suite 3200, New York, NY 10118"
+    "contact": "E-mail : {{platformEmail}}\nAdresse : {{platformName}} Inc., {{platformAddress}}"
   },
   "terms": {
     "title": "Conditions d'utilisation",
@@ -257,7 +257,7 @@
     "lawTitle": "Droit applicable",
     "law": "Ces conditions sont régies par les lois de l'État du Delaware, États-Unis.",
     "contactTitle": "Contact",
-    "contact": "E-mail : legal@bankvault.com\nAdresse : {{platformName}} Inc., 350 Fifth Avenue, Suite 3200, New York, NY 10118"
+    "contact": "E-mail : {{platformEmail}}\nAdresse : {{platformName}} Inc., {{platformAddress}}"
   },
   "dashboard": {
     "overview": "Aperçu",

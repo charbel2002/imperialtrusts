@@ -1,6 +1,7 @@
 import { LoanSimulator } from "@/components/public/loan-simulator";
 import { Calculator, Mail, Clock } from "lucide-react";
 import { getDictionary } from "@/lib/dictionary";
+import { getPlatformSettings } from "@/lib/platform";
 import type { Locale } from "@/lib/i18n";
 import type { Metadata } from "next";
 
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 
 
 export default async function LoanSimulatorPage({ params }: { params: { locale: string } }) {
-  const dict = await getDictionary(params.locale as Locale);
+  const platform = await getPlatformSettings();
+  const dict = await getDictionary(params.locale as Locale, platform);
   const t = dict.loanSim;
 
   return (

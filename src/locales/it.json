@@ -208,7 +208,7 @@
     "title": "Note legali",
     "updated": "Ultimo aggiornamento",
     "publisherTitle": "Editore",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "Registrazione",
     "registration": "Registrata secondo le leggi del Delaware. Numero: BV-2024-00381.",
     "ipTitle": "Proprietà intellettuale",
@@ -233,7 +233,7 @@
     "rightsTitle": "I tuoi diritti",
     "rights": "Puoi accedere, correggere o eliminare i tuoi dati.",
     "contactTitle": "Contatto",
-    "contact": "Email: privacy@bankvault.com"
+    "contact": "Email: {{platformEmail}}"
   },
   "terms": {
     "title": "Termini di servizio",
@@ -257,7 +257,7 @@
     "lawTitle": "Legge applicabile",
     "law": "Leggi del Delaware.",
     "contactTitle": "Contatto",
-    "contact": "Email: legal@bankvault.com"
+    "contact": "Email: {{platformEmail}}"
   },
   "dashboard": {
     "overview": "Panoramica",

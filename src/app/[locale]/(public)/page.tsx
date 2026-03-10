@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ArrowRight, Shield, CreditCard, Send, Users, Calculator, Bell, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getDictionary } from "@/lib/dictionary";
+import { getPlatformSettings } from "@/lib/platform";
 import type { Locale } from "@/lib/i18n";
 
 export default async function HomePage({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
-  const dict = await getDictionary(locale);
+  const platform = await getPlatformSettings();
+  const dict = await getDictionary(locale, platform);
   const t = dict.home;
 
   const features = [

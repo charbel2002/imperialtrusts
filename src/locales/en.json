@@ -208,7 +208,7 @@
     "title": "Legal Notices",
     "updated": "Last updated",
     "publisherTitle": "Publisher",
-    "publisher": "{{platformName}} Inc.\n350 Fifth Avenue, Suite 3200\nNew York, NY 10118",
+    "publisher": "{{platformName}} Inc.\n{{platformAddress}}",
     "registrationTitle": "Company Registration",
     "registration": "Registered under the laws of the State of Delaware. Company Registration Number: BV-2024-00381.",
     "ipTitle": "Intellectual Property",
@@ -231,9 +231,9 @@
     "securityTitle": "Data Security",
     "security": "We implement 256-bit SSL/TLS encryption, encrypted storage, multi-factor authentication, regular security audits, and role-based access controls.",
     "rightsTitle": "Your Rights",
-    "rights": "You may have the right to access, correct, delete, or port your data. Contact privacy@bankvault.com to exercise these rights.",
+    "rights": "You may have the right to access, correct, delete, or port your data. Contact {{platformEmail}} to exercise these rights.",
     "contactTitle": "Contact",
-    "contact": "Email: privacy@bankvault.com\nAddress: {{platformName}} Inc., 350 Fifth Avenue, Suite 3200, New York, NY 10118"
+    "contact": "Email: {{platformEmail}}\nAddress: {{platformName}} Inc., {{platformAddress}}"
   },
   "terms": {
     "title": "Terms of Service",
@@ -257,7 +257,7 @@
     "lawTitle": "Governing Law",
     "law": "These Terms are governed by the laws of the State of Delaware, United States.",
     "contactTitle": "Contact",
-    "contact": "Email: legal@bankvault.com\nAddress: {{platformName}} Inc., 350 Fifth Avenue, Suite 3200, New York, NY 10118"
+    "contact": "Email: {{platformEmail}}\nAddress: {{platformName}} Inc., {{platformAddress}}"
   },
   "dashboard": {
     "overview": "Overview",

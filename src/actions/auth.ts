@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validations";
 import { generateAccountNumber } from "@/lib/utils";
 import { sendWelcomeEmail, sendNewUserAdminNotice } from "@/lib/email";
+import { getPlatformSettings } from "@/lib/platform";
 
 export async function registerUser(formData: FormData) {
   const raw = {
@@ -51,10 +52,11 @@ export async function registerUser(formData: FormData) {
   });
 
   // Create welcome notification
+  const platform = await getPlatformSettings();
   await prisma.notification.create({
     data: {
       userId: user.id,
-      title: "Welcome to BankVault",
+      title: `Welcome to ${platform.name}`,
       message:
         "Your account has been created successfully. Complete your KYC verification to unlock all features.",
       type: "success",
