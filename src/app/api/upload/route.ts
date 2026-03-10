@@ -9,8 +9,13 @@ import path from "path";
  * Dual-mode KYC file upload:
  *   • Production  (BLOB_READ_WRITE_TOKEN is set) → Vercel Blob Storage
  *   • Development (no token)                     → local filesystem
+ *
+ * On Vercel the filesystem is read-only, so we MUST use Blob storage.
+ * If running on Vercel without a token we return an explicit error
+ * instead of silently trying (and failing) to write to disk.
  */
-const useBlob = !!process.env.BLOB_READ_WRITE_TOKEN;
+const isVercel = !!process.env.VERCEL;
+const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN?.trim();
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -48,7 +53,14 @@ export async function POST(request: NextRequest) {
     const ext = file.name.split(".").pop() || "jpg";
     const filename = `${type}_${Date.now()}.${ext}`;
 
-    if (useBlob) {
+    if (isVercel && !hasBlobToken) {
+      return NextResponse.json(
+        { error: "File storage is not configured. Please contact support." },
+        { status: 500 }
+      );
+    }
+
+    if (hasBlobToken) {
       // ---- Vercel Blob Storage ----
 
       // Delete previous blob for this type (avoid orphaned files)
