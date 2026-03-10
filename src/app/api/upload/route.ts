@@ -7,14 +7,12 @@ import path from "path";
 
 /**
  * Dual-mode KYC file upload:
- *   • Production  (BLOB_READ_WRITE_TOKEN is set) → Vercel Blob Storage (private)
+ *   • Production  (BLOB_READ_WRITE_TOKEN is set) → Vercel Blob Storage (public)
  *   • Development (no token)                     → local filesystem
  *
  * On Vercel the filesystem is read-only, so we MUST use Blob storage.
  * If running on Vercel without a token we return an explicit error
  * instead of silently trying (and failing) to write to disk.
- *
- * Private blobs are served through /api/upload/serve?url=<blobUrl>
  */
 const isVercel = !!process.env.VERCEL;
 const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN?.trim();
@@ -63,7 +61,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (hasBlobToken) {
-      // ---- Vercel Blob Storage (private) ----
+      // ---- Vercel Blob Storage (public) ----
 
       // Delete previous blob for this type (avoid orphaned files)
       const prefix = `kyc/${session.user.id}/${type}_`;
@@ -77,14 +75,11 @@ export async function POST(request: NextRequest) {
       }
 
       const blob = await put(`kyc/${session.user.id}/${filename}`, file, {
-        access: "private",
+        access: "public",
         addRandomSuffix: false,
       });
 
-      // Store a proxy path so the admin panel can view it via /api/upload/serve
-      const proxyPath = `/api/upload/serve?url=${encodeURIComponent(blob.url)}`;
-
-      return NextResponse.json({ path: proxyPath });
+      return NextResponse.json({ path: blob.url });
     } else {
       // ---- Local filesystem (development) ----
 
