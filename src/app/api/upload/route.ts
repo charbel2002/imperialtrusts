@@ -1,8 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { put, del, list } from "@vercel/blob";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+
+/**
+ * Dual-mode KYC file upload:
+ *   • Production  (BLOB_READ_WRITE_TOKEN is set) → Vercel Blob Storage
+ *   • Development (no token)                     → local filesystem
+ */
+const useBlob = !!process.env.BLOB_READ_WRITE_TOKEN;
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -37,23 +45,42 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create upload directory
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "kyc", session.user.id);
-    await mkdir(uploadDir, { recursive: true });
-
-    // Generate filename
     const ext = file.name.split(".").pop() || "jpg";
     const filename = `${type}_${Date.now()}.${ext}`;
-    const filepath = path.join(uploadDir, filename);
 
-    // Write file
-    const bytes = await file.arrayBuffer();
-    await writeFile(filepath, Buffer.from(bytes));
+    if (useBlob) {
+      // ---- Vercel Blob Storage ----
 
-    // Return the public URL path
-    const publicPath = `/uploads/kyc/${session.user.id}/${filename}`;
+      // Delete previous blob for this type (avoid orphaned files)
+      const prefix = `kyc/${session.user.id}/${type}_`;
+      try {
+        const existing = await list({ prefix });
+        if (existing.blobs.length > 0) {
+          await del(existing.blobs.map((b) => b.url));
+        }
+      } catch {
+        // Non-critical – old blob stays, just upload the new one
+      }
 
-    return NextResponse.json({ path: publicPath });
+      const blob = await put(`kyc/${session.user.id}/${filename}`, file, {
+        access: "public",
+        addRandomSuffix: false,
+      });
+
+      return NextResponse.json({ path: blob.url });
+    } else {
+      // ---- Local filesystem (development) ----
+
+      const uploadDir = path.join(process.cwd(), "public", "uploads", "kyc", session.user.id);
+      await mkdir(uploadDir, { recursive: true });
+
+      const filepath = path.join(uploadDir, filename);
+      const bytes = await file.arrayBuffer();
+      await writeFile(filepath, Buffer.from(bytes));
+
+      const publicPath = `/uploads/kyc/${session.user.id}/${filename}`;
+      return NextResponse.json({ path: publicPath });
+    }
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
