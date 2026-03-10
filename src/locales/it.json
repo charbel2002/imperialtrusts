@@ -203,7 +203,9 @@
     "infoEmail": "Conferma email",
     "infoEmailDesc": "Dettagli via email.",
     "infoReview": "Revisione rapida",
-    "infoReviewDesc": "Revisione in 24 ore."
+    "infoReviewDesc": "Revisione in 24 ore.",
+    "phoneLabel": "WhatsApp / Numero di telefono",
+    "phonePlaceholder": "+39 320 123 4567"
   },
   "legal": {
     "title": "Note legali",
@@ -662,7 +664,8 @@
     "durationMax": "La durata non puo superare 120 mesi",
     "bankNameRequired": "Nome della banca obbligatorio",
     "accountNumberMin": "Numero di conto deve avere almeno 4 caratteri",
-    "countryRequired": "Paese obbligatorio"
+    "countryRequired": "Paese obbligatorio",
+    "phoneMin": "Il numero di telefono deve avere almeno 6 caratteri"
   },
   "errors": {
     "unauthorized": "Non autorizzato",

@@ -203,7 +203,9 @@
     "infoEmail": "Email Confirmation",
     "infoEmailDesc": "Receive a detailed breakdown by email immediately.",
     "infoReview": "Fast Review",
-    "infoReviewDesc": "Our team reviews applications within 24 hours."
+    "infoReviewDesc": "Our team reviews applications within 24 hours.",
+    "phoneLabel": "WhatsApp / Număr de telefon",
+    "phonePlaceholder": "+40 721 234 567"
   },
   "legal": {
     "title": "Note legale",
@@ -662,7 +664,8 @@
     "durationMax": "Durata nu poate depasi 120 de luni",
     "bankNameRequired": "Numele bancii este obligatoriu",
     "accountNumberMin": "Numarul de cont trebuie sa aiba cel putin 4 caractere",
-    "countryRequired": "Tara este obligatorie"
+    "countryRequired": "Tara este obligatorie",
+    "phoneMin": "Numărul de telefon trebuie să aibă cel puțin 6 caractere"
   },
   "errors": {
     "unauthorized": "Neautorizat",

@@ -203,7 +203,9 @@
     "infoEmail": "Confirmación por correo",
     "infoEmailDesc": "Recibe detalles por correo inmediatamente.",
     "infoReview": "Revisión rápida",
-    "infoReviewDesc": "Revisamos solicitudes en 24 horas."
+    "infoReviewDesc": "Revisamos solicitudes en 24 horas.",
+    "phoneLabel": "WhatsApp / Número de teléfono",
+    "phonePlaceholder": "+34 612 345 678"
   },
   "legal": {
     "title": "Avisos legales",
@@ -662,7 +664,8 @@
     "durationMax": "La duracion no puede exceder 120 meses",
     "bankNameRequired": "Nombre del banco requerido",
     "accountNumberMin": "Numero de cuenta debe tener al menos 4 caracteres",
-    "countryRequired": "Pais requerido"
+    "countryRequired": "Pais requerido",
+    "phoneMin": "El número de teléfono debe tener al menos 6 caracteres"
   },
   "errors": {
     "unauthorized": "No autorizado",

@@ -235,6 +235,7 @@ model LoanApplication {
   id             String         @id @default(cuid())
   userId         String?        @map("user_id")
   email          String
+  phone          String?
   amount         Decimal        @db.Decimal(16, 2)
   durationMonths Int            @map("duration_months")
   interestRate   Decimal        @map("interest_rate") @db.Decimal(5, 2)

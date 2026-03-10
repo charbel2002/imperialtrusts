@@ -203,7 +203,9 @@
     "infoEmail": "Confirmation par e-mail",
     "infoEmailDesc": "Recevez un détail complet par e-mail immédiatement.",
     "infoReview": "Révision rapide",
-    "infoReviewDesc": "Notre équipe examine les demandes sous 24 heures."
+    "infoReviewDesc": "Notre équipe examine les demandes sous 24 heures.",
+    "phoneLabel": "WhatsApp / Numéro de téléphone",
+    "phonePlaceholder": "+33 6 12 34 56 78"
   },
   "legal": {
     "title": "Mentions légales",
@@ -675,7 +677,8 @@
     "durationMax": "La duree ne peut pas depasser 120 mois",
     "bankNameRequired": "Le nom de la banque est requis",
     "accountNumberMin": "Le numero de compte doit contenir au moins 4 caracteres",
-    "countryRequired": "Le pays est requis"
+    "countryRequired": "Le pays est requis",
+    "phoneMin": "Le numéro de téléphone doit comporter au moins 6 caractères"
   },
   "errors": {
     "unauthorized": "Non autorise",

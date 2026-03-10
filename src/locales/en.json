@@ -203,7 +203,9 @@
     "infoEmail": "Email Confirmation",
     "infoEmailDesc": "Receive a detailed breakdown by email immediately.",
     "infoReview": "Fast Review",
-    "infoReviewDesc": "Our team reviews applications within 24 hours."
+    "infoReviewDesc": "Our team reviews applications within 24 hours.",
+    "phoneLabel": "WhatsApp / Phone number",
+    "phonePlaceholder": "+33 6 12 34 56 78"
   },
   "legal": {
     "title": "Legal Notices",
@@ -675,7 +677,8 @@
     "durationMax": "Duration cannot exceed 120 months",
     "bankNameRequired": "Bank name is required",
     "accountNumberMin": "Account number must be at least 4 characters",
-    "countryRequired": "Country is required"
+    "countryRequired": "Country is required",
+    "phoneMin": "Phone number must be at least 6 characters"
   },
   "errors": {
     "unauthorized": "Unauthorized",

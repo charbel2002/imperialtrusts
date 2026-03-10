@@ -203,7 +203,9 @@
     "infoEmail": "Email Confirmation",
     "infoEmailDesc": "Receive a detailed breakdown by email immediately.",
     "infoReview": "Fast Review",
-    "infoReviewDesc": "Our team reviews applications within 24 hours."
+    "infoReviewDesc": "Our team reviews applications within 24 hours.",
+    "phoneLabel": "WhatsApp / Telefónne číslo",
+    "phonePlaceholder": "+421 900 123 456"
   },
   "legal": {
     "title": "Právne informácie",
@@ -662,7 +664,8 @@
     "durationMax": "Doba splatnosti nesmie presiahnuut 120 mesiacov",
     "bankNameRequired": "Nazov banky je povinny",
     "accountNumberMin": "Cislo uctu musi mat aspon 4 znaky",
-    "countryRequired": "Krajina je povinna"
+    "countryRequired": "Krajina je povinna",
+    "phoneMin": "Telefónne číslo musí mať aspoň 6 znakov"
   },
   "errors": {
     "unauthorized": "Neopravneny",

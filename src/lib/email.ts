@@ -146,6 +146,7 @@ export async function sendLoanApplicationConfirmation(opts: {
 /** Sent to the admin when a new loan application comes in */
 export async function sendLoanApplicationAdminNotice(opts: {
   applicantEmail: string;
+  applicantPhone: string;
   amount: number;
   durationMonths: number;
 }) {
@@ -163,10 +164,14 @@ export async function sendLoanApplicationAdminNotice(opts: {
         <td style="border-bottom:1px solid #e2e8f0;font-weight:600;text-align:right;">${opts.applicantEmail}</td>
       </tr>
       <tr>
-        <td style="border-bottom:1px solid #e2e8f0;color:#64748b;font-size:13px;">Amount</td>
-        <td style="border-bottom:1px solid #e2e8f0;font-weight:600;text-align:right;">$${opts.amount.toFixed(2)}</td>
+        <td style="border-bottom:1px solid #e2e8f0;color:#64748b;font-size:13px;">Phone / WhatsApp</td>
+        <td style="border-bottom:1px solid #e2e8f0;font-weight:600;text-align:right;">${opts.applicantPhone}</td>
       </tr>
       <tr style="background:#f8fafc;">
+        <td style="border-bottom:1px solid #e2e8f0;color:#64748b;font-size:13px;">Amount</td>
+        <td style="border-bottom:1px solid #e2e8f0;font-weight:600;text-align:right;">€${opts.amount.toFixed(2)}</td>
+      </tr>
+      <tr>
         <td style="color:#64748b;font-size:13px;">Duration</td>
         <td style="font-weight:600;text-align:right;">${opts.durationMonths} months</td>
       </tr>

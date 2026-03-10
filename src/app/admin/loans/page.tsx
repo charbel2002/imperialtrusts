@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { formatCurrency } from "@/lib/utils";
 import { Badge, Card, CardBody } from "@/components/ui/index";
 import { AdminLoanActions } from "@/components/admin/admin-loan-actions";
-import { FileText, DollarSign, Clock, Calendar, Percent, Mail, User } from "lucide-react";
+import { FileText, DollarSign, Clock, Calendar, Percent, Mail, Phone, User } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Demandes de prêt" };
@@ -117,6 +117,11 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
               <p className="text-xs text-slate-400 flex items-center gap-1">
                 <Mail size={10} /> {loan.email}
               </p>
+              {loan.phone && (
+                <p className="text-xs text-slate-400 flex items-center gap-1">
+                  <Phone size={10} /> {loan.phone}
+                </p>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-3">

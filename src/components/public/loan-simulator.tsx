@@ -14,6 +14,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   const [duration, setDuration] = useState(12);
   const rate = 3;
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [showApply, setShowApply] = useState(false);
   const [applied, setApplied] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
 
   async function handleApply() {
     setLoading(true); setError("");
-    const result = await submitLoanApplication({ email, amount: numAmount, durationMonths: duration, interestRate: rate });
+    const result = await submitLoanApplication({ email, phone, amount: numAmount, durationMonths: duration, interestRate: rate });
     setLoading(false);
     if (result.error) setError(translateActionError(result.error, dict)); else { setApplied(true); setShowApply(false); }
   }
@@ -38,7 +39,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
         <h3 className="text-2xl font-bold text-primary font-heading">{t.successTitle}</h3>
         <p className="mt-2 text-slate-500">{t.successMsg} <strong>{email}</strong>.</p>
         <p className="mt-1 text-sm text-slate-400">{t.successSub}</p>
-        <Button variant="outline" className="mt-8" onClick={() => { setApplied(false); setEmail(""); }}>{t.another}</Button>
+        <Button variant="outline" className="mt-8" onClick={() => { setApplied(false); setEmail(""); setPhone(""); }}>{t.another}</Button>
       </div>
     );
   }
@@ -73,6 +74,8 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
             <div className="mt-6 pt-6 border-t border-white/10">
               <label className="text-sm text-slate-300 mb-2 block">{t.emailLabel}</label>
               <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="john@example.com" className="w-full px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40" />
+              <label className="text-sm text-slate-300 mb-2 block mt-3">{t.phoneLabel}</label>
+              <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder={t.phonePlaceholder || "+33 6 12 34 56 78"} className="w-full px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40" />
               {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
               <div className="flex gap-3 mt-4">
                 <Button variant="accent" className="flex-1" onClick={handleApply} loading={loading}>{t.submit}</Button>

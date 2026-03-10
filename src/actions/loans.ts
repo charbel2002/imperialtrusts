@@ -16,6 +16,7 @@ import { revalidatePath } from "next/cache";
 
 export async function submitLoanApplication(data: {
   email: string;
+  phone: string;
   amount: number;
   durationMonths: number;
   interestRate: number;
@@ -25,7 +26,7 @@ export async function submitLoanApplication(data: {
     return { error: validated.error.errors[0].message };
   }
 
-  const { email, amount, durationMonths, interestRate } = validated.data;
+  const { email, phone, amount, durationMonths, interestRate } = validated.data;
 
   const monthlyPayment = calculateMonthlyPayment(amount, durationMonths, interestRate);
   const totalRepayment = monthlyPayment * durationMonths;
@@ -33,6 +34,7 @@ export async function submitLoanApplication(data: {
   await prisma.loanApplication.create({
     data: {
       email,
+      phone,
       amount,
       durationMonths,
       interestRate,
@@ -55,6 +57,7 @@ export async function submitLoanApplication(data: {
   // Notify admin about the new application
   await sendLoanApplicationAdminNotice({
     applicantEmail: email,
+    applicantPhone: phone,
     amount,
     durationMonths,
   });

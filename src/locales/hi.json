@@ -203,7 +203,9 @@
     "infoEmail": "ईमेल पुष्टि",
     "infoEmailDesc": "तुरंत विवरण।",
     "infoReview": "तेज़ समीक्षा",
-    "infoReviewDesc": "24 घंटे में।"
+    "infoReviewDesc": "24 घंटे में।",
+    "phoneLabel": "WhatsApp / फ़ोन नंबर",
+    "phonePlaceholder": "+91 98765 43210"
   },
   "legal": {
     "title": "कानूनी सूचनाएं",
@@ -662,7 +664,8 @@
     "durationMax": "अवधि 120 महीने से अधिक नहीं हो सकती",
     "bankNameRequired": "बैंक का नाम आवश्यक है",
     "accountNumberMin": "खाता संख्या कम से कम 4 अक्षर होनी चाहिए",
-    "countryRequired": "देश आवश्यक है"
+    "countryRequired": "देश आवश्यक है",
+    "phoneMin": "फ़ोन नंबर कम से कम 6 अक्षर होना चाहिए"
   },
   "errors": {
     "unauthorized": "अनधिकृत",

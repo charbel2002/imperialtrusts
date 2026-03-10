@@ -30,6 +30,7 @@ export const contactSchema = z.object({
 
 export const loanApplicationSchema = z.object({
   email: z.string().email("validation.invalidEmailShort"),
+  phone: z.string().min(6, "validation.phoneMin"),
   amount: z.number().min(500, "validation.loanAmountMin").max(500000, "validation.loanAmountMax"),
   durationMonths: z.number().int().min(3, "validation.durationMin").max(120, "validation.durationMax"),
   interestRate: z.number().min(0).max(30),

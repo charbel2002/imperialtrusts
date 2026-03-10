@@ -27,12 +27,22 @@ interface Props {
 }
 
 const COUNTRIES = [
-  "United States", "United Kingdom", "Canada", "France", "Germany",
-  "Nigeria", "South Africa", "Kenya", "Ghana", "India",
-  "China", "Japan", "Australia", "Brazil", "Mexico",
-  "UAE", "Saudi Arabia", "Singapore", "Netherlands", "Switzerland",
-  "Belgium", "Benin", "Togo", "Senegal", "Ivory Coast",
-  "Other",
+  // Europe
+  "Albania", "Andorra", "Austria", "Belarus", "Belgium",
+  "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic",
+  "Denmark", "Estonia", "Finland", "France", "Germany",
+  "Greece", "Hungary", "Iceland", "Ireland", "Italy",
+  "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg",
+  "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands",
+  "North Macedonia", "Norway", "Poland", "Portugal", "Romania",
+  "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia",
+  "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine",
+  "United Kingdom", "Vatican City",
+  // Latin America
+  "Argentina", "Bolivia", "Brazil", "Chile", "Colombia",
+  "Costa Rica", "Cuba", "Dominican Republic", "Ecuador", "El Salvador",
+  "Guatemala", "Haiti", "Honduras", "Mexico", "Nicaragua",
+  "Panama", "Paraguay", "Peru", "Uruguay", "Venezuela",
 ];
 
 export function BeneficiaryFormModal({ mode, defaultValues, onClose, onSuccess }: Props) {

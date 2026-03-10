@@ -203,7 +203,9 @@
     "infoEmail": "Confirmação por email",
     "infoEmailDesc": "Detalhes por email.",
     "infoReview": "Revisão rápida",
-    "infoReviewDesc": "Revisão em 24 horas."
+    "infoReviewDesc": "Revisão em 24 horas.",
+    "phoneLabel": "WhatsApp / Número de telefone",
+    "phonePlaceholder": "+351 912 345 678"
   },
   "legal": {
     "title": "Avisos legais",
@@ -662,7 +664,8 @@
     "durationMax": "Duracao nao pode exceder 120 meses",
     "bankNameRequired": "Nome do banco obrigatorio",
     "accountNumberMin": "Numero da conta deve ter pelo menos 4 caracteres",
-    "countryRequired": "Pais obrigatorio"
+    "countryRequired": "Pais obrigatorio",
+    "phoneMin": "Número de telefone deve ter pelo menos 6 caracteres"
   },
   "errors": {
     "unauthorized": "Nao autorizado",

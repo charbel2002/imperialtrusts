@@ -203,7 +203,9 @@
     "infoEmail": "E-Mail-Bestätigung",
     "infoEmailDesc": "Erhalten Sie sofort eine detaillierte Aufstellung.",
     "infoReview": "Schnelle Prüfung",
-    "infoReviewDesc": "Unser Team prüft Anträge innerhalb von 24 Stunden."
+    "infoReviewDesc": "Unser Team prüft Anträge innerhalb von 24 Stunden.",
+    "phoneLabel": "WhatsApp / Telefonnummer",
+    "phonePlaceholder": "+49 170 1234567"
   },
   "legal": {
     "title": "Rechtliche Hinweise",
@@ -662,7 +664,8 @@
     "durationMax": "Laufzeit darf 120 Monate nicht uberschreiten",
     "bankNameRequired": "Bankname ist erforderlich",
     "accountNumberMin": "Kontonummer muss mindestens 4 Zeichen haben",
-    "countryRequired": "Land ist erforderlich"
+    "countryRequired": "Land ist erforderlich",
+    "phoneMin": "Telefonnummer muss mindestens 6 Zeichen haben"
   },
   "errors": {
     "unauthorized": "Nicht autorisiert",
