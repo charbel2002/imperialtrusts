@@ -18,9 +18,13 @@ interface Props {
   amount: number;
   currency: string;
   maxLockPercentage?: number;
+  currentProgress?: number;
 }
 
-export function AdminTransactionActions({ transactionId, status, reference, userName, amount, currency, maxLockPercentage = 0 }: Props) {
+export function AdminTransactionActions({ transactionId, status, reference, userName, amount, currency, maxLockPercentage = 0, currentProgress = 0 }: Props) {
+  // Lock must be placed ahead of both the highest existing lock AND the
+  // user's current animation progress.
+  const lockFloor = Math.max(maxLockPercentage, currentProgress);
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [done, setDone] = useState<string | null>(null);
@@ -29,7 +33,7 @@ export function AdminTransactionActions({ transactionId, status, reference, user
   const [showLock, setShowLock] = useState(false);
   const [lockMotif, setLockMotif] = useState("");
   const [lockCode, setLockCode] = useState("");
-  const [lockPercentage, setLockPercentage] = useState(Math.max(maxLockPercentage + 5, 5));
+  const [lockPercentage, setLockPercentage] = useState(Math.min(lockFloor + 1, 99));
 
   const canApprove = status === "PENDING";
   const canReject = ["PENDING", "PROCESSING"].includes(status);
@@ -103,10 +107,10 @@ export function AdminTransactionActions({ transactionId, status, reference, user
             <label className="text-[10px] text-slate-500">Checkpoint at</label>
             <span className="text-xs font-bold text-secondary">{lockPercentage}%</span>
           </div>
-          <input type="range" min={Math.max(maxLockPercentage + 5, 5)} max={95} step={5} value={lockPercentage} onChange={(e) => setLockPercentage(Number(e.target.value))}
+          <input type="range" min={lockFloor + 1} max={99} step={1} value={lockPercentage} onChange={(e) => setLockPercentage(Number(e.target.value))}
             className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-            style={{ background: `linear-gradient(to right, #1E40AF ${((lockPercentage - 5) / 90) * 100}%, #e2e8f0 ${((lockPercentage - 5) / 90) * 100}%)` }} />
-          <div className="flex justify-between text-[9px] text-slate-400 mt-0.5"><span>{Math.max(maxLockPercentage + 5, 5)}%</span><span>95%</span></div>
+            style={{ background: `linear-gradient(to right, #1E40AF ${((lockPercentage - (lockFloor + 1)) / (99 - (lockFloor + 1))) * 100}%, #e2e8f0 ${((lockPercentage - (lockFloor + 1)) / (99 - (lockFloor + 1))) * 100}%)` }} />
+          <div className="flex justify-between text-[9px] text-slate-400 mt-0.5"><span>{lockFloor + 1}%</span><span>99%</span></div>
         </div>
         <Button size="sm" variant="secondary" onClick={handleAddLock} loading={loading === "lock"} className="w-full !text-xs">
           <Lock size={12} /> Add Lock at {lockPercentage}%

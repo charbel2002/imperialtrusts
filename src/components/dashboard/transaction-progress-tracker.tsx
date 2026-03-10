@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useDict } from "@/components/shared/dict-provider";
 import { resolveTransactionLock, completeTransaction, updateTransactionProgress } from "@/actions/transactions";
 import { Button } from "@/components/ui/button";
@@ -63,7 +63,15 @@ export function TransactionProgressTracker({
   const [error, setError] = useState("");
   const animRef = useRef<number | null>(null);
   const speedRef = useRef(0.3); // % per frame tick
-  const lastSavedRef = useRef(Math.round(initialProgress));
+  const lastMilestoneRef = useRef(Math.floor(initialProgress / 5) * 5);
+
+  // Ref flag — set inside the setProgress updater to tell the animate
+  // function NOT to queue another requestAnimationFrame.  This prevents
+  // the extra frame that would otherwise run after a lock hit or 100%.
+  const shouldStopRef = useRef(false);
+
+  // Guard so handleComplete only fires once even if two frames see 100%
+  const completingRef = useRef(false);
 
   // Stable sorted locks — only recompute when the locks array actually changes
   const sortedLocks = useMemo(
@@ -78,26 +86,28 @@ export function TransactionProgressTracker({
     locksRef.current = sortedLocks;
   }, [sortedLocks]);
 
-  // Save progress to DB — fires at every whole-percent advance so a
-  // page reload never rewinds past a resolved lock checkpoint.
-  function saveProgress(currentProgress: number) {
-    const rounded = Math.round(currentProgress);
-    if (rounded > lastSavedRef.current) {
-      lastSavedRef.current = rounded;
-      updateTransactionProgress(transactionId, rounded);
+  // Save progress to DB every 5 % milestone.
+  // Lock-hit and 100 % are saved explicitly by their own call sites.
+  function saveProgressMilestone(currentProgress: number) {
+    const milestone = Math.floor(currentProgress / 5) * 5;
+    if (milestone > lastMilestoneRef.current) {
+      lastMilestoneRef.current = milestone;
+      updateTransactionProgress(transactionId, milestone);
     }
   }
 
-  // Animation loop — depends only on completed & paused (both stable booleans)
+  // ── Animation loop ────────────────────────────────────────
   useEffect(() => {
     if (completed || paused) return;
+
+    shouldStopRef.current = false;
 
     const animate = () => {
       setProgress((prev) => {
         const next = Math.min(prev + speedRef.current, 100);
 
-        // Save progress
-        saveProgress(next);
+        // Save at 5 % milestones
+        saveProgressMilestone(next);
 
         // Check if we hit a lock checkpoint (read from ref, always fresh)
         const hitLock = locksRef.current.find(
@@ -105,22 +115,30 @@ export function TransactionProgressTracker({
         );
 
         if (hitLock) {
+          shouldStopRef.current = true;          // ← stop before next rAF
           setPaused(true);
           setCurrentLock(hitLock);
           updateTransactionProgress(transactionId, hitLock.percentage);
           return hitLock.percentage;
         }
 
-        // Reached 100%
+        // Reached 100 %
         if (next >= 100) {
-          handleComplete();
+          shouldStopRef.current = true;          // ← stop before next rAF
+          if (!completingRef.current) {
+            completingRef.current = true;
+            handleComplete();
+          }
           return 100;
         }
 
         return next;
       });
 
-      animRef.current = requestAnimationFrame(animate);
+      // Only queue next frame if the updater didn't signal a stop
+      if (!shouldStopRef.current) {
+        animRef.current = requestAnimationFrame(animate);
+      }
     };
 
     animRef.current = requestAnimationFrame(animate);
@@ -131,6 +149,7 @@ export function TransactionProgressTracker({
 
   async function handleComplete() {
     setCompleting(true);
+    updateTransactionProgress(transactionId, 100);
     const result = await completeTransaction(transactionId);
     setCompleting(false);
     if (result.error) {

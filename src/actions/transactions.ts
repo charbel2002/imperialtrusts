@@ -201,7 +201,7 @@ export async function getTransactionWithLocks(transactionId: string) {
   };
 }
 
-// --- Client: Save progress (called every 5% increment) -----
+// --- Client: Save progress (monotonic — never goes backwards) -----
 
 export async function updateTransactionProgress(transactionId: string, progress: number) {
   const session = await getServerSession(authOptions);
@@ -213,6 +213,9 @@ export async function updateTransactionProgress(transactionId: string, progress:
   if (!txn) return { error: "Transaction not found" };
 
   const clampedProgress = Math.min(Math.max(Math.round(progress), 0), 100);
+
+  // Only move forward — never overwrite with a lower value
+  if (clampedProgress <= txn.progress) return { success: true };
 
   await prisma.transaction.update({
     where: { id: transactionId },
@@ -332,6 +335,11 @@ export async function adminAddTransactionLock(data: {
   const maxExisting = txn.locks.length > 0 ? Math.max(...txn.locks.map((l) => l.percentage)) : 0;
   if (data.percentage <= maxExisting) {
     return { error: `Percentage must be greater than ${maxExisting}% (highest existing lock)` };
+  }
+
+  // New lock must also be ahead of the user's current progress
+  if (data.percentage <= txn.progress) {
+    return { error: `Percentage must be greater than ${txn.progress}% (current progress)` };
   }
 
   await prisma.$transaction([
