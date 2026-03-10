@@ -185,6 +185,7 @@
     "duration": "Durata",
     "months": "mesi",
     "rate": "Tasso annuale",
+    "fixedRate": "Tasso fisso",
     "monthly": "Rata mensile",
     "loanAmount": "Importo prestito",
     "totalInterest": "Interessi totali",

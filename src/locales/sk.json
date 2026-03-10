@@ -185,6 +185,7 @@
     "duration": "Doba",
     "months": "mesiacov",
     "rate": "Ročný úrok",
+    "fixedRate": "Pevná sadzba",
     "monthly": "Mesačná splátka",
     "loanAmount": "Suma pôžičky",
     "totalInterest": "Celkový úrok",

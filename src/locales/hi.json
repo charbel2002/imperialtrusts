@@ -185,6 +185,7 @@
     "duration": "अवधि",
     "months": "महीने",
     "rate": "वार्षिक ब्याज दर",
+    "fixedRate": "निश्चित दर",
     "monthly": "मासिक भुगतान",
     "loanAmount": "ऋण राशि",
     "totalInterest": "कुल ब्याज",

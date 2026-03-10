@@ -185,6 +185,7 @@
     "duration": "Prazo",
     "months": "meses",
     "rate": "Taxa anual",
+    "fixedRate": "Taxa fixa",
     "monthly": "Parcela mensal",
     "loanAmount": "Valor do empréstimo",
     "totalInterest": "Juros totais",

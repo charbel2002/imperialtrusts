@@ -185,6 +185,7 @@
     "duration": "Laufzeit",
     "months": "Monate",
     "rate": "Jahreszins",
+    "fixedRate": "Fester Zinssatz",
     "monthly": "Monatliche Rate",
     "loanAmount": "Kreditbetrag",
     "totalInterest": "Gesamtzinsen",

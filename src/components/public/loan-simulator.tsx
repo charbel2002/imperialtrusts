@@ -9,22 +9,23 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 
 export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   const t = dict.loanSim;
-  const [amount, setAmount] = useState(10000);
+  const [amount, setAmount] = useState<number | "">(10000);
   const [duration, setDuration] = useState(12);
-  const [rate, setRate] = useState(5.5);
+  const rate = 3;
   const [email, setEmail] = useState("");
   const [showApply, setShowApply] = useState(false);
   const [applied, setApplied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const monthly = calculateMonthlyPayment(amount, duration, rate);
+  const numAmount = typeof amount === "number" ? amount : 0;
+  const monthly = calculateMonthlyPayment(numAmount, duration, rate);
   const total = monthly * duration;
-  const interest = total - amount;
+  const interest = total - numAmount;
 
   async function handleApply() {
     setLoading(true); setError("");
-    const result = await submitLoanApplication({ email, amount, durationMonths: duration, interestRate: rate });
+    const result = await submitLoanApplication({ email, amount: numAmount, durationMonths: duration, interestRate: rate });
     setLoading(false);
     if (result.error) setError(result.error); else { setApplied(true); setShowApply(false); }
   }
@@ -44,18 +45,28 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   return (
     <div className="grid lg:grid-cols-5 gap-10">
       <div className="lg:col-span-3 space-y-8">
-        <SliderField label={t.amount} prefix="$" value={amount} onChange={setAmount} min={500} max={500000} step={500} color="#1E40AF" />
+        <SliderField label={t.amount} prefix="€" value={numAmount} onChange={(v) => setAmount(v)} min={500} max={500000} step={500} color="#1E40AF" rawValue={amount === "" ? "" : undefined} onRawChange={(raw) => { if (raw === "") setAmount(""); else setAmount(Number(raw)); }} />
         <SliderField label={t.duration} suffix={t.months} value={duration} onChange={setDuration} min={3} max={120} step={1} color="#1E40AF" />
-        <SliderField label={t.rate} suffix="%" value={rate} onChange={setRate} min={0} max={30} step={0.1} color="#10B981" />
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <label className="text-sm font-medium text-slate-700">{t.rate}</label>
+            <div className="flex items-center gap-1">
+              <span className="text-sm font-semibold text-primary">{rate}</span>
+              <span className="text-sm text-slate-400">%</span>
+            </div>
+          </div>
+          <div className="w-full h-2 rounded-full" style={{ background: `linear-gradient(to right, #10B981 10%, #e2e8f0 10%)` }} />
+          <p className="text-xs text-slate-400 mt-1">{t.fixedRate || "Fixed rate"}</p>
+        </div>
       </div>
       <div className="lg:col-span-2">
         <div className="rounded-2xl bg-gradient-to-br from-primary to-secondary-700 p-8 text-white sticky top-24">
           <p className="text-sm text-slate-400 uppercase tracking-wider mb-1">{t.monthly}</p>
-          <p className="text-4xl font-bold tracking-tight font-heading">{formatCurrency(monthly)}</p>
+          <p className="text-4xl font-bold tracking-tight font-heading">{formatCurrency(monthly, "EUR")}</p>
           <div className="mt-8 space-y-4">
-            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.loanAmount}</span><span className="text-sm font-semibold">{formatCurrency(amount)}</span></div>
-            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalInterest}</span><span className="text-sm font-semibold text-accent">{formatCurrency(interest)}</span></div>
-            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalRepayment}</span><span className="text-sm font-bold text-lg">{formatCurrency(total)}</span></div>
+            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.loanAmount}</span><span className="text-sm font-semibold">{formatCurrency(numAmount, "EUR")}</span></div>
+            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalInterest}</span><span className="text-sm font-semibold text-accent">{formatCurrency(interest, "EUR")}</span></div>
+            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalRepayment}</span><span className="text-sm font-bold text-lg">{formatCurrency(total, "EUR")}</span></div>
           </div>
           {showApply ? (
             <div className="mt-6 pt-6 border-t border-white/10">
@@ -76,17 +87,21 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   );
 }
 
-function SliderField({ label, prefix, suffix, value, onChange, min, max, step, color }: {
-  label: string; prefix?: string; suffix?: string; value: number; onChange: (v: number) => void; min: number; max: number; step: number; color: string;
+function SliderField({ label, prefix, suffix, value, onChange, min, max, step, color, rawValue, onRawChange }: {
+  label: string; prefix?: string; suffix?: string; value: number; onChange: (v: number) => void; min: number; max: number; step: number; color: string; rawValue?: string; onRawChange?: (raw: string) => void;
 }) {
   const pct = ((value - min) / (max - min)) * 100;
+  const inputValue = rawValue !== undefined ? rawValue : value;
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
         <label className="text-sm font-medium text-slate-700">{label}</label>
         <div className="flex items-center gap-1">
           {prefix && <span className="text-sm text-slate-400">{prefix}</span>}
-          <input type="number" value={value} onChange={(e) => onChange(Number(e.target.value))} min={min} max={max} step={step}
+          <input type="number" value={inputValue} onChange={(e) => {
+            if (onRawChange) { onRawChange(e.target.value); }
+            else { onChange(Number(e.target.value)); }
+          }} min={min} max={max} step={step}
             className="w-24 text-right text-sm font-semibold text-primary border-0 border-b-2 border-slate-200 focus:border-secondary focus:ring-0 px-1 py-0.5 bg-transparent" />
           {suffix && <span className="text-sm text-slate-400">{suffix}</span>}
         </div>

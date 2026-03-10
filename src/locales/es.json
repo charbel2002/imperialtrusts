@@ -185,6 +185,7 @@
     "duration": "Duración",
     "months": "meses",
     "rate": "Tasa anual",
+    "fixedRate": "Tasa fija",
     "monthly": "Pago mensual",
     "loanAmount": "Monto del préstamo",
     "totalInterest": "Interés total",
