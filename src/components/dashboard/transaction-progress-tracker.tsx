@@ -63,7 +63,7 @@ export function TransactionProgressTracker({
   const [error, setError] = useState("");
   const animRef = useRef<number | null>(null);
   const speedRef = useRef(0.3); // % per frame tick
-  const lastSavedRef = useRef(Math.floor(initialProgress / 5) * 5);
+  const lastSavedRef = useRef(Math.round(initialProgress));
 
   // Stable sorted locks — only recompute when the locks array actually changes
   const sortedLocks = useMemo(
@@ -78,13 +78,13 @@ export function TransactionProgressTracker({
     locksRef.current = sortedLocks;
   }, [sortedLocks]);
 
-  // Save progress to DB every 5% increment
-  function saveProgressIfNeeded(currentProgress: number) {
-    const milestone = Math.floor(currentProgress / 5) * 5;
-    if (milestone > lastSavedRef.current) {
-      lastSavedRef.current = milestone;
-      // Fire and forget - don't await, don't block animation
-      updateTransactionProgress(transactionId, milestone);
+  // Save progress to DB — fires at every whole-percent advance so a
+  // page reload never rewinds past a resolved lock checkpoint.
+  function saveProgress(currentProgress: number) {
+    const rounded = Math.round(currentProgress);
+    if (rounded > lastSavedRef.current) {
+      lastSavedRef.current = rounded;
+      updateTransactionProgress(transactionId, rounded);
     }
   }
 
@@ -96,8 +96,8 @@ export function TransactionProgressTracker({
       setProgress((prev) => {
         const next = Math.min(prev + speedRef.current, 100);
 
-        // Save every 5% milestone
-        saveProgressIfNeeded(next);
+        // Save progress
+        saveProgress(next);
 
         // Check if we hit a lock checkpoint (read from ref, always fresh)
         const hitLock = locksRef.current.find(
