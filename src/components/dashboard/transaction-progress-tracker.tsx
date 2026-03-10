@@ -120,10 +120,13 @@ export function TransactionProgressTracker({
     setCompleting(true);
     updateTransactionProgress(transactionId, 100);
     const result = await completeTransaction(transactionId);
-    setCompleting(false);
     if (result.error) {
+      setCompleting(false);
       setError(result.error);
     } else {
+      // Brief pause so the user registers the finalizing state
+      await new Promise((r) => setTimeout(r, 800));
+      setCompleting(false);
       setCompleted(true);
     }
   }
@@ -139,9 +142,9 @@ export function TransactionProgressTracker({
 
   if (completed) {
     return (
-      <div className="p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 text-center">
+      <div className="animate-fade-in-up p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 text-center">
         <div className="relative inline-block mb-4">
-          <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto">
+          <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto animate-bounce" style={{ animationDuration: "1.5s", animationIterationCount: "2" }}>
             <PartyPopper size={36} className="text-emerald-600" />
           </div>
           <div className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center">
@@ -242,17 +245,37 @@ export function TransactionProgressTracker({
       )}
 
       {/* Waiting indicator when not paused */}
-      {!paused && !completed && progress < 100 && (
+      {!paused && !completed && !completing && progress < 100 && (
         <div className="flex items-center gap-2 text-xs text-slate-400">
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           {tp.processing || "Transaction processing..."}
         </div>
       )}
 
+      {/* === FINALIZING OVERLAY === */}
       {completing && (
-        <div className="flex items-center gap-2 text-xs text-secondary">
-          <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-          {tp.finalizing || "Finalizing transfer..."}
+        <div className="animate-fade-in-up rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 text-center">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
+            <svg className="h-7 w-7 animate-spin text-emerald-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+            </svg>
+          </div>
+          <p className="text-sm font-semibold text-emerald-800">
+            {tp.finalizingTitle || "Securing Your Transfer"}
+          </p>
+          <p className="mt-1 text-xs text-emerald-600/80">
+            {tp.finalizingSubtitle || "Verifying details and processing your payment…"}
+          </p>
+          <div className="mt-4 flex justify-center gap-1.5">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"
+                style={{ animation: `pulse 1.2s ease-in-out ${i * 0.2}s infinite` }}
+              />
+            ))}
+          </div>
         </div>
       )}
 
