@@ -49,15 +49,22 @@ export async function getDictionary(
   const loader = dictionaries[locale] || dictionaries.en;
   const raw = await loader();
 
+  // Attach the locale code so client components can use it for Intl APIs
+  raw._locale = locale;
+
   if (!platform) return raw;
 
-  return injectPlatformVars(raw, {
+  const injected = injectPlatformVars(raw, {
     platformName: platform.name,
     platformEmail: platform.email,
     platformPhone: platform.phone,
     platformAddress: platform.address,
     platformTagline: platform.tagline,
   });
+
+  // Preserve _locale after injection (injectPlatformVars keeps it)
+  injected._locale = locale;
+  return injected;
 }
 
 /**

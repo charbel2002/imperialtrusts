@@ -1,5 +1,6 @@
 "use client";
 
+import { useDict } from "@/components/shared/dict-provider";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { markNotificationRead, markAllNotificationsRead } from "@/actions/notifications";
@@ -39,6 +40,9 @@ const typeColors: Record<string, string> = {
 };
 
 export function NotificationBell({ initialCount, initialNotifications }: Props) {
+  const dict = useDict();
+  const tn = dict.dashboardNotifications || {} as any;
+  const locale = dict._locale || "en";
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(initialCount);
   const [notifications, setNotifications] = useState(initialNotifications);
@@ -105,7 +109,7 @@ export function NotificationBell({ initialCount, initialNotifications }: Props) 
         <div className="absolute right-0 top-full mt-2 w-96 max-h-[480px] bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden z-50 animate-fade-in-up" style={{ animationDuration: "0.15s" }}>
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
-            <h3 className="text-sm font-semibold text-slate-800">Notifications</h3>
+            <h3 className="text-sm font-semibold text-slate-800">{tn.title || "Notifications"}</h3>
             <div className="flex items-center gap-2">
               {count > 0 && (
                 <button
@@ -113,7 +117,7 @@ export function NotificationBell({ initialCount, initialNotifications }: Props) 
                   disabled={markingAll}
                   className="text-[10px] text-secondary hover:underline font-medium flex items-center gap-1"
                 >
-                  <CheckCheck size={12} /> Mark all read
+                  <CheckCheck size={12} /> {tn.markAllRead || "Mark all read"}
                 </button>
               )}
             </div>
@@ -124,7 +128,7 @@ export function NotificationBell({ initialCount, initialNotifications }: Props) 
             {notifications.length === 0 ? (
               <div className="px-4 py-10 text-center">
                 <Bell size={32} className="mx-auto mb-2 text-slate-300" />
-                <p className="text-sm text-slate-400">No notifications</p>
+                <p className="text-sm text-slate-400">{tn.noNotifications || "No notifications"}</p>
               </div>
             ) : (
               notifications.map((notif) => {
@@ -155,7 +159,7 @@ export function NotificationBell({ initialCount, initialNotifications }: Props) 
                         )}
                       </div>
                       <p className="text-[11px] text-slate-500 line-clamp-2 mt-0.5 leading-relaxed">{notif.message}</p>
-                      <p className="text-[10px] text-slate-400 mt-1">{timeAgo(new Date(notif.createdAt))}</p>
+                      <p className="text-[10px] text-slate-400 mt-1">{timeAgo(new Date(notif.createdAt), locale)}</p>
                     </div>
                   </button>
                 );
@@ -170,7 +174,7 @@ export function NotificationBell({ initialCount, initialNotifications }: Props) 
               onClick={() => setOpen(false)}
               className="text-xs text-secondary font-medium hover:underline"
             >
-              View all notifications &rarr;
+              {tn.viewAll || "View all notifications"} &rarr;
             </Link>
           </div>
         </div>

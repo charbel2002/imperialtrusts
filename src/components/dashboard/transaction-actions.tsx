@@ -41,6 +41,7 @@ export function TransactionActions({
   const [error, setError] = useState("");
   const dict = useDict();
   const tp = dict.txnProgress || {};
+  const tt = (dict.txnPage || {}) as any;
   const [cancelled, setCancelled] = useState(false);
 
   const canCancel = ["INITIALIZED", "PENDING"].includes(status);
@@ -59,7 +60,7 @@ export function TransactionActions({
   if (cancelled) {
     return (
       <Alert variant="success" className="!py-2 !text-xs">
-        <CheckCircle size={12} className="flex-shrink-0" />Transaction cancelled.
+        <CheckCircle size={12} className="flex-shrink-0" />{tt.cancelled || "Transaction cancelled."}
       </Alert>
     );
   }
@@ -94,7 +95,7 @@ export function TransactionActions({
           loading={cancelling}
           className="text-red-500 hover:bg-red-50 hover:text-red-600"
         >
-          <X size={14} /> Cancel Transaction
+          <X size={14} /> {tt.cancelBtn || "Cancel Transaction"}
         </Button>
       )}
     </div>

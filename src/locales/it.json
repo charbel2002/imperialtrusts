@@ -324,7 +324,11 @@
     "verified": "Verificato",
     "notSubmitted": "Non inviato",
     "language": "Lingua",
-    "changeLanguage": "Cambia lingua"
+    "changeLanguage": "Cambia lingua",
+    "initialized": "Initialized",
+    "processing": "Processing",
+    "expired": "Expired",
+    "unknown": "Unknown"
   },
   "dashboardCards": {
     "title": "My Cards",
@@ -343,7 +347,9 @@
     "createTitle": "Create Virtual Card",
     "createDesc": "Choose your card network. Your virtual card will be created instantly.",
     "createInfo": "Card will be created with $0.00 balance. You can fund it from your bank account after creation.",
-    "cardCreated": "Card Created!"
+    "cardCreated": "Card Created!",
+    "createBtn": "Create {{type}} Card",
+    "cardReadyMsg": "Your new {{type}} card is ready."
   },
   "dashboardBeneficiaries": {
     "title": "Beneficiaries",
@@ -408,7 +414,9 @@
     "success": "Success",
     "warning": "Warning",
     "alerts": "Alerts",
-    "info": "Info"
+    "info": "Info",
+    "viewAll": "View all notifications",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "cards": {
     "title": "Le mie carte",
@@ -437,7 +445,13 @@
     "cardBalance": "Saldo carta",
     "cardCreated": "Carta creata!",
     "frozen": "CONGELATA",
-    "cancelled": "ANNULLATA"
+    "cancelled": "ANNULLATA",
+    "cardReadyMsg": "Your new {{type}} card is ready.",
+    "fundTitle": "Fund Card **** {{last4}}",
+    "withdrawTitle": "Withdraw to Account",
+    "addedToCard": "{{amount}} added to card",
+    "withdrawnToAccount": "{{amount}} withdrawn to account",
+    "enterValidAmount": "Enter a valid amount"
   },
   "kycPage": {
     "title": "Verifica KYC",
@@ -478,7 +492,19 @@
     "uploaded": "Caricato",
     "securityRequired": "Verifica sicurezza richiesta",
     "verifiedOn": "Verificato il",
-    "submitted": "Inviato"
+    "submitted": "Inviato",
+    "uploadFailed": "Upload failed. Please try again.",
+    "idDocRequired": "ID document is required",
+    "selfieFileTypes": "JPEG, PNG, or WebP — Max 5MB",
+    "addressPlaceholder": "Full address including city, state/province, and postal code",
+    "nationalIdPlaceholder": "Passport, national ID, or driver's license number",
+    "nextDocuments": "Next: Documents",
+    "nextReview": "Next: Review",
+    "pendingReview": "Pending Review",
+    "rejectedReason": "Reason: {{reason}}",
+    "noReason": "No reason provided",
+    "optionalNotice": "KYC verification is currently optional. All features are accessible without verification.",
+    "documentUploaded": "Document uploaded"
   },
   "beneficiariesPage": {
     "title": "Beneficiari",
@@ -499,7 +525,10 @@
     "saveChanges": "Salva modifiche",
     "deleteConfirm": "Eliminare \"{{name}}\"?",
     "bank": "Banca",
-    "account": "Conto"
+    "account": "Conto",
+    "bankPlaceholder": "e.g., Chase Bank",
+    "accountPlaceholder": "Recipient's account number",
+    "swiftPlaceholder": "Optional"
   },
   "transfersPage": {
     "title": "Invia denaro",
@@ -521,7 +550,11 @@
     "successTitle": "Trasferimento inviato",
     "successDesc": "{{amount}} a {{name}} in revisione.",
     "newTransfer": "Nuovo trasferimento",
-    "viewTransactions": "Vedi transazioni"
+    "viewTransactions": "Vedi transazioni",
+    "ref": "Ref: {{ref}}",
+    "descriptionPlaceholder": "e.g., Invoice payment, Rent, Gift...",
+    "amountExceeds": "Amount exceeds available balance ({{max}})",
+    "amountLabel": "Amount ({{currency}})"
   },
   "txnPage": {
     "title": "Storico transazioni",
@@ -562,7 +595,8 @@
     "warning": "Avviso",
     "alerts": "Avvisi",
     "info": "Info",
-    "deleteConfirm": "Eliminare le notifiche lette?"
+    "deleteConfirm": "Eliminare le notifiche lette?",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "profilePage": {
     "title": "Profilo",
@@ -632,5 +666,14 @@
     "invalidSecurityCode": "Codice non valido",
     "insufficientBalance": "Saldo insufficiente",
     "accountInactive": "Il conto non e attivo"
+  },
+  "transactionTypes": {
+    "TRANSFER": "Transfer",
+    "DEPOSIT": "Deposit",
+    "WITHDRAWAL": "Withdrawal",
+    "ADMIN_CREDIT": "Admin Credit",
+    "ADMIN_DEBIT": "Admin Debit",
+    "CARD_TRANSFER": "Card Transfer",
+    "LOAN_DISBURSEMENT": "Loan Disbursement"
   }
 }

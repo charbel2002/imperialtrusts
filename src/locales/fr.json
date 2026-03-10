@@ -323,8 +323,21 @@
     "cancelled": "Annulé",
     "verified": "Vérifié",
     "notSubmitted": "Non soumis",
+    "initialized": "Initialisé",
+    "processing": "En traitement",
+    "expired": "Expiré",
+    "unknown": "Inconnu",
     "language": "Langue",
     "changeLanguage": "Changer de langue"
+  },
+  "transactionTypes": {
+    "TRANSFER": "Transfert",
+    "DEPOSIT": "Dépôt",
+    "WITHDRAWAL": "Retrait",
+    "ADMIN_CREDIT": "Crédit administrateur",
+    "ADMIN_DEBIT": "Débit administrateur",
+    "CARD_TRANSFER": "Transfert carte",
+    "LOAN_DISBURSEMENT": "Décaissement de prêt"
   },
   "dashboardCards": {
     "title": "Mes cartes",
@@ -343,7 +356,9 @@
     "createTitle": "Créer une carte virtuelle",
     "createDesc": "Choisissez votre réseau. Votre carte sera créée instantanément.",
     "createInfo": "La carte sera créée avec un solde de 0,00 $. Vous pourrez l'approvisionner depuis votre compte.",
-    "cardCreated": "Carte créée !"
+    "createBtn": "Créer une carte {{type}}",
+    "cardCreated": "Carte créée !",
+    "cardReadyMsg": "Votre nouvelle carte {{type}} est prête."
   },
   "dashboardBeneficiaries": {
     "title": "Bénéficiaires",
@@ -408,7 +423,9 @@
     "success": "Succès",
     "warning": "Avertissement",
     "alerts": "Alertes",
-    "info": "Info"
+    "info": "Info",
+    "viewAll": "Voir toutes les notifications",
+    "noFilteredNotifications": "Aucune notification {{filter}}"
   },
   "cards": {
     "title": "Mes Cartes",
@@ -436,6 +453,12 @@
     "availableInAccount": "Disponible sur le compte",
     "cardBalance": "Solde de la carte",
     "cardCreated": "Carte Créée !",
+    "cardReadyMsg": "Votre nouvelle carte {{type}} est prête.",
+    "fundTitle": "Alimenter la carte **** {{last4}}",
+    "withdrawTitle": "Retirer vers le compte",
+    "addedToCard": "{{amount}} ajouté à la carte",
+    "withdrawnToAccount": "{{amount}} retiré vers le compte",
+    "enterValidAmount": "Entrez un montant valide",
     "frozen": "GELÉE",
     "cancelled": "ANNULÉE"
   },
@@ -476,6 +499,18 @@
     "submitConfirm": "En soumettant, vous confirmez que toutes les informations fournies sont exactes et que vous autorisez {{platformName}} à vérifier votre identité.",
     "submitBtn": "Soumettre la vérification",
     "uploaded": "Téléchargé avec succès",
+    "uploadFailed": "Échec du téléchargement. Veuillez réessayer.",
+    "idDocRequired": "Le document d'identité est requis",
+    "selfieFileTypes": "JPEG, PNG ou WebP — Max 5 Mo",
+    "addressPlaceholder": "Adresse complète avec ville, région et code postal",
+    "nationalIdPlaceholder": "Passeport, carte d'identité ou permis de conduire",
+    "nextDocuments": "Suivant : Documents",
+    "nextReview": "Suivant : Vérification",
+    "pendingReview": "En attente de révision",
+    "rejectedReason": "Raison : {{reason}}",
+    "noReason": "Aucune raison fournie",
+    "optionalNotice": "La vérification KYC est actuellement facultative. Toutes les fonctionnalités sont accessibles sans vérification.",
+    "documentUploaded": "Document téléchargé",
     "securityRequired": "Vérification de sécurité requise",
     "verifiedOn": "Vérifié le",
     "submitted": "Soumis"
@@ -498,6 +533,9 @@
     "selectCountry": "Sélectionner le pays",
     "saveChanges": "Enregistrer les modifications",
     "deleteConfirm": "Supprimer le bénéficiaire \"{{name}}\" ? Cette action est irréversible.",
+    "bankPlaceholder": "ex. BNP Paribas",
+    "accountPlaceholder": "Numéro de compte du destinataire",
+    "swiftPlaceholder": "Facultatif",
     "bank": "Banque",
     "account": "Compte"
   },
@@ -520,6 +558,10 @@
     "sendBtn": "Envoyer",
     "successTitle": "Transfert soumis",
     "successDesc": "Votre transfert de {{amount}} à {{name}} est en attente de validation.",
+    "ref": "Réf : {{ref}}",
+    "descriptionPlaceholder": "ex. Paiement de facture, Loyer, Cadeau...",
+    "amountExceeds": "Le montant dépasse le solde disponible ({{max}})",
+    "amountLabel": "Montant ({{currency}})",
     "newTransfer": "Nouveau transfert",
     "viewTransactions": "Voir les transactions"
   },
@@ -562,7 +604,8 @@
     "warning": "Avertissement",
     "alerts": "Alertes",
     "info": "Info",
-    "deleteConfirm": "Supprimer toutes les notifications lues ? Cette action est irréversible."
+    "deleteConfirm": "Supprimer toutes les notifications lues ? Cette action est irréversible.",
+    "noFilteredNotifications": "Aucune notification {{filter}}"
   },
   "profilePage": {
     "title": "Profil",

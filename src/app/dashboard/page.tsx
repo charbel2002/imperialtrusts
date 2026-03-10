@@ -20,6 +20,8 @@ export default async function DashboardPage() {
   const platform = await getPlatformSettings();
   const dict = await getDictionary(userLang, platform);
   const t = dict.dashboard || {};
+  const c = dict.common || {} as any;
+  const txnTypes = (dict as any).transactionTypes || {} as any;
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
@@ -91,7 +93,7 @@ export default async function DashboardPage() {
               <p className="text-xs text-slate-500 uppercase tracking-wider">{t.kycStatus || "KYC Status"}</p>
               <div className="mt-2">
                 <Badge variant={kycStatus === "APPROVED" ? "success" : kycStatus === "PENDING" ? "warning" : kycStatus === "REJECTED" ? "danger" : "neutral"}>
-                  {kycStatus === "NOT_SUBMITTED" ? (dict.common?.notSubmitted || "Not Submitted") : kycStatus.charAt(0) + kycStatus.slice(1).toLowerCase()}
+                  {kycStatus === "NOT_SUBMITTED" ? (c.notSubmitted || "Not Submitted") : (c[kycStatus.toLowerCase()] || kycStatus.charAt(0) + kycStatus.slice(1).toLowerCase())}
                 </Badge>
               </div>
             </CardBody>
@@ -101,7 +103,7 @@ export default async function DashboardPage() {
               <p className="text-xs text-slate-500 uppercase tracking-wider">{t.accountStatus || "Account Status"}</p>
               <div className="mt-2">
                 <Badge variant={account?.status === "ACTIVE" ? "success" : "danger"}>
-                  {account?.status ?? "Unknown"}
+                  {(c[account?.status?.toLowerCase() ?? ""] || account?.status) ?? (c.unknown || "Unknown")}
                 </Badge>
               </div>
             </CardBody>
@@ -137,9 +139,9 @@ export default async function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-slate-800">
-                        {txn.type.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase())}
+                        {txnTypes[txn.type] || txn.type.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (l: string) => l.toUpperCase())}
                       </p>
-                      <p className="text-xs text-slate-500">{timeAgo(txn.createdAt)}</p>
+                      <p className="text-xs text-slate-500">{timeAgo(txn.createdAt, userLang)}</p>
                     </div>
                   </div>
                   <div className="text-right">
@@ -147,7 +149,7 @@ export default async function DashboardPage() {
                       {isCredit ? "+" : "-"}{formatCurrency(Number(txn.amount), txn.currency)}
                     </p>
                     <Badge variant={txn.status === "COMPLETED" ? "success" : txn.status === "REJECTED" ? "danger" : "warning"} className="text-[10px]">
-                      {txn.status}
+                      {c[txn.status.toLowerCase()] || txn.status}
                     </Badge>
                   </div>
                 </div>

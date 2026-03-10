@@ -81,6 +81,7 @@ export function NotificationList({ notifications: initial, unreadCount: initialU
 
   const d = useDict();
   const tn = d.notificationsPage || {};
+  const locale = d._locale || "en";
 
   const filters: { value: FilterType; label: string }[] = [
     { value: "all", label: tn.all || "All" },
@@ -131,7 +132,7 @@ export function NotificationList({ notifications: initial, unreadCount: initialU
         <div className="text-center py-16">
           <Bell size={40} className="mx-auto mb-3 text-slate-300" />
           <p className="text-sm text-slate-500">
-            {filter === "all" ? (tn.noNotifications || "No notifications") : `No ${filter} notifications`}
+            {filter === "all" ? (tn.noNotifications || "No notifications") : (tn.noFilteredNotifications || "No {{filter}} notifications").replace("{{filter}}", filter)}
           </p>
         </div>
       ) : (
@@ -163,7 +164,7 @@ export function NotificationList({ notifications: initial, unreadCount: initialU
                         {notif.title}
                       </p>
                       <p className="text-xs text-slate-500 mt-1 leading-relaxed">{notif.message}</p>
-                      <p className="text-[10px] text-slate-400 mt-2">{timeAgo(new Date(notif.createdAt))}</p>
+                      <p className="text-[10px] text-slate-400 mt-2">{timeAgo(new Date(notif.createdAt), locale)}</p>
                     </div>
 
                     {/* Unread dot */}

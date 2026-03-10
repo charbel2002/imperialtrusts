@@ -26,6 +26,7 @@ export function KycForm({ defaultValues }: Props) {
   const router = useRouter();
   const dict = useDict();
   const tk = (dict.kycPage || {}) as any;
+  const tv = (dict.validation || {}) as any;
 
   const steps = [
     { id: 1, label: tk.step1 || "Personal Info", icon: User },
@@ -55,8 +56,8 @@ export function KycForm({ defaultValues }: Props) {
 
   function validateStep1(): boolean {
     const errors: Record<string, string> = {};
-    if (!fullLegalName.trim()) errors.fullLegalName = "Full legal name is required";
-    if (!dateOfBirth) errors.dateOfBirth = "Date of birth is required";
+    if (!fullLegalName.trim()) errors.fullLegalName = tv.fullNameRequired || "Full legal name is required";
+    if (!dateOfBirth) errors.dateOfBirth = tv.dobRequired || "Date of birth is required";
     if (!address.trim() || address.trim().length < 5) errors.address = (dict.txnProgress?.addressMinLength || "Address must be at least 5 characters");
     if (!nationalId.trim()) errors.nationalId = (dict.txnProgress?.nationalIdRequired || "National ID is required");
     setFieldErrors(errors);
@@ -65,7 +66,7 @@ export function KycForm({ defaultValues }: Props) {
 
   function validateStep2(): boolean {
     const errors: Record<string, string> = {};
-    if (!idDocPath) errors.idDoc = "ID document is required";
+    if (!idDocPath) errors.idDoc = tk.idDocRequired || "ID document is required";
     if (!selfiePath) errors.selfie = (dict.txnProgress?.selfieRequired || "Selfie is required");
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -98,7 +99,7 @@ export function KycForm({ defaultValues }: Props) {
       if (!res.ok) {
         setFieldErrors((prev) => ({
           ...prev,
-          [type === "id_document" ? "idDoc" : "selfie"]: data.error || "Upload failed",
+          [type === "id_document" ? "idDoc" : "selfie"]: data.error || (tk.uploadFailed || "Upload failed"),
         }));
         return;
       }
@@ -113,7 +114,7 @@ export function KycForm({ defaultValues }: Props) {
     } catch {
       setFieldErrors((prev) => ({
         ...prev,
-        [type === "id_document" ? "idDoc" : "selfie"]: "Upload failed. Please try again.",
+        [type === "id_document" ? "idDoc" : "selfie"]: tk.uploadFailed || "Upload failed. Please try again.",
       }));
     } finally {
       setUploading(null);
@@ -185,7 +186,7 @@ export function KycForm({ defaultValues }: Props) {
           />
           <Textarea
             label={tk.address || "Residential Address"}
-            placeholder="Full address including city, state/province, and postal code"
+            placeholder={tk.addressPlaceholder || "Full address including city, state/province, and postal code"}
             rows={3}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -193,7 +194,7 @@ export function KycForm({ defaultValues }: Props) {
           />
           <Input
             label={tk.nationalId || "National ID Number"}
-            placeholder="Passport, national ID, or driver's license number"
+            placeholder={tk.nationalIdPlaceholder || "Passport, national ID, or driver's license number"}
             value={nationalId}
             onChange={(e) => setNationalId(e.target.value)}
             error={fieldErrors.nationalId}
@@ -201,7 +202,7 @@ export function KycForm({ defaultValues }: Props) {
 
           <div className="flex justify-end pt-2">
             <Button onClick={nextStep}>
-              Next: Documents <ArrowRight size={16} />
+              {tk.nextDocuments || "Next: Documents"} <ArrowRight size={16} />
             </Button>
           </div>
         </div>
@@ -212,15 +213,15 @@ export function KycForm({ defaultValues }: Props) {
         <div className="space-y-6">
           {/* ID Document */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">ID Document</label>
-            <p className="text-xs text-slate-400 mb-3">Upload a clear photo or scan of your government-issued ID (passport, national ID, or driver&apos;s license).</p>
+            <label className="block text-sm font-medium text-slate-700 mb-2">{tk.idDoc || "ID Document"}</label>
+            <p className="text-xs text-slate-400 mb-3">{tk.idDocDesc || "Upload a clear photo or scan of your government-issued ID (passport, national ID, or driver's license)."}</p>
 
             {idDocPath ? (
               <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200">
                 <CheckCircle size={20} className="text-emerald-600 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-emerald-800 truncate">{idDocName}</p>
-                  <p className="text-xs text-emerald-600">Uploaded successfully</p>
+                  <p className="text-xs text-emerald-600">{tk.uploaded || "Uploaded successfully"}</p>
                 </div>
                 <button onClick={() => { setIdDocPath(""); setIdDocName(""); }} className="text-slate-400 hover:text-slate-600">
                   <X size={16} />
@@ -236,8 +237,8 @@ export function KycForm({ defaultValues }: Props) {
                 ) : (
                   <>
                     <FileText size={32} className="text-slate-400 mb-2" />
-                    <p className="text-sm font-medium text-slate-600">Click to upload ID document</p>
-                    <p className="text-xs text-slate-400 mt-1">JPEG, PNG, WebP, or PDF - Max 5MB</p>
+                    <p className="text-sm font-medium text-slate-600">{tk.uploadId || "Click to upload ID document"}</p>
+                    <p className="text-xs text-slate-400 mt-1">{tk.fileTypes || "JPEG, PNG, WebP, or PDF — Max 5MB"}</p>
                   </>
                 )}
                 <input
@@ -253,15 +254,15 @@ export function KycForm({ defaultValues }: Props) {
 
           {/* Selfie */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Selfie Verification</label>
-            <p className="text-xs text-slate-400 mb-3">Take a clear selfie of yourself. Make sure your face is visible and well-lit.</p>
+            <label className="block text-sm font-medium text-slate-700 mb-2">{tk.selfie || "Selfie Verification"}</label>
+            <p className="text-xs text-slate-400 mb-3">{tk.selfieDesc || "Take a clear selfie of yourself. Make sure your face is visible and well-lit."}</p>
 
             {selfiePath ? (
               <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200">
                 <CheckCircle size={20} className="text-emerald-600 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-emerald-800 truncate">{selfieName}</p>
-                  <p className="text-xs text-emerald-600">Uploaded successfully</p>
+                  <p className="text-xs text-emerald-600">{tk.uploaded || "Uploaded successfully"}</p>
                 </div>
                 <button onClick={() => { setSelfiePath(""); setSelfieName(""); }} className="text-slate-400 hover:text-slate-600">
                   <X size={16} />
@@ -277,8 +278,8 @@ export function KycForm({ defaultValues }: Props) {
                 ) : (
                   <>
                     <Camera size={32} className="text-slate-400 mb-2" />
-                    <p className="text-sm font-medium text-slate-600">Click to upload selfie</p>
-                    <p className="text-xs text-slate-400 mt-1">JPEG, PNG, or WebP - Max 5MB</p>
+                    <p className="text-sm font-medium text-slate-600">{tk.uploadSelfie || "Click to upload selfie"}</p>
+                    <p className="text-xs text-slate-400 mt-1">{tk.selfieFileTypes || "JPEG, PNG, or WebP — Max 5MB"}</p>
                   </>
                 )}
                 <input
@@ -293,8 +294,8 @@ export function KycForm({ defaultValues }: Props) {
           </div>
 
           <div className="flex justify-between pt-2">
-            <Button variant="ghost" onClick={prevStep}><ArrowLeft size={16} /> Back</Button>
-            <Button onClick={nextStep}>Next: Review <ArrowRight size={16} /></Button>
+            <Button variant="ghost" onClick={prevStep}><ArrowLeft size={16} /> {dict.common?.back || "Back"}</Button>
+            <Button onClick={nextStep}>{tk.nextReview || "Next: Review"} <ArrowRight size={16} /></Button>
           </div>
         </div>
       )}
@@ -304,7 +305,7 @@ export function KycForm({ defaultValues }: Props) {
         <div className="space-y-6">
           <div className="rounded-xl border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200">
-              <h3 className="text-sm font-semibold text-slate-700">Review Your Information</h3>
+              <h3 className="text-sm font-semibold text-slate-700">{tk.reviewInfo || "Review Your Information"}</h3>
             </div>
             <div className="p-5 space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
@@ -332,9 +333,9 @@ export function KycForm({ defaultValues }: Props) {
           </Alert>
 
           <div className="flex justify-between pt-2">
-            <Button variant="ghost" onClick={prevStep}><ArrowLeft size={16} /> Back</Button>
+            <Button variant="ghost" onClick={prevStep}><ArrowLeft size={16} /> {dict.common?.back || "Back"}</Button>
             <Button onClick={handleSubmit} loading={loading} variant="accent" className="shadow-lg shadow-accent/20">
-              Submit Verification
+              {tk.submitBtn || "Submit Verification"}
             </Button>
           </div>
         </div>

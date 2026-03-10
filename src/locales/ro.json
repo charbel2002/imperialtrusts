@@ -324,7 +324,11 @@
     "verified": "Verificat",
     "notSubmitted": "Netrimis",
     "language": "Limbă",
-    "changeLanguage": "Schimbă limba"
+    "changeLanguage": "Schimbă limba",
+    "initialized": "Initialized",
+    "processing": "Processing",
+    "expired": "Expired",
+    "unknown": "Unknown"
   },
   "dashboardCards": {
     "title": "My Cards",
@@ -343,7 +347,9 @@
     "createTitle": "Create Virtual Card",
     "createDesc": "Choose your card network. Your virtual card will be created instantly.",
     "createInfo": "Card will be created with $0.00 balance. You can fund it from your bank account after creation.",
-    "cardCreated": "Card Created!"
+    "cardCreated": "Card Created!",
+    "createBtn": "Create {{type}} Card",
+    "cardReadyMsg": "Your new {{type}} card is ready."
   },
   "dashboardBeneficiaries": {
     "title": "Beneficiaries",
@@ -408,7 +414,9 @@
     "success": "Success",
     "warning": "Warning",
     "alerts": "Alerts",
-    "info": "Info"
+    "info": "Info",
+    "viewAll": "View all notifications",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "cards": {
     "title": "Cardurile mele",
@@ -437,7 +445,13 @@
     "cardBalance": "Sold card",
     "cardCreated": "Card creat!",
     "frozen": "ÎNGHEȚAT",
-    "cancelled": "ANULAT"
+    "cancelled": "ANULAT",
+    "cardReadyMsg": "Your new {{type}} card is ready.",
+    "fundTitle": "Fund Card **** {{last4}}",
+    "withdrawTitle": "Withdraw to Account",
+    "addedToCard": "{{amount}} added to card",
+    "withdrawnToAccount": "{{amount}} withdrawn to account",
+    "enterValidAmount": "Enter a valid amount"
   },
   "kycPage": {
     "title": "Verificare KYC",
@@ -478,7 +492,19 @@
     "uploaded": "Încărcat",
     "securityRequired": "Verificare necesară",
     "verifiedOn": "Verificat pe",
-    "submitted": "Trimis"
+    "submitted": "Trimis",
+    "uploadFailed": "Upload failed. Please try again.",
+    "idDocRequired": "ID document is required",
+    "selfieFileTypes": "JPEG, PNG, or WebP — Max 5MB",
+    "addressPlaceholder": "Full address including city, state/province, and postal code",
+    "nationalIdPlaceholder": "Passport, national ID, or driver's license number",
+    "nextDocuments": "Next: Documents",
+    "nextReview": "Next: Review",
+    "pendingReview": "Pending Review",
+    "rejectedReason": "Reason: {{reason}}",
+    "noReason": "No reason provided",
+    "optionalNotice": "KYC verification is currently optional. All features are accessible without verification.",
+    "documentUploaded": "Document uploaded"
   },
   "beneficiariesPage": {
     "title": "Beneficiari",
@@ -499,7 +525,10 @@
     "saveChanges": "Salvează",
     "deleteConfirm": "Șterge \"{{name}}\"?",
     "bank": "Bancă",
-    "account": "Cont"
+    "account": "Cont",
+    "bankPlaceholder": "e.g., Chase Bank",
+    "accountPlaceholder": "Recipient's account number",
+    "swiftPlaceholder": "Optional"
   },
   "transfersPage": {
     "title": "Trimite bani",
@@ -521,7 +550,11 @@
     "successTitle": "Transfer trimis",
     "successDesc": "{{amount}} către {{name}} în revizuire.",
     "newTransfer": "Transfer nou",
-    "viewTransactions": "Vezi tranzacții"
+    "viewTransactions": "Vezi tranzacții",
+    "ref": "Ref: {{ref}}",
+    "descriptionPlaceholder": "e.g., Invoice payment, Rent, Gift...",
+    "amountExceeds": "Amount exceeds available balance ({{max}})",
+    "amountLabel": "Amount ({{currency}})"
   },
   "txnPage": {
     "title": "Istoric tranzacții",
@@ -562,7 +595,8 @@
     "warning": "Avertisment",
     "alerts": "Alerte",
     "info": "Info",
-    "deleteConfirm": "Șterge notificările citite?"
+    "deleteConfirm": "Șterge notificările citite?",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "profilePage": {
     "title": "Profil",
@@ -632,5 +666,14 @@
     "invalidSecurityCode": "Cod invalid",
     "insufficientBalance": "Sold insuficient",
     "accountInactive": "Contul nu este activ"
+  },
+  "transactionTypes": {
+    "TRANSFER": "Transfer",
+    "DEPOSIT": "Deposit",
+    "WITHDRAWAL": "Withdrawal",
+    "ADMIN_CREDIT": "Admin Credit",
+    "ADMIN_DEBIT": "Admin Debit",
+    "CARD_TRANSFER": "Card Transfer",
+    "LOAN_DISBURSEMENT": "Loan Disbursement"
   }
 }

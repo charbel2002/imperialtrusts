@@ -73,11 +73,12 @@ export default async function CardsPage() {
             <div key={card.id} className="space-y-4">
               <BankCard cardType={card.cardType} cardNumber={card.cardNumber} holderName={user.name}
                 expirationDate={formatDate(card.expirationDate, userLang, { month: "2-digit", year: "2-digit" })}
-                balance={Number(card.balance)} currency={account?.currency} status={card.status} size="md" />
+                balance={Number(card.balance)} currency={account?.currency} status={card.status} size="md"
+                labels={{ frozen: tc.frozen, cancelled: tc.cancelled, balance: tc.balance, cardHolder: tc.cardHolder, expires: tc.expires }} />
               <Card><CardBody className="!py-4">
                 <div className="flex items-center justify-between mb-4">
                   <div><p className="text-xs text-slate-400 uppercase tracking-wider">{card.cardType} - **** {card.cardNumber.slice(-4)}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{formatCurrency(Number(card.balance), account?.currency)}</p></div>
-                  <Badge variant={card.status === "ACTIVE" ? "success" : card.status === "FROZEN" ? "info" : card.status === "CANCELLED" ? "danger" : "neutral"}>{card.status}</Badge>
+                  <Badge variant={card.status === "ACTIVE" ? "success" : card.status === "FROZEN" ? "info" : card.status === "CANCELLED" ? "danger" : "neutral"}>{(tc as any)[card.status.toLowerCase()] || card.status}</Badge>
                 </div>
                 <CardActions cardId={card.id} cardStatus={card.status} cardLast4={card.cardNumber.slice(-4)} cardBalance={Number(card.balance)} accountBalance={Number(account?.balance ?? 0)} cvv={card.cvv} currency={account?.currency ?? "USD"} />
               </CardBody></Card>

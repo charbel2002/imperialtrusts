@@ -58,26 +58,26 @@ export function CardActions({
 
   async function handleFund() {
     const num = parseFloat(amount);
-    if (isNaN(num) || num <= 0) { setError("Enter a valid amount"); return; }
+    if (isNaN(num) || num <= 0) { setError(tc.enterValidAmount || "Enter a valid amount"); return; }
     setLoading("fund");
     setError("");
     setSuccess("");
     const result = await fundCard({ cardId, amount: num });
     setLoading(null);
     if (result.error) setError(result.error);
-    else { setSuccess(`${formatCurrency(num, currency)} added to card`); setAmount(""); setShowFund(false); }
+    else { setSuccess((tc.addedToCard || "{{amount}} added to card").replace("{{amount}}", formatCurrency(num, currency))); setAmount(""); setShowFund(false); }
   }
 
   async function handleWithdraw() {
     const num = parseFloat(amount);
-    if (isNaN(num) || num <= 0) { setError("Enter a valid amount"); return; }
+    if (isNaN(num) || num <= 0) { setError(tc.enterValidAmount || "Enter a valid amount"); return; }
     setLoading("withdraw");
     setError("");
     setSuccess("");
     const result = await withdrawFromCard({ cardId, amount: num });
     setLoading(null);
     if (result.error) setError(result.error);
-    else { setSuccess(`${formatCurrency(num, currency)} withdrawn to account`); setAmount(""); setShowWithdraw(false); }
+    else { setSuccess((tc.withdrawnToAccount || "{{amount}} withdrawn to account").replace("{{amount}}", formatCurrency(num, currency))); setAmount(""); setShowWithdraw(false); }
   }
 
   return (
@@ -102,11 +102,11 @@ export function CardActions({
           {isActive && (
             <>
               <Button size="sm" variant="accent" onClick={() => { setShowFund(true); setShowWithdraw(false); setAmount(""); setError(""); setSuccess(""); }}>
-                <Plus size={14} /> Fund
+                <Plus size={14} /> {tc.fund || "Fund"}
               </Button>
               {cardBalance > 0 && (
                 <Button size="sm" variant="ghost" onClick={() => { setShowWithdraw(true); setShowFund(false); setAmount(""); setError(""); setSuccess(""); }}>
-                  <Minus size={14} /> Withdraw
+                  <Minus size={14} /> {tc.withdraw || "Withdraw"}
                 </Button>
               )}
             </>
@@ -118,7 +118,7 @@ export function CardActions({
             loading={loading === "freeze"}
             className={isActive ? "text-blue-600 hover:bg-blue-50" : ""}
           >
-            {isActive ? <><Snowflake size={14} /> Freeze</> : <><Sun size={14} /> Unfreeze</>}
+            {isActive ? <><Snowflake size={14} /> {tc.freeze || "Freeze"}</> : <><Sun size={14} /> {tc.unfreeze || "Unfreeze"}</>}
           </Button>
         </div>
       )}
@@ -127,10 +127,10 @@ export function CardActions({
       {showFund && (
         <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-slate-700">Fund Card **** {cardLast4}</h4>
+            <h4 className="text-sm font-semibold text-slate-700">{(tc.fundTitle || "Fund Card **** {{last4}}").replace("{{last4}}", cardLast4)}</h4>
             <button onClick={() => setShowFund(false)} className="text-slate-400 hover:text-slate-600"><X size={16} /></button>
           </div>
-          <p className="text-xs text-slate-400">Available in account: {formatCurrency(accountBalance, currency)}</p>
+          <p className="text-xs text-slate-400">{tc.availableInAccount || "Available in account"}: {formatCurrency(accountBalance, currency)}</p>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">$</span>
             <input type="number" step="0.01" min="0.01" placeholder="0.00" value={amount}
@@ -139,7 +139,7 @@ export function CardActions({
             />
           </div>
           <Button size="sm" variant="accent" onClick={handleFund} loading={loading === "fund"} className="w-full">
-            <Plus size={14} /> Add {amount ? formatCurrency(parseFloat(amount) || 0, currency) : (dict.txnProgress?.funds || "Funds")}
+            <Plus size={14} /> {tc.addFunds || "Add"} {amount ? formatCurrency(parseFloat(amount) || 0, currency) : (dict.txnProgress?.funds || "Funds")}
           </Button>
         </div>
       )}
@@ -148,10 +148,10 @@ export function CardActions({
       {showWithdraw && (
         <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-slate-700">Withdraw to Account</h4>
+            <h4 className="text-sm font-semibold text-slate-700">{tc.withdrawTo || "Withdraw to Account"}</h4>
             <button onClick={() => setShowWithdraw(false)} className="text-slate-400 hover:text-slate-600"><X size={16} /></button>
           </div>
-          <p className="text-xs text-slate-400">Card balance: {formatCurrency(cardBalance, currency)}</p>
+          <p className="text-xs text-slate-400">{tc.cardBalance || "Card balance"}: {formatCurrency(cardBalance, currency)}</p>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">$</span>
             <input type="number" step="0.01" min="0.01" placeholder="0.00" value={amount}
@@ -160,7 +160,7 @@ export function CardActions({
             />
           </div>
           <Button size="sm" variant="secondary" onClick={handleWithdraw} loading={loading === "withdraw"} className="w-full">
-            <Minus size={14} /> Withdraw {amount ? formatCurrency(parseFloat(amount) || 0, currency) : ""}
+            <Minus size={14} /> {tc.withdraw || "Withdraw"} {amount ? formatCurrency(parseFloat(amount) || 0, currency) : ""}
           </Button>
         </div>
       )}

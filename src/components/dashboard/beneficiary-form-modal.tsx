@@ -105,14 +105,14 @@ export function BeneficiaryFormModal({ mode, defaultValues, onClose, onSuccess }
           <div className="grid grid-cols-2 gap-4">
             <Input
               label={tb.bankName || "Bank Name"}
-              placeholder="e.g., Chase Bank"
+              placeholder={tb.bankPlaceholder || "e.g., Chase Bank"}
               value={bankName}
               onChange={(e) => setBankName(e.target.value)}
               required
             />
             <Input
               label={tb.accountNumber || "Account Number"}
-              placeholder="Recipient's account number"
+              placeholder={tb.accountPlaceholder || "Recipient's account number"}
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
               required
@@ -122,12 +122,12 @@ export function BeneficiaryFormModal({ mode, defaultValues, onClose, onSuccess }
           <div className="grid grid-cols-2 gap-4">
             <Input
               label={tb.swift || "SWIFT / BIC Code"}
-              placeholder="Optional"
+              placeholder={tb.swiftPlaceholder || "Optional"}
               value={swift}
               onChange={(e) => setSwift(e.target.value.toUpperCase())}
             />
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Country</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">{tb.country || "Country"}</label>
               <select
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
@@ -145,9 +145,9 @@ export function BeneficiaryFormModal({ mode, defaultValues, onClose, onSuccess }
           <div className="flex gap-3 pt-2">
             <Button type="submit" loading={loading} className="flex-1">
               {mode === "create" ? (
-                <><Plus size={16} /> Add Beneficiary</>
+                <><Plus size={16} /> {tb.addBtn || "Add Beneficiary"}</>
               ) : (
-                <><CheckCircle size={16} /> Save Changes</>
+                <><CheckCircle size={16} /> {tb.saveChanges || "Save Changes"}</>
               )}
             </Button>
             <Button type="button" variant="ghost" onClick={onClose}>{tc.cancel || "Cancel"}</Button>

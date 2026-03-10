@@ -25,12 +25,13 @@ interface Props {
 export function BeneficiaryCard({ beneficiary }: Props) {
   const dict = useDict();
   const tc = dict.common || {};
+  const tb = (dict.beneficiariesPage || {}) as any;
   const [showEdit, setShowEdit] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
 
   async function handleDelete() {
-    if (!confirm(`Delete beneficiary "${beneficiary.name}"? This cannot be undone.`)) return;
+    if (!confirm((tb.deleteConfirm || "Delete beneficiary \"{{name}}\"? This cannot be undone.").replace("{{name}}", beneficiary.name))) return;
     setDeleting(true);
     setError("");
     const result = await deleteBeneficiary(beneficiary.id);
@@ -94,7 +95,7 @@ export function BeneficiaryCard({ beneficiary }: Props) {
             <div className="flex items-center gap-2.5">
               <Building2 size={14} className="text-slate-400 flex-shrink-0" />
               <div className="min-w-0">
-                <p className="text-[10px] text-slate-400 uppercase tracking-wider">Bank</p>
+                <p className="text-[10px] text-slate-400 uppercase tracking-wider">{tb.bank || "Bank"}</p>
                 <p className="text-xs font-medium text-slate-700 truncate">{beneficiary.bankName}</p>
               </div>
             </div>
@@ -102,7 +103,7 @@ export function BeneficiaryCard({ beneficiary }: Props) {
             <div className="flex items-center gap-2.5">
               <Hash size={14} className="text-slate-400 flex-shrink-0" />
               <div className="min-w-0">
-                <p className="text-[10px] text-slate-400 uppercase tracking-wider">Account</p>
+                <p className="text-[10px] text-slate-400 uppercase tracking-wider">{tb.account || "Account"}</p>
                 <p className="text-xs font-mono font-medium text-slate-700 truncate">{beneficiary.accountNumber}</p>
               </div>
             </div>

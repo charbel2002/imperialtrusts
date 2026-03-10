@@ -324,7 +324,11 @@
     "verified": "Verifiziert",
     "notSubmitted": "Nicht eingereicht",
     "language": "Sprache",
-    "changeLanguage": "Sprache ändern"
+    "changeLanguage": "Sprache ändern",
+    "initialized": "Initialized",
+    "processing": "Processing",
+    "expired": "Expired",
+    "unknown": "Unknown"
   },
   "dashboardCards": {
     "title": "My Cards",
@@ -343,7 +347,9 @@
     "createTitle": "Create Virtual Card",
     "createDesc": "Choose your card network. Your virtual card will be created instantly.",
     "createInfo": "Card will be created with $0.00 balance. You can fund it from your bank account after creation.",
-    "cardCreated": "Card Created!"
+    "cardCreated": "Card Created!",
+    "createBtn": "Create {{type}} Card",
+    "cardReadyMsg": "Your new {{type}} card is ready."
   },
   "dashboardBeneficiaries": {
     "title": "Beneficiaries",
@@ -408,7 +414,9 @@
     "success": "Success",
     "warning": "Warning",
     "alerts": "Alerts",
-    "info": "Info"
+    "info": "Info",
+    "viewAll": "View all notifications",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "cards": {
     "title": "Meine Karten",
@@ -437,7 +445,13 @@
     "cardBalance": "Kartensaldo",
     "cardCreated": "Karte erstellt!",
     "frozen": "EINGEFROREN",
-    "cancelled": "STORNIERT"
+    "cancelled": "STORNIERT",
+    "cardReadyMsg": "Your new {{type}} card is ready.",
+    "fundTitle": "Fund Card **** {{last4}}",
+    "withdrawTitle": "Withdraw to Account",
+    "addedToCard": "{{amount}} added to card",
+    "withdrawnToAccount": "{{amount}} withdrawn to account",
+    "enterValidAmount": "Enter a valid amount"
   },
   "kycPage": {
     "title": "KYC-Verifizierung",
@@ -478,7 +492,19 @@
     "uploaded": "Erfolgreich hochgeladen",
     "securityRequired": "Sicherheitsverifizierung erforderlich",
     "verifiedOn": "Verifiziert am",
-    "submitted": "Eingereicht"
+    "submitted": "Eingereicht",
+    "uploadFailed": "Upload failed. Please try again.",
+    "idDocRequired": "ID document is required",
+    "selfieFileTypes": "JPEG, PNG, or WebP — Max 5MB",
+    "addressPlaceholder": "Full address including city, state/province, and postal code",
+    "nationalIdPlaceholder": "Passport, national ID, or driver's license number",
+    "nextDocuments": "Next: Documents",
+    "nextReview": "Next: Review",
+    "pendingReview": "Pending Review",
+    "rejectedReason": "Reason: {{reason}}",
+    "noReason": "No reason provided",
+    "optionalNotice": "KYC verification is currently optional. All features are accessible without verification.",
+    "documentUploaded": "Document uploaded"
   },
   "beneficiariesPage": {
     "title": "Empfänger",
@@ -499,7 +525,10 @@
     "saveChanges": "Änderungen speichern",
     "deleteConfirm": "Empfänger \"{{name}}\" löschen?",
     "bank": "Bank",
-    "account": "Konto"
+    "account": "Konto",
+    "bankPlaceholder": "e.g., Chase Bank",
+    "accountPlaceholder": "Recipient's account number",
+    "swiftPlaceholder": "Optional"
   },
   "transfersPage": {
     "title": "Geld senden",
@@ -521,7 +550,11 @@
     "successTitle": "Überweisung eingereicht",
     "successDesc": "Ihre Überweisung von {{amount}} an {{name}} wird geprüft.",
     "newTransfer": "Neue Überweisung",
-    "viewTransactions": "Transaktionen anzeigen"
+    "viewTransactions": "Transaktionen anzeigen",
+    "ref": "Ref: {{ref}}",
+    "descriptionPlaceholder": "e.g., Invoice payment, Rent, Gift...",
+    "amountExceeds": "Amount exceeds available balance ({{max}})",
+    "amountLabel": "Amount ({{currency}})"
   },
   "txnPage": {
     "title": "Transaktionsverlauf",
@@ -562,7 +595,8 @@
     "warning": "Warnung",
     "alerts": "Warnungen",
     "info": "Info",
-    "deleteConfirm": "Alle gelesenen Benachrichtigungen löschen?"
+    "deleteConfirm": "Alle gelesenen Benachrichtigungen löschen?",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "profilePage": {
     "title": "Profil",
@@ -632,5 +666,14 @@
     "invalidSecurityCode": "Ungultiger Sicherheitscode",
     "insufficientBalance": "Unzureichendes Guthaben",
     "accountInactive": "Konto ist nicht aktiv"
+  },
+  "transactionTypes": {
+    "TRANSFER": "Transfer",
+    "DEPOSIT": "Deposit",
+    "WITHDRAWAL": "Withdrawal",
+    "ADMIN_CREDIT": "Admin Credit",
+    "ADMIN_DEBIT": "Admin Debit",
+    "CARD_TRANSFER": "Card Transfer",
+    "LOAN_DISBURSEMENT": "Loan Disbursement"
   }
 }

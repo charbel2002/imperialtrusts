@@ -324,7 +324,11 @@
     "verified": "सत्यापित",
     "notSubmitted": "सबमिट नहीं किया",
     "language": "भाषा",
-    "changeLanguage": "भाषा बदलें"
+    "changeLanguage": "भाषा बदलें",
+    "initialized": "Initialized",
+    "processing": "Processing",
+    "expired": "Expired",
+    "unknown": "Unknown"
   },
   "dashboardCards": {
     "title": "My Cards",
@@ -343,7 +347,9 @@
     "createTitle": "Create Virtual Card",
     "createDesc": "Choose your card network. Your virtual card will be created instantly.",
     "createInfo": "Card will be created with $0.00 balance. You can fund it from your bank account after creation.",
-    "cardCreated": "Card Created!"
+    "cardCreated": "Card Created!",
+    "createBtn": "Create {{type}} Card",
+    "cardReadyMsg": "Your new {{type}} card is ready."
   },
   "dashboardBeneficiaries": {
     "title": "Beneficiaries",
@@ -408,7 +414,9 @@
     "success": "Success",
     "warning": "Warning",
     "alerts": "Alerts",
-    "info": "Info"
+    "info": "Info",
+    "viewAll": "View all notifications",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "cards": {
     "title": "मेरे कार्ड",
@@ -437,7 +445,13 @@
     "cardBalance": "कार्ड शेष",
     "cardCreated": "कार्ड बनाया!",
     "frozen": "फ्रीज",
-    "cancelled": "रद्द"
+    "cancelled": "रद्द",
+    "cardReadyMsg": "Your new {{type}} card is ready.",
+    "fundTitle": "Fund Card **** {{last4}}",
+    "withdrawTitle": "Withdraw to Account",
+    "addedToCard": "{{amount}} added to card",
+    "withdrawnToAccount": "{{amount}} withdrawn to account",
+    "enterValidAmount": "Enter a valid amount"
   },
   "kycPage": {
     "title": "KYC सत्यापन",
@@ -478,7 +492,19 @@
     "uploaded": "अपलोड हो गया",
     "securityRequired": "सुरक्षा सत्यापन आवश्यक",
     "verifiedOn": "सत्यापित",
-    "submitted": "सबमिट किया"
+    "submitted": "सबमिट किया",
+    "uploadFailed": "Upload failed. Please try again.",
+    "idDocRequired": "ID document is required",
+    "selfieFileTypes": "JPEG, PNG, or WebP — Max 5MB",
+    "addressPlaceholder": "Full address including city, state/province, and postal code",
+    "nationalIdPlaceholder": "Passport, national ID, or driver's license number",
+    "nextDocuments": "Next: Documents",
+    "nextReview": "Next: Review",
+    "pendingReview": "Pending Review",
+    "rejectedReason": "Reason: {{reason}}",
+    "noReason": "No reason provided",
+    "optionalNotice": "KYC verification is currently optional. All features are accessible without verification.",
+    "documentUploaded": "Document uploaded"
   },
   "beneficiariesPage": {
     "title": "लाभार्थी",
@@ -499,7 +525,10 @@
     "saveChanges": "बदलाव सहेजें",
     "deleteConfirm": "\"{{name}}\" हटाएं?",
     "bank": "बैंक",
-    "account": "खाता"
+    "account": "खाता",
+    "bankPlaceholder": "e.g., Chase Bank",
+    "accountPlaceholder": "Recipient's account number",
+    "swiftPlaceholder": "Optional"
   },
   "transfersPage": {
     "title": "पैसे भेजें",
@@ -521,7 +550,11 @@
     "successTitle": "ट्रांसफर सबमिट किया गया",
     "successDesc": "{{amount}} {{name}} को समीक्षा में।",
     "newTransfer": "नया ट्रांसफर",
-    "viewTransactions": "लेनदेन देखें"
+    "viewTransactions": "लेनदेन देखें",
+    "ref": "Ref: {{ref}}",
+    "descriptionPlaceholder": "e.g., Invoice payment, Rent, Gift...",
+    "amountExceeds": "Amount exceeds available balance ({{max}})",
+    "amountLabel": "Amount ({{currency}})"
   },
   "txnPage": {
     "title": "लेनदेन इतिहास",
@@ -562,7 +595,8 @@
     "warning": "चेतावनी",
     "alerts": "अलर्ट",
     "info": "जानकारी",
-    "deleteConfirm": "पढ़ी हुई सूचनाएं हटाएं?"
+    "deleteConfirm": "पढ़ी हुई सूचनाएं हटाएं?",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "profilePage": {
     "title": "प्रोफ़ाइल",
@@ -632,5 +666,14 @@
     "invalidSecurityCode": "अमान्य कोड",
     "insufficientBalance": "अपर्याप्त शेष",
     "accountInactive": "खाता सक्रिय नहीं"
+  },
+  "transactionTypes": {
+    "TRANSFER": "Transfer",
+    "DEPOSIT": "Deposit",
+    "WITHDRAWAL": "Withdrawal",
+    "ADMIN_CREDIT": "Admin Credit",
+    "ADMIN_DEBIT": "Admin Debit",
+    "CARD_TRANSFER": "Card Transfer",
+    "LOAN_DISBURSEMENT": "Loan Disbursement"
   }
 }

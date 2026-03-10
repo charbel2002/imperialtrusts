@@ -324,7 +324,11 @@
     "verified": "Verificado",
     "notSubmitted": "No enviado",
     "language": "Idioma",
-    "changeLanguage": "Cambiar idioma"
+    "changeLanguage": "Cambiar idioma",
+    "initialized": "Initialized",
+    "processing": "Processing",
+    "expired": "Expired",
+    "unknown": "Unknown"
   },
   "dashboardCards": {
     "title": "My Cards",
@@ -343,7 +347,9 @@
     "createTitle": "Create Virtual Card",
     "createDesc": "Choose your card network. Your virtual card will be created instantly.",
     "createInfo": "Card will be created with $0.00 balance. You can fund it from your bank account after creation.",
-    "cardCreated": "Card Created!"
+    "cardCreated": "Card Created!",
+    "createBtn": "Create {{type}} Card",
+    "cardReadyMsg": "Your new {{type}} card is ready."
   },
   "dashboardBeneficiaries": {
     "title": "Beneficiaries",
@@ -408,7 +414,9 @@
     "success": "Success",
     "warning": "Warning",
     "alerts": "Alerts",
-    "info": "Info"
+    "info": "Info",
+    "viewAll": "View all notifications",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "cards": {
     "title": "Mis tarjetas",
@@ -437,7 +445,13 @@
     "cardBalance": "Saldo de tarjeta",
     "cardCreated": "¡Tarjeta creada!",
     "frozen": "CONGELADA",
-    "cancelled": "CANCELADA"
+    "cancelled": "CANCELADA",
+    "cardReadyMsg": "Your new {{type}} card is ready.",
+    "fundTitle": "Fund Card **** {{last4}}",
+    "withdrawTitle": "Withdraw to Account",
+    "addedToCard": "{{amount}} added to card",
+    "withdrawnToAccount": "{{amount}} withdrawn to account",
+    "enterValidAmount": "Enter a valid amount"
   },
   "kycPage": {
     "title": "Verificación KYC",
@@ -478,7 +492,19 @@
     "uploaded": "Subido exitosamente",
     "securityRequired": "Verificación de seguridad requerida",
     "verifiedOn": "Verificado el",
-    "submitted": "Enviado"
+    "submitted": "Enviado",
+    "uploadFailed": "Upload failed. Please try again.",
+    "idDocRequired": "ID document is required",
+    "selfieFileTypes": "JPEG, PNG, or WebP — Max 5MB",
+    "addressPlaceholder": "Full address including city, state/province, and postal code",
+    "nationalIdPlaceholder": "Passport, national ID, or driver's license number",
+    "nextDocuments": "Next: Documents",
+    "nextReview": "Next: Review",
+    "pendingReview": "Pending Review",
+    "rejectedReason": "Reason: {{reason}}",
+    "noReason": "No reason provided",
+    "optionalNotice": "KYC verification is currently optional. All features are accessible without verification.",
+    "documentUploaded": "Document uploaded"
   },
   "beneficiariesPage": {
     "title": "Beneficiarios",
@@ -499,7 +525,10 @@
     "saveChanges": "Guardar cambios",
     "deleteConfirm": "¿Eliminar \"{{name}}\"?",
     "bank": "Banco",
-    "account": "Cuenta"
+    "account": "Cuenta",
+    "bankPlaceholder": "e.g., Chase Bank",
+    "accountPlaceholder": "Recipient's account number",
+    "swiftPlaceholder": "Optional"
   },
   "transfersPage": {
     "title": "Enviar dinero",
@@ -521,7 +550,11 @@
     "successTitle": "Transferencia enviada",
     "successDesc": "Tu transferencia de {{amount}} a {{name}} está en revisión.",
     "newTransfer": "Nueva transferencia",
-    "viewTransactions": "Ver transacciones"
+    "viewTransactions": "Ver transacciones",
+    "ref": "Ref: {{ref}}",
+    "descriptionPlaceholder": "e.g., Invoice payment, Rent, Gift...",
+    "amountExceeds": "Amount exceeds available balance ({{max}})",
+    "amountLabel": "Amount ({{currency}})"
   },
   "txnPage": {
     "title": "Historial de transacciones",
@@ -562,7 +595,8 @@
     "warning": "Advertencia",
     "alerts": "Alertas",
     "info": "Info",
-    "deleteConfirm": "¿Eliminar notificaciones leídas?"
+    "deleteConfirm": "¿Eliminar notificaciones leídas?",
+    "noFilteredNotifications": "No {{filter}} notifications"
   },
   "profilePage": {
     "title": "Perfil",
@@ -632,5 +666,14 @@
     "invalidSecurityCode": "Codigo de seguridad invalido",
     "insufficientBalance": "Saldo insuficiente",
     "accountInactive": "La cuenta no esta activa"
+  },
+  "transactionTypes": {
+    "TRANSFER": "Transfer",
+    "DEPOSIT": "Deposit",
+    "WITHDRAWAL": "Withdrawal",
+    "ADMIN_CREDIT": "Admin Credit",
+    "ADMIN_DEBIT": "Admin Debit",
+    "CARD_TRANSFER": "Card Transfer",
+    "LOAN_DISBURSEMENT": "Loan Disbursement"
   }
 }

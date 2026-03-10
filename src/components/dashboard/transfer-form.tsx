@@ -42,7 +42,7 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
     e.preventDefault();
     if (!beneficiaryId) { setError(dict.txnProgress?.selectBeneficiary || "Please select a beneficiary"); return; }
     if (numAmount <= 0) { setError(dict.txnProgress?.enterValidAmount || "Enter a valid amount"); return; }
-    if (numAmount > maxAmount) { setError(`Amount exceeds available balance (${formatCurrency(maxAmount, currency)})`); return; }
+    if (numAmount > maxAmount) { setError((tt.amountExceeds || "Amount exceeds available balance ({{max}})").replace("{{max}}", formatCurrency(maxAmount, currency))); return; }
 
     setLoading(true);
     setError("");
@@ -63,19 +63,19 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
         <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
           <CheckCircle size={32} className="text-emerald-600" />
         </div>
-        <h3 className="text-xl font-bold text-slate-800 font-heading">Transfer Submitted</h3>
+        <h3 className="text-xl font-bold text-slate-800 font-heading">{tt.successTitle || "Transfer Submitted"}</h3>
         <p className="mt-2 text-sm text-slate-500">
-          Your transfer of {formatCurrency(numAmount, currency)} to {selected?.name} is now pending review.
+          {(tt.successDesc || "Your transfer of {{amount}} to {{name}} is now pending review.").replace("{{amount}}", formatCurrency(numAmount, currency)).replace("{{name}}", selected?.name || "")}
         </p>
         <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 text-xs font-mono text-slate-600">
-          Ref: {success.reference}
+          {(tt.ref || "Ref: {{ref}}").replace("{{ref}}", success.reference)}
         </div>
         <div className="mt-6 flex justify-center gap-3">
           <Button size="sm" onClick={() => { setSuccess(null); setBeneficiaryId(""); setAmount(""); setDescription(""); }}>
-            New Transfer
+            {tt.newTransfer || "New Transfer"}
           </Button>
           <Button size="sm" variant="ghost" onClick={() => router.push("/dashboard/transactions")}>
-            View Transactions
+            {tt.viewTransactions || "View Transactions"}
           </Button>
         </div>
       </div>
@@ -88,7 +88,7 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
 
       {/* Beneficiary Selector */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2">Select Beneficiary</label>
+        <label className="block text-sm font-medium text-slate-700 mb-2">{tt.selectBeneficiary || "Select Beneficiary"}</label>
         <div className="grid gap-2 max-h-64 overflow-y-auto">
           {beneficiaries.map((b) => (
             <button
@@ -120,7 +120,7 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
 
       {/* Amount */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1.5">Amount ({currency})</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1.5">{(tt.amountLabel || "Amount ({{currency}})").replace("{{currency}}", currency)}</label>
         <div className="relative">
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg font-medium">$</span>
           <input
@@ -134,13 +134,13 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
             required
           />
         </div>
-        <p className="text-xs text-slate-400 mt-1">Available: {formatCurrency(maxAmount, currency)}</p>
+        <p className="text-xs text-slate-400 mt-1">{tt.available || "Available"}: {formatCurrency(maxAmount, currency)}</p>
       </div>
 
       {/* Description */}
       <Textarea
         label={tt.description || "Description (optional)"}
-        placeholder="e.g., Invoice payment, Rent, Gift..."
+        placeholder={tt.descriptionPlaceholder || "e.g., Invoice payment, Rent, Gift..."}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         rows={2}
@@ -150,15 +150,15 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
       {beneficiaryId && numAmount > 0 && (
         <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-slate-500">To</span>
+            <span className="text-slate-500">{tt.to || "To"}</span>
             <span className="font-medium text-slate-800">{selected?.name}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-slate-500">Bank</span>
+            <span className="text-slate-500">{tt.bank || "Bank"}</span>
             <span className="text-slate-700">{selected?.bankName}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-slate-500">Amount</span>
+            <span className="text-slate-500">{tt.amount || "Amount"}</span>
             <span className="font-bold text-slate-800">{formatCurrency(numAmount, currency)}</span>
           </div>
         </div>

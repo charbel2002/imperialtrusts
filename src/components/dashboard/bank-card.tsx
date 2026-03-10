@@ -14,6 +14,13 @@ interface Props {
   showFull?: boolean;
   size?: "sm" | "md" | "lg";
   className?: string;
+  labels?: {
+    frozen?: string;
+    cancelled?: string;
+    balance?: string;
+    cardHolder?: string;
+    expires?: string;
+  };
 }
 
 export function BankCard({
@@ -27,6 +34,7 @@ export function BankCard({
   showFull = false,
   size = "md",
   className,
+  labels,
 }: Props) {
   const masked = showFull
     ? cardNumber.replace(/(.{4})/g, "$1 ").trim()
@@ -77,13 +85,13 @@ export function BankCard({
       {isFrozen && (
         <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-400/20 backdrop-blur-sm border border-blue-300/20">
           <Snowflake size={10} className="text-blue-300" />
-          <span className="text-[9px] font-medium text-blue-300">FROZEN</span>
+          <span className="text-[9px] font-medium text-blue-300">{labels?.frozen || "FROZEN"}</span>
         </div>
       )}
 
       {isCancelled && (
         <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-red-400/20 backdrop-blur-sm border border-red-300/20">
-          <span className="text-[9px] font-medium text-red-300">CANCELLED</span>
+          <span className="text-[9px] font-medium text-red-300">{labels?.cancelled || "CANCELLED"}</span>
         </div>
       )}
 
@@ -112,7 +120,7 @@ export function BankCard({
 
         {/* Balance */}
         <div className="mt-3">
-          <p className={cn("text-white/40 uppercase tracking-wider", ts.label)}>Balance</p>
+          <p className={cn("text-white/40 uppercase tracking-wider", ts.label)}>{labels?.balance || "Balance"}</p>
           <p className={cn("font-bold text-white font-heading", ts.balance)}>
             ${balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
@@ -121,11 +129,11 @@ export function BankCard({
         {/* Bottom: holder + expiry */}
         <div className={cn("flex items-end justify-between", size === "sm" ? "mt-3" : "mt-5")}>
           <div>
-            <p className={cn("text-white/40 uppercase tracking-wider", ts.label)}>Card Holder</p>
+            <p className={cn("text-white/40 uppercase tracking-wider", ts.label)}>{labels?.cardHolder || "Card Holder"}</p>
             <p className={cn("text-white font-medium mt-0.5 uppercase", ts.holder)}>{holderName}</p>
           </div>
           <div className="text-right">
-            <p className={cn("text-white/40 uppercase tracking-wider", ts.label)}>Expires</p>
+            <p className={cn("text-white/40 uppercase tracking-wider", ts.label)}>{labels?.expires || "Expires"}</p>
             <p className={cn("text-white font-medium mt-0.5", ts.holder)}>{expirationDate}</p>
           </div>
         </div>
