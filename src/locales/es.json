@@ -726,5 +726,170 @@
     "ADMIN_DEBIT": "Admin Debit",
     "CARD_TRANSFER": "Card Transfer",
     "LOAN_DISBURSEMENT": "Loan Disbursement"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Su código de verificación de inicio de sesión",
+      "heading": "Su código de verificación de inicio de sesión",
+      "body": "Utilice el siguiente código de un solo uso para completar su inicio de sesión. Este código es válido durante <strong>10 minutos</strong>.",
+      "ignore": "Si usted no intentó iniciar sesión, ignore este correo electrónico o contacte al soporte de inmediato."
+    },
+    "welcome": {
+      "subject": "Bienvenido a {{platformName}}",
+      "heading": "¡Bienvenido a {{platformName}}!",
+      "greeting": "Hola <strong>{{name}}</strong>, su cuenta ha sido creada exitosamente.",
+      "body": "Para desbloquear todas las funciones — incluyendo transferencias, tarjetas y gestión de beneficiarios — complete su verificación KYC desde su panel de control.",
+      "support": "Si tiene alguna pregunta, no dude en contactar a nuestro equipo de soporte."
+    },
+    "loanConfirmation": {
+      "subject": "Solicitud de préstamo recibida",
+      "heading": "Solicitud de préstamo recibida",
+      "body": "Gracias por su solicitud. La hemos recibido y nuestro equipo la revisará en breve.",
+      "amountRequested": "Monto solicitado",
+      "duration": "Duración",
+      "months": "meses",
+      "interestRate": "Tasa de interés",
+      "monthlyPayment": "Cuota mensual",
+      "totalRepayment": "Reembolso total",
+      "footer": "Recibirá otro correo electrónico cuando se tome una decisión. Si tiene preguntas mientras tanto, no dude en contactarnos."
+    },
+    "loanApproved": {
+      "subject": "Su préstamo ha sido aprobado",
+      "heading": "Solicitud de préstamo aprobada",
+      "body": "¡Buenas noticias! Su solicitud de préstamo ha sido <strong>aprobada</strong>.",
+      "amount": "Monto",
+      "duration": "Duración",
+      "months": "meses",
+      "monthlyPayment": "Cuota mensual",
+      "disbursed": "Los fondos han sido depositados en su cuenta.",
+      "notDisbursed": "Por favor contáctenos para los próximos pasos sobre el desembolso de fondos."
+    },
+    "loanRejected": {
+      "subject": "Actualización de su solicitud de préstamo",
+      "heading": "Actualización de su solicitud de préstamo",
+      "body": "Lamentamos informarle que su solicitud de préstamo por <strong>{{amount}}</strong> no fue aprobada en este momento.",
+      "reason": "Motivo",
+      "footer": "Si cree que esta decisión fue un error, o desea discutir alternativas, contacte a nuestro equipo de soporte."
+    },
+    "kycSubmitted": {
+      "subject": "Documentos KYC recibidos",
+      "heading": "Documentos KYC recibidos",
+      "body": "Hola <strong>{{name}}</strong>, hemos recibido sus documentos de verificación de identidad y están siendo revisados.",
+      "footer": "Recibirá otro correo electrónico cuando se complete la revisión. Normalmente tarda de 1 a 2 días hábiles."
+    },
+    "kycApproved": {
+      "subject": "KYC aprobado – Identidad verificada",
+      "heading": "Identidad verificada",
+      "body": "Hola <strong>{{name}}</strong>, ¡su identidad ha sido verificada exitosamente!",
+      "footer": "Ahora tiene acceso completo a todas las funciones bancarias, incluyendo transferencias, tarjetas y gestión de beneficiarios."
+    },
+    "kycRejected": {
+      "subject": "Verificación KYC – Acción requerida",
+      "heading": "Actualización de verificación KYC",
+      "body": "Hola <strong>{{name}}</strong>, lamentablemente su verificación de identidad no fue aprobada.",
+      "reason": "Motivo",
+      "footer": "Revise el motivo anterior y vuelva a enviar sus documentos desde su panel de control."
+    },
+    "transferInitiated": {
+      "subject": "Transferencia pendiente – {{reference}}",
+      "heading": "Transferencia enviada",
+      "body": "Su transferencia ha sido enviada y está pendiente de revisión.",
+      "amount": "Monto",
+      "recipient": "Destinatario",
+      "reference": "Referencia",
+      "footer": "Se le notificará cuando su transferencia sea procesada."
+    },
+    "transferApproved": {
+      "subject": "Transferencia aprobada – {{reference}}",
+      "heading": "Transferencia aprobada",
+      "statusCompleted": "aprobada y completada",
+      "statusLocks": "aprobada pero requiere pasos de verificación adicionales antes de completarse",
+      "body": "Su transferencia ha sido <strong>{{status}}</strong>.",
+      "amount": "Monto",
+      "recipient": "Destinatario",
+      "reference": "Referencia",
+      "fundsDeducted": "Los fondos han sido deducidos de su cuenta.",
+      "verificationRequired": "Inicie sesión en su panel de control para completar los pasos de verificación requeridos."
+    },
+    "transferRejected": {
+      "subject": "Transferencia rechazada – {{reference}}",
+      "heading": "Transferencia rechazada",
+      "body": "Su transferencia ha sido rechazada.",
+      "amount": "Monto",
+      "recipient": "Destinatario",
+      "reference": "Referencia",
+      "reason": "Motivo",
+      "footer": "Si cree que fue un error, contacte al soporte."
+    },
+    "transferCompleted": {
+      "subject": "Transferencia completada – {{reference}}",
+      "heading": "Transferencia completada",
+      "body": "Su transferencia se ha completado exitosamente.",
+      "amount": "Monto",
+      "recipient": "Destinatario",
+      "reference": "Referencia",
+      "fundsDeducted": "Los fondos han sido deducidos de su cuenta."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Cuenta bloqueada",
+        "message": "Su cuenta bancaria ha sido bloqueada por un administrador. No podrá realizar transacciones hasta que se desbloquee. Contacte al soporte para obtener ayuda."
+      },
+      "suspended": {
+        "title": "Cuenta suspendida",
+        "message": "Su cuenta bancaria ha sido suspendida en espera de revisión. Todas las operaciones de la cuenta están temporalmente desactivadas. Contacte al soporte para más información."
+      },
+      "active": {
+        "title": "Cuenta reactivada",
+        "message": "Su cuenta bancaria ha sido reactivada. Ahora puede realizar transacciones y acceder normalmente a todas las funciones de la cuenta."
+      },
+      "greeting": "Hola <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Cuenta acreditada",
+      "heading": "Cuenta acreditada",
+      "greeting": "Hola <strong>{{name}}</strong>,",
+      "body": "Su cuenta ha sido acreditada.",
+      "amount": "Monto",
+      "reason": "Motivo"
+    },
+    "accountDebited": {
+      "subject": "Cuenta debitada",
+      "heading": "Cuenta debitada",
+      "greeting": "Hola <strong>{{name}}</strong>,",
+      "body": "Se ha aplicado un débito a su cuenta.",
+      "amount": "Monto",
+      "reason": "Motivo",
+      "footer": "Si tiene preguntas sobre esta transacción, contacte al soporte."
+    },
+    "cardCreated": {
+      "subject": "Nueva tarjeta {{cardType}} creada",
+      "heading": "Nueva tarjeta creada",
+      "body": "Su nueva tarjeta virtual ha sido creada exitosamente.",
+      "cardType": "Tipo de tarjeta",
+      "cardNumber": "Número de tarjeta",
+      "footer": "Puede gestionar su tarjeta desde la sección Tarjetas de su panel de control."
+    },
+    "cardCancelled": {
+      "subject": "Tarjeta cancelada",
+      "heading": "Tarjeta cancelada",
+      "body": "Su tarjeta <strong>{{cardType}}</strong> terminada en <strong>{{lastFour}}</strong> ha sido cancelada por un administrador.",
+      "balanceReturned": "<strong>{{amount}}</strong> ha sido devuelto a su cuenta bancaria.",
+      "footer": "Si tiene preguntas, contacte al soporte."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Tarjeta congelada",
+      "reactivatedTitle": "Tarjeta reactivada",
+      "frozenBody": "Su tarjeta <strong>{{cardType}}</strong> terminada en <strong>{{lastFour}}</strong> ha sido congelada por un administrador. No podrá usarla hasta que sea reactivada.",
+      "reactivatedBody": "Su tarjeta <strong>{{cardType}}</strong> terminada en <strong>{{lastFour}}</strong> ha sido reactivada por un administrador y está lista para usar.",
+      "footer": "Si tiene preguntas, contacte al soporte."
+    },
+    "contactConfirmation": {
+      "subject": "Mensaje recibido – {{subject}}",
+      "heading": "Hemos recibido su mensaje",
+      "greeting": "Hola <strong>{{name}}</strong>, gracias por contactarnos.",
+      "body": "Hemos recibido su mensaje sobre \"<strong>{{subject}}</strong>\" y nuestro equipo le responderá lo antes posible.",
+      "urgent": "Mientras tanto, si su consulta es urgente, llámenos al <strong>{{phone}}</strong>."
+    }
   }
 }

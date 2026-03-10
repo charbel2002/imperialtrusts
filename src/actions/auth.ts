@@ -65,7 +65,7 @@ export async function registerUser(formData: FormData) {
   });
 
   // Send welcome email to user + notify admin
-  await sendWelcomeEmail({ to: email, name });
+  await sendWelcomeEmail({ to: email, name, lang: language });
   await sendNewUserAdminNotice({ name, email });
 
   return { success: true };
@@ -102,7 +102,7 @@ export async function requestLoginOtp(email: string, password: string) {
 
   // Generate OTP and send email
   const code = await generateOtp(user.id);
-  await sendOtpEmail({ to: user.email, code });
+  await sendOtpEmail({ to: user.email, code, lang: user.language });
 
   return { otpSent: true };
 }

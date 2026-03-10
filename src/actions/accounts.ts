@@ -25,7 +25,7 @@ export async function setAccountStatus(
 
   const account = await prisma.account.findUnique({
     where: { id: accountId },
-    include: { user: { select: { id: true, name: true, email: true } } },
+    include: { user: { select: { id: true, name: true, email: true, language: true } } },
   });
 
   if (!account) return { error: "Account not found" };
@@ -96,6 +96,7 @@ export async function setAccountStatus(
     to: account.user.email,
     name: account.user.name ?? "Customer",
     status,
+    lang: account.user.language,
   });
 
   revalidatePath("/admin/users");
@@ -120,7 +121,7 @@ export async function adminCreditAccount(data: {
 
   const account = await prisma.account.findUnique({
     where: { id: data.accountId },
-    include: { user: { select: { id: true, name: true, email: true } } },
+    include: { user: { select: { id: true, name: true, email: true, language: true } } },
   });
 
   if (!account) return { error: "Account not found" };
@@ -171,6 +172,7 @@ export async function adminCreditAccount(data: {
     name: account.user.name ?? "Customer",
     amount: `$${data.amount.toFixed(2)}`,
     description: data.description,
+    lang: account.user.language,
   });
 
   revalidatePath("/admin/users");
@@ -195,7 +197,7 @@ export async function adminDebitAccount(data: {
 
   const account = await prisma.account.findUnique({
     where: { id: data.accountId },
-    include: { user: { select: { id: true, name: true, email: true } } },
+    include: { user: { select: { id: true, name: true, email: true, language: true } } },
   });
 
   if (!account) return { error: "Account not found" };
@@ -249,6 +251,7 @@ export async function adminDebitAccount(data: {
     name: account.user.name ?? "Customer",
     amount: `$${data.amount.toFixed(2)}`,
     description: data.description,
+    lang: account.user.language,
   });
 
   revalidatePath("/admin/users");

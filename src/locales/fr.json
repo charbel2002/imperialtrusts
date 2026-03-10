@@ -730,5 +730,170 @@
     "otpRequired": "Le code de vérification est requis",
     "otpExpired": "Le code de vérification a expiré. Veuillez en demander un nouveau.",
     "otpInvalid": "Code de vérification invalide"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Votre code de vérification de connexion",
+      "heading": "Votre code de vérification de connexion",
+      "body": "Utilisez le code suivant pour finaliser votre connexion. Ce code est valable pendant <strong>10 minutes</strong>.",
+      "ignore": "Si vous n'avez pas tenté de vous connecter, veuillez ignorer cet e-mail ou contacter immédiatement le support."
+    },
+    "welcome": {
+      "subject": "Bienvenue chez {{platformName}}",
+      "heading": "Bienvenue chez {{platformName}} !",
+      "greeting": "Bonjour <strong>{{name}}</strong>, votre compte a été créé avec succès.",
+      "body": "Pour accéder à toutes les fonctionnalités — y compris les virements, les cartes et la gestion des bénéficiaires — veuillez compléter votre vérification KYC depuis votre tableau de bord.",
+      "support": "Si vous avez des questions, n'hésitez pas à contacter notre équipe de support."
+    },
+    "loanConfirmation": {
+      "subject": "Demande de prêt reçue",
+      "heading": "Demande de prêt reçue",
+      "body": "Merci pour votre demande. Nous l'avons bien reçue et notre équipe l'examinera prochainement.",
+      "amountRequested": "Montant demandé",
+      "duration": "Durée",
+      "months": "mois",
+      "interestRate": "Taux d'intérêt",
+      "monthlyPayment": "Mensualité",
+      "totalRepayment": "Remboursement total",
+      "footer": "Vous recevrez un autre e-mail dès qu'une décision sera prise. Si vous avez des questions entre-temps, n'hésitez pas à nous contacter."
+    },
+    "loanApproved": {
+      "subject": "Votre prêt a été approuvé",
+      "heading": "Demande de prêt approuvée",
+      "body": "Bonne nouvelle ! Votre demande de prêt a été <strong>approuvée</strong>.",
+      "amount": "Montant",
+      "duration": "Durée",
+      "months": "mois",
+      "monthlyPayment": "Mensualité",
+      "disbursed": "Les fonds ont été versés sur votre compte.",
+      "notDisbursed": "Veuillez nous contacter pour les prochaines étapes concernant le versement des fonds."
+    },
+    "loanRejected": {
+      "subject": "Mise à jour de votre demande de prêt",
+      "heading": "Mise à jour de votre demande de prêt",
+      "body": "Nous avons le regret de vous informer que votre demande de prêt de <strong>{{amount}}</strong> n'a pas été approuvée pour le moment.",
+      "reason": "Motif",
+      "footer": "Si vous pensez que cette décision est erronée, ou si vous souhaitez discuter d'alternatives, veuillez contacter notre équipe de support."
+    },
+    "kycSubmitted": {
+      "subject": "Documents KYC reçus",
+      "heading": "Documents KYC reçus",
+      "body": "Bonjour <strong>{{name}}</strong>, nous avons bien reçu vos documents de vérification d'identité et ils sont en cours d'examen.",
+      "footer": "Vous recevrez un autre e-mail une fois l'examen terminé. Cela prend généralement 1 à 2 jours ouvrés."
+    },
+    "kycApproved": {
+      "subject": "KYC approuvé – Identité vérifiée",
+      "heading": "Identité vérifiée",
+      "body": "Bonjour <strong>{{name}}</strong>, votre identité a été vérifiée avec succès !",
+      "footer": "Vous avez maintenant un accès complet à toutes les fonctionnalités bancaires, y compris les virements, les cartes et la gestion des bénéficiaires."
+    },
+    "kycRejected": {
+      "subject": "Vérification KYC – Action requise",
+      "heading": "Mise à jour de la vérification KYC",
+      "body": "Bonjour <strong>{{name}}</strong>, malheureusement votre vérification d'identité n'a pas été approuvée.",
+      "reason": "Motif",
+      "footer": "Veuillez examiner le motif ci-dessus et soumettre à nouveau vos documents depuis votre tableau de bord."
+    },
+    "transferInitiated": {
+      "subject": "Virement en attente – {{reference}}",
+      "heading": "Virement soumis",
+      "body": "Votre virement a été soumis et est en attente de validation.",
+      "amount": "Montant",
+      "recipient": "Destinataire",
+      "reference": "Référence",
+      "footer": "Vous serez notifié une fois votre virement traité."
+    },
+    "transferApproved": {
+      "subject": "Virement approuvé – {{reference}}",
+      "heading": "Virement approuvé",
+      "statusCompleted": "approuvé et complété",
+      "statusLocks": "approuvé mais nécessite des étapes de vérification supplémentaires avant finalisation",
+      "body": "Votre virement a été <strong>{{status}}</strong>.",
+      "amount": "Montant",
+      "recipient": "Destinataire",
+      "reference": "Référence",
+      "fundsDeducted": "Les fonds ont été débités de votre compte.",
+      "verificationRequired": "Veuillez vous connecter à votre tableau de bord pour compléter les étapes de vérification requises."
+    },
+    "transferRejected": {
+      "subject": "Virement rejeté – {{reference}}",
+      "heading": "Virement rejeté",
+      "body": "Votre virement a été rejeté.",
+      "amount": "Montant",
+      "recipient": "Destinataire",
+      "reference": "Référence",
+      "reason": "Motif",
+      "footer": "Si vous pensez qu'il s'agit d'une erreur, veuillez contacter le support."
+    },
+    "transferCompleted": {
+      "subject": "Virement terminé – {{reference}}",
+      "heading": "Virement terminé",
+      "body": "Votre virement a été effectué avec succès.",
+      "amount": "Montant",
+      "recipient": "Destinataire",
+      "reference": "Référence",
+      "fundsDeducted": "Les fonds ont été débités de votre compte."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Compte verrouillé",
+        "message": "Votre compte bancaire a été verrouillé par un administrateur. Vous ne pourrez pas effectuer de transactions tant qu'il ne sera pas déverrouillé. Veuillez contacter le support pour obtenir de l'aide."
+      },
+      "suspended": {
+        "title": "Compte suspendu",
+        "message": "Votre compte bancaire a été suspendu en attente d'examen. Toutes les opérations du compte sont temporairement désactivées. Veuillez contacter le support pour plus d'informations."
+      },
+      "active": {
+        "title": "Compte réactivé",
+        "message": "Votre compte bancaire a été réactivé. Vous pouvez désormais effectuer des transactions et accéder normalement à toutes les fonctionnalités de votre compte."
+      },
+      "greeting": "Bonjour <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Compte crédité",
+      "heading": "Compte crédité",
+      "greeting": "Bonjour <strong>{{name}}</strong>,",
+      "body": "Votre compte a été crédité.",
+      "amount": "Montant",
+      "reason": "Motif"
+    },
+    "accountDebited": {
+      "subject": "Compte débité",
+      "heading": "Compte débité",
+      "greeting": "Bonjour <strong>{{name}}</strong>,",
+      "body": "Un débit a été appliqué à votre compte.",
+      "amount": "Montant",
+      "reason": "Motif",
+      "footer": "Si vous avez des questions concernant cette transaction, veuillez contacter le support."
+    },
+    "cardCreated": {
+      "subject": "Nouvelle carte {{cardType}} créée",
+      "heading": "Nouvelle carte créée",
+      "body": "Votre nouvelle carte virtuelle a été créée avec succès.",
+      "cardType": "Type de carte",
+      "cardNumber": "Numéro de carte",
+      "footer": "Vous pouvez gérer votre carte depuis la section Cartes de votre tableau de bord."
+    },
+    "cardCancelled": {
+      "subject": "Carte annulée",
+      "heading": "Carte annulée",
+      "body": "Votre carte <strong>{{cardType}}</strong> se terminant par <strong>{{lastFour}}</strong> a été annulée par un administrateur.",
+      "balanceReturned": "<strong>{{amount}}</strong> a été restitué sur votre compte bancaire.",
+      "footer": "Si vous avez des questions, veuillez contacter le support."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Carte gelée",
+      "reactivatedTitle": "Carte réactivée",
+      "frozenBody": "Votre carte <strong>{{cardType}}</strong> se terminant par <strong>{{lastFour}}</strong> a été gelée par un administrateur. Vous ne pourrez pas l'utiliser tant qu'elle ne sera pas réactivée.",
+      "reactivatedBody": "Votre carte <strong>{{cardType}}</strong> se terminant par <strong>{{lastFour}}</strong> a été réactivée par un administrateur et est prête à être utilisée.",
+      "footer": "Si vous avez des questions, veuillez contacter le support."
+    },
+    "contactConfirmation": {
+      "subject": "Message reçu – {{subject}}",
+      "heading": "Nous avons reçu votre message",
+      "greeting": "Bonjour <strong>{{name}}</strong>, merci de nous avoir contactés.",
+      "body": "Nous avons bien reçu votre message concernant \"<strong>{{subject}}</strong>\" et notre équipe vous répondra dans les meilleurs délais.",
+      "urgent": "En attendant, si votre demande est urgente, n'hésitez pas à nous appeler au <strong>{{phone}}</strong>."
+    }
   }
 }

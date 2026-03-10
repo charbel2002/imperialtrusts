@@ -726,5 +726,170 @@
     "ADMIN_DEBIT": "Admin Debit",
     "CARD_TRANSFER": "Card Transfer",
     "LOAN_DISBURSEMENT": "Loan Disbursement"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Ihr Anmelde-Verifizierungscode",
+      "heading": "Ihr Anmelde-Verifizierungscode",
+      "body": "Verwenden Sie den folgenden Einmalcode, um Ihre Anmeldung abzuschließen. Dieser Code ist <strong>10 Minuten</strong> gültig.",
+      "ignore": "Wenn Sie keinen Anmeldeversuch unternommen haben, ignorieren Sie bitte diese E-Mail oder kontaktieren Sie sofort den Support."
+    },
+    "welcome": {
+      "subject": "Willkommen bei {{platformName}}",
+      "heading": "Willkommen bei {{platformName}}!",
+      "greeting": "Hallo <strong>{{name}}</strong>, Ihr Konto wurde erfolgreich erstellt.",
+      "body": "Um alle Funktionen freizuschalten — einschließlich Überweisungen, Karten und Begünstigtenverwaltung — führen Sie bitte Ihre KYC-Verifizierung in Ihrem Dashboard durch.",
+      "support": "Wenn Sie Fragen haben, zögern Sie nicht, unser Support-Team zu kontaktieren."
+    },
+    "loanConfirmation": {
+      "subject": "Kreditantrag eingegangen",
+      "heading": "Kreditantrag eingegangen",
+      "body": "Vielen Dank für Ihren Antrag. Wir haben ihn erhalten und unser Team wird ihn in Kürze prüfen.",
+      "amountRequested": "Beantragter Betrag",
+      "duration": "Laufzeit",
+      "months": "Monate",
+      "interestRate": "Zinssatz",
+      "monthlyPayment": "Monatliche Rate",
+      "totalRepayment": "Gesamtrückzahlung",
+      "footer": "Sie erhalten eine weitere E-Mail, sobald eine Entscheidung getroffen wurde. Bei Fragen können Sie uns gerne kontaktieren."
+    },
+    "loanApproved": {
+      "subject": "Ihr Kredit wurde genehmigt",
+      "heading": "Kreditantrag genehmigt",
+      "body": "Gute Neuigkeiten! Ihr Kreditantrag wurde <strong>genehmigt</strong>.",
+      "amount": "Betrag",
+      "duration": "Laufzeit",
+      "months": "Monate",
+      "monthlyPayment": "Monatliche Rate",
+      "disbursed": "Die Mittel wurden auf Ihr Konto ausgezahlt.",
+      "notDisbursed": "Bitte kontaktieren Sie uns für die nächsten Schritte bezüglich der Auszahlung."
+    },
+    "loanRejected": {
+      "subject": "Aktualisierung Ihres Kreditantrags",
+      "heading": "Aktualisierung Ihres Kreditantrags",
+      "body": "Wir bedauern Ihnen mitteilen zu müssen, dass Ihr Kreditantrag über <strong>{{amount}}</strong> derzeit nicht genehmigt wurde.",
+      "reason": "Grund",
+      "footer": "Wenn Sie glauben, dass diese Entscheidung fehlerhaft war, oder Alternativen besprechen möchten, kontaktieren Sie bitte unser Support-Team."
+    },
+    "kycSubmitted": {
+      "subject": "KYC-Dokumente eingegangen",
+      "heading": "KYC-Dokumente eingegangen",
+      "body": "Hallo <strong>{{name}}</strong>, wir haben Ihre Identitätsverifizierungsdokumente erhalten und sie werden derzeit geprüft.",
+      "footer": "Sie erhalten eine weitere E-Mail, sobald die Prüfung abgeschlossen ist. Dies dauert in der Regel 1–2 Werktage."
+    },
+    "kycApproved": {
+      "subject": "KYC genehmigt – Identität verifiziert",
+      "heading": "Identität verifiziert",
+      "body": "Hallo <strong>{{name}}</strong>, Ihre Identität wurde erfolgreich verifiziert!",
+      "footer": "Sie haben jetzt vollen Zugang zu allen Bankfunktionen einschließlich Überweisungen, Karten und Begünstigtenverwaltung."
+    },
+    "kycRejected": {
+      "subject": "KYC-Verifizierung – Handlung erforderlich",
+      "heading": "Aktualisierung der KYC-Verifizierung",
+      "body": "Hallo <strong>{{name}}</strong>, leider wurde Ihre Identitätsverifizierung nicht genehmigt.",
+      "reason": "Grund",
+      "footer": "Bitte überprüfen Sie den oben genannten Grund und reichen Sie Ihre Dokumente erneut über Ihr Dashboard ein."
+    },
+    "transferInitiated": {
+      "subject": "Überweisung ausstehend – {{reference}}",
+      "heading": "Überweisung eingereicht",
+      "body": "Ihre Überweisung wurde eingereicht und wartet auf Überprüfung.",
+      "amount": "Betrag",
+      "recipient": "Empfänger",
+      "reference": "Referenz",
+      "footer": "Sie werden benachrichtigt, sobald Ihre Überweisung bearbeitet wurde."
+    },
+    "transferApproved": {
+      "subject": "Überweisung genehmigt – {{reference}}",
+      "heading": "Überweisung genehmigt",
+      "statusCompleted": "genehmigt und abgeschlossen",
+      "statusLocks": "genehmigt, erfordert jedoch zusätzliche Verifizierungsschritte vor der Fertigstellung",
+      "body": "Ihre Überweisung wurde <strong>{{status}}</strong>.",
+      "amount": "Betrag",
+      "recipient": "Empfänger",
+      "reference": "Referenz",
+      "fundsDeducted": "Die Mittel wurden von Ihrem Konto abgebucht.",
+      "verificationRequired": "Bitte melden Sie sich in Ihrem Dashboard an, um die erforderlichen Verifizierungsschritte abzuschließen."
+    },
+    "transferRejected": {
+      "subject": "Überweisung abgelehnt – {{reference}}",
+      "heading": "Überweisung abgelehnt",
+      "body": "Ihre Überweisung wurde abgelehnt.",
+      "amount": "Betrag",
+      "recipient": "Empfänger",
+      "reference": "Referenz",
+      "reason": "Grund",
+      "footer": "Wenn Sie glauben, dass es sich um einen Fehler handelt, kontaktieren Sie bitte den Support."
+    },
+    "transferCompleted": {
+      "subject": "Überweisung abgeschlossen – {{reference}}",
+      "heading": "Überweisung abgeschlossen",
+      "body": "Ihre Überweisung wurde erfolgreich abgeschlossen.",
+      "amount": "Betrag",
+      "recipient": "Empfänger",
+      "reference": "Referenz",
+      "fundsDeducted": "Die Mittel wurden von Ihrem Konto abgebucht."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Konto gesperrt",
+        "message": "Ihr Bankkonto wurde von einem Administrator gesperrt. Sie können keine Transaktionen durchführen, bis es entsperrt wird. Bitte kontaktieren Sie den Support."
+      },
+      "suspended": {
+        "title": "Konto ausgesetzt",
+        "message": "Ihr Bankkonto wurde zur Überprüfung ausgesetzt. Alle Kontooperationen sind vorübergehend deaktiviert. Bitte kontaktieren Sie den Support für weitere Informationen."
+      },
+      "active": {
+        "title": "Konto reaktiviert",
+        "message": "Ihr Bankkonto wurde reaktiviert. Sie können jetzt Transaktionen durchführen und normal auf alle Kontofunktionen zugreifen."
+      },
+      "greeting": "Hallo <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Konto gutgeschrieben",
+      "heading": "Konto gutgeschrieben",
+      "greeting": "Hallo <strong>{{name}}</strong>,",
+      "body": "Ihrem Konto wurde ein Betrag gutgeschrieben.",
+      "amount": "Betrag",
+      "reason": "Grund"
+    },
+    "accountDebited": {
+      "subject": "Konto belastet",
+      "heading": "Konto belastet",
+      "greeting": "Hallo <strong>{{name}}</strong>,",
+      "body": "Eine Belastung wurde auf Ihr Konto angewendet.",
+      "amount": "Betrag",
+      "reason": "Grund",
+      "footer": "Wenn Sie Fragen zu dieser Transaktion haben, kontaktieren Sie bitte den Support."
+    },
+    "cardCreated": {
+      "subject": "Neue {{cardType}}-Karte erstellt",
+      "heading": "Neue Karte erstellt",
+      "body": "Ihre neue virtuelle Karte wurde erfolgreich erstellt.",
+      "cardType": "Kartentyp",
+      "cardNumber": "Kartennummer",
+      "footer": "Sie können Ihre Karte im Kartenbereich Ihres Dashboards verwalten."
+    },
+    "cardCancelled": {
+      "subject": "Karte storniert",
+      "heading": "Karte storniert",
+      "body": "Ihre <strong>{{cardType}}</strong>-Karte mit der Endung <strong>{{lastFour}}</strong> wurde von einem Administrator storniert.",
+      "balanceReturned": "<strong>{{amount}}</strong> wurde auf Ihr Bankkonto zurückerstattet.",
+      "footer": "Wenn Sie Fragen haben, kontaktieren Sie bitte den Support."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Karte eingefroren",
+      "reactivatedTitle": "Karte reaktiviert",
+      "frozenBody": "Ihre <strong>{{cardType}}</strong>-Karte mit der Endung <strong>{{lastFour}}</strong> wurde von einem Administrator eingefroren. Sie können sie nicht verwenden, bis sie reaktiviert wird.",
+      "reactivatedBody": "Ihre <strong>{{cardType}}</strong>-Karte mit der Endung <strong>{{lastFour}}</strong> wurde von einem Administrator reaktiviert und ist einsatzbereit.",
+      "footer": "Wenn Sie Fragen haben, kontaktieren Sie bitte den Support."
+    },
+    "contactConfirmation": {
+      "subject": "Nachricht erhalten – {{subject}}",
+      "heading": "Wir haben Ihre Nachricht erhalten",
+      "greeting": "Hallo <strong>{{name}}</strong>, vielen Dank, dass Sie uns kontaktiert haben.",
+      "body": "Wir haben Ihre Nachricht bezüglich \"<strong>{{subject}}</strong>\" erhalten und unser Team wird sich so schnell wie möglich bei Ihnen melden.",
+      "urgent": "Wenn Ihre Anfrage dringend ist, rufen Sie uns gerne unter <strong>{{phone}}</strong> an."
+    }
   }
 }

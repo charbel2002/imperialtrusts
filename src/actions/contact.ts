@@ -11,6 +11,7 @@ export async function submitContactForm(data: {
   email: string;
   subject: string;
   message: string;
+  locale?: string;
 }) {
   const validated = contactSchema.safeParse(data);
   if (!validated.success) {
@@ -20,7 +21,7 @@ export async function submitContactForm(data: {
   const { name, email, subject, message } = validated.data;
 
   // Send confirmation to the user
-  await sendContactConfirmationEmail({ to: email, name, subject });
+  await sendContactConfirmationEmail({ to: email, name, subject, lang: data.locale });
 
   // Forward the message to the admin / support team
   await sendContactFormToAdmin({ name, email, subject, message });

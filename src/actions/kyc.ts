@@ -91,7 +91,8 @@ export async function submitKyc(formData: FormData) {
   });
 
   // Email user + admin
-  await sendKycSubmittedEmail({ to: session.user.email!, name: session.user.name || "User" });
+  const dbUser = await prisma.user.findUnique({ where: { id: session.user.id }, select: { language: true } });
+  await sendKycSubmittedEmail({ to: session.user.email!, name: session.user.name || "User", lang: dbUser?.language });
   await sendKycSubmittedAdminNotice({ userName: session.user.name || "User", userEmail: session.user.email! });
 
   revalidatePath("/dashboard/kyc");
@@ -144,7 +145,7 @@ export async function approveKyc(kycId: string) {
   });
 
   // Email the user
-  await sendKycApprovedEmail({ to: kyc.user.email, name: kyc.user.name });
+  await sendKycApprovedEmail({ to: kyc.user.email, name: kyc.user.name, lang: kyc.user.language });
 
   revalidatePath("/admin/kyc");
   revalidatePath("/dashboard/kyc");
@@ -200,7 +201,7 @@ export async function rejectKyc(kycId: string, reason: string) {
   });
 
   // Email the user
-  await sendKycRejectedEmail({ to: kyc.user.email, name: kyc.user.name, reason });
+  await sendKycRejectedEmail({ to: kyc.user.email, name: kyc.user.name, reason, lang: kyc.user.language });
 
   revalidatePath("/admin/kyc");
   revalidatePath("/dashboard/kyc");

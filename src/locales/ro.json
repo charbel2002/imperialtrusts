@@ -726,5 +726,170 @@
     "ADMIN_DEBIT": "Admin Debit",
     "CARD_TRANSFER": "Card Transfer",
     "LOAN_DISBURSEMENT": "Loan Disbursement"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Codul dvs. de verificare pentru autentificare",
+      "heading": "Codul dvs. de verificare pentru autentificare",
+      "body": "Folosiți următorul cod unic pentru a finaliza autentificarea. Acest cod este valabil <strong>10 minute</strong>.",
+      "ignore": "Dacă nu ați încercat să vă autentificați, ignorați acest e-mail sau contactați imediat suportul."
+    },
+    "welcome": {
+      "subject": "Bine ați venit la {{platformName}}",
+      "heading": "Bine ați venit la {{platformName}}!",
+      "greeting": "Bună ziua <strong>{{name}}</strong>, contul dvs. a fost creat cu succes.",
+      "body": "Pentru a debloca toate funcțiile — inclusiv transferuri, carduri și gestionarea beneficiarilor — finalizați verificarea KYC din panoul dvs.",
+      "support": "Dacă aveți întrebări, nu ezitați să contactați echipa noastră de suport."
+    },
+    "loanConfirmation": {
+      "subject": "Cerere de împrumut primită",
+      "heading": "Cerere de împrumut primită",
+      "body": "Vă mulțumim pentru cererea dvs. Am primit-o și echipa noastră o va examina în curând.",
+      "amountRequested": "Suma solicitată",
+      "duration": "Durată",
+      "months": "luni",
+      "interestRate": "Rata dobânzii",
+      "monthlyPayment": "Rata lunară",
+      "totalRepayment": "Rambursare totală",
+      "footer": "Veți primi un alt e-mail odată ce o decizie va fi luată. Dacă aveți întrebări între timp, nu ezitați să ne contactați."
+    },
+    "loanApproved": {
+      "subject": "Împrumutul dvs. a fost aprobat",
+      "heading": "Cerere de împrumut aprobată",
+      "body": "Vești bune! Cererea dvs. de împrumut a fost <strong>aprobată</strong>.",
+      "amount": "Suma",
+      "duration": "Durată",
+      "months": "luni",
+      "monthlyPayment": "Rata lunară",
+      "disbursed": "Fondurile au fost transferate în contul dvs.",
+      "notDisbursed": "Vă rugăm să ne contactați pentru următorii pași privind disbursarea fondurilor."
+    },
+    "loanRejected": {
+      "subject": "Actualizare cerere de împrumut",
+      "heading": "Actualizare cerere de împrumut",
+      "body": "Ne pare rău să vă informăm că cererea dvs. de împrumut de <strong>{{amount}}</strong> nu a fost aprobată momentan.",
+      "reason": "Motiv",
+      "footer": "Dacă credeți că această decizie a fost eronată, sau doriți să discutați alternative, contactați echipa noastră de suport."
+    },
+    "kycSubmitted": {
+      "subject": "Documente KYC primite",
+      "heading": "Documente KYC primite",
+      "body": "Bună ziua <strong>{{name}}</strong>, am primit documentele dvs. de verificare a identității și sunt în curs de examinare.",
+      "footer": "Veți primi un alt e-mail odată ce examinarea este finalizată. De obicei durează 1-2 zile lucrătoare."
+    },
+    "kycApproved": {
+      "subject": "KYC aprobat – Identitate verificată",
+      "heading": "Identitate verificată",
+      "body": "Bună ziua <strong>{{name}}</strong>, identitatea dvs. a fost verificată cu succes!",
+      "footer": "Acum aveți acces complet la toate funcțiile bancare, inclusiv transferuri, carduri și gestionarea beneficiarilor."
+    },
+    "kycRejected": {
+      "subject": "Verificare KYC – Acțiune necesară",
+      "heading": "Actualizare verificare KYC",
+      "body": "Bună ziua <strong>{{name}}</strong>, din păcate verificarea identității dvs. nu a fost aprobată.",
+      "reason": "Motiv",
+      "footer": "Vă rugăm să examinați motivul de mai sus și să retrimiteți documentele din panoul dvs."
+    },
+    "transferInitiated": {
+      "subject": "Transfer în așteptare – {{reference}}",
+      "heading": "Transfer trimis",
+      "body": "Transferul dvs. a fost trimis și este în așteptare pentru verificare.",
+      "amount": "Suma",
+      "recipient": "Destinatar",
+      "reference": "Referință",
+      "footer": "Veți fi notificat odată ce transferul dvs. este procesat."
+    },
+    "transferApproved": {
+      "subject": "Transfer aprobat – {{reference}}",
+      "heading": "Transfer aprobat",
+      "statusCompleted": "aprobat și finalizat",
+      "statusLocks": "aprobat dar necesită pași de verificare suplimentari înainte de finalizare",
+      "body": "Transferul dvs. a fost <strong>{{status}}</strong>.",
+      "amount": "Suma",
+      "recipient": "Destinatar",
+      "reference": "Referință",
+      "fundsDeducted": "Fondurile au fost deduse din contul dvs.",
+      "verificationRequired": "Vă rugăm să vă autentificați în panou pentru a finaliza pașii de verificare necesari."
+    },
+    "transferRejected": {
+      "subject": "Transfer respins – {{reference}}",
+      "heading": "Transfer respins",
+      "body": "Transferul dvs. a fost respins.",
+      "amount": "Suma",
+      "recipient": "Destinatar",
+      "reference": "Referință",
+      "reason": "Motiv",
+      "footer": "Dacă credeți că a fost o eroare, contactați suportul."
+    },
+    "transferCompleted": {
+      "subject": "Transfer finalizat – {{reference}}",
+      "heading": "Transfer finalizat",
+      "body": "Transferul dvs. a fost finalizat cu succes.",
+      "amount": "Suma",
+      "recipient": "Destinatar",
+      "reference": "Referință",
+      "fundsDeducted": "Fondurile au fost deduse din contul dvs."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Cont blocat",
+        "message": "Contul dvs. bancar a fost blocat de un administrator. Nu veți putea efectua tranzacții până la deblocare. Contactați suportul pentru asistență."
+      },
+      "suspended": {
+        "title": "Cont suspendat",
+        "message": "Contul dvs. bancar a fost suspendat în așteptarea examinării. Toate operațiunile contului sunt temporar dezactivate. Contactați suportul pentru mai multe informații."
+      },
+      "active": {
+        "title": "Cont reactivat",
+        "message": "Contul dvs. bancar a fost reactivat. Acum puteți efectua tranzacții și accesa normal toate funcțiile contului."
+      },
+      "greeting": "Bună ziua <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Cont creditat",
+      "heading": "Cont creditat",
+      "greeting": "Bună ziua <strong>{{name}}</strong>,",
+      "body": "Contul dvs. a fost creditat.",
+      "amount": "Suma",
+      "reason": "Motiv"
+    },
+    "accountDebited": {
+      "subject": "Cont debitat",
+      "heading": "Cont debitat",
+      "greeting": "Bună ziua <strong>{{name}}</strong>,",
+      "body": "Un debit a fost aplicat contului dvs.",
+      "amount": "Suma",
+      "reason": "Motiv",
+      "footer": "Dacă aveți întrebări despre această tranzacție, contactați suportul."
+    },
+    "cardCreated": {
+      "subject": "Card nou {{cardType}} creat",
+      "heading": "Card nou creat",
+      "body": "Cardul dvs. virtual nou a fost creat cu succes.",
+      "cardType": "Tip card",
+      "cardNumber": "Număr card",
+      "footer": "Puteți gestiona cardul din secțiunea Carduri a panoului dvs."
+    },
+    "cardCancelled": {
+      "subject": "Card anulat",
+      "heading": "Card anulat",
+      "body": "Cardul dvs. <strong>{{cardType}}</strong> care se termină cu <strong>{{lastFour}}</strong> a fost anulat de un administrator.",
+      "balanceReturned": "<strong>{{amount}}</strong> a fost returnat în contul dvs. bancar.",
+      "footer": "Dacă aveți întrebări, contactați suportul."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Card înghețat",
+      "reactivatedTitle": "Card reactivat",
+      "frozenBody": "Cardul dvs. <strong>{{cardType}}</strong> care se termină cu <strong>{{lastFour}}</strong> a fost înghețat de un administrator. Nu îl veți putea folosi până la reactivare.",
+      "reactivatedBody": "Cardul dvs. <strong>{{cardType}}</strong> care se termină cu <strong>{{lastFour}}</strong> a fost reactivat de un administrator și este gata de utilizare.",
+      "footer": "Dacă aveți întrebări, contactați suportul."
+    },
+    "contactConfirmation": {
+      "subject": "Mesaj primit – {{subject}}",
+      "heading": "Am primit mesajul dvs.",
+      "greeting": "Bună ziua <strong>{{name}}</strong>, vă mulțumim că ne-ați contactat.",
+      "body": "Am primit mesajul dvs. referitor la \"<strong>{{subject}}</strong>\" și echipa noastră vă va răspunde cât mai curând posibil.",
+      "urgent": "Între timp, dacă cererea dvs. este urgentă, sunați-ne la <strong>{{phone}}</strong>."
+    }
   }
 }

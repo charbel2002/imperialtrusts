@@ -726,5 +726,170 @@
     "ADMIN_DEBIT": "Admin Debit",
     "CARD_TRANSFER": "Card Transfer",
     "LOAN_DISBURSEMENT": "Loan Disbursement"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Váš ověřovací kód pro přihlášení",
+      "heading": "Váš ověřovací kód pro přihlášení",
+      "body": "K dokončení přihlášení použijte následující jednorázový kód. Tento kód je platný <strong>10 minut</strong>.",
+      "ignore": "Pokud jste se nepokoušeli přihlásit, ignorujte tento e-mail nebo okamžitě kontaktujte podporu."
+    },
+    "welcome": {
+      "subject": "Vítejte na {{platformName}}",
+      "heading": "Vítejte na {{platformName}}!",
+      "greeting": "Dobrý den <strong>{{name}}</strong>, váš účet byl úspěšně vytvořen.",
+      "body": "Pro odemknutí všech funkcí — včetně převodů, karet a správy příjemců — dokončete KYC ověření z vašeho panelu.",
+      "support": "Pokud máte jakékoliv dotazy, neváhejte kontaktovat náš tým podpory."
+    },
+    "loanConfirmation": {
+      "subject": "Žádost o půjčku přijata",
+      "heading": "Žádost o půjčku přijata",
+      "body": "Děkujeme za vaši žádost. Přijali jsme ji a náš tým ji brzy posoudí.",
+      "amountRequested": "Požadovaná částka",
+      "duration": "Doba trvání",
+      "months": "měsíců",
+      "interestRate": "Úroková sazba",
+      "monthlyPayment": "Měsíční splátka",
+      "totalRepayment": "Celková splátka",
+      "footer": "Další e-mail obdržíte po rozhodnutí. Pokud máte mezitím dotazy, neváhejte nás kontaktovat."
+    },
+    "loanApproved": {
+      "subject": "Vaše půjčka byla schválena",
+      "heading": "Žádost o půjčku schválena",
+      "body": "Skvělá zpráva! Vaše žádost o půjčku byla <strong>schválena</strong>.",
+      "amount": "Částka",
+      "duration": "Doba trvání",
+      "months": "měsíců",
+      "monthlyPayment": "Měsíční splátka",
+      "disbursed": "Prostředky byly převedeny na váš účet.",
+      "notDisbursed": "Kontaktujte nás pro další kroky ohledně vyplacení prostředků."
+    },
+    "loanRejected": {
+      "subject": "Aktualizace žádosti o půjčku",
+      "heading": "Aktualizace žádosti o půjčku",
+      "body": "S lítostí vám oznamujeme, že vaše žádost o půjčku ve výši <strong>{{amount}}</strong> nebyla v tuto chvíli schválena.",
+      "reason": "Důvod",
+      "footer": "Pokud si myslíte, že toto rozhodnutí bylo chybné, nebo chcete projednat alternativy, kontaktujte náš tým podpory."
+    },
+    "kycSubmitted": {
+      "subject": "KYC dokumenty přijaty",
+      "heading": "KYC dokumenty přijaty",
+      "body": "Dobrý den <strong>{{name}}</strong>, přijali jsme vaše dokumenty k ověření totožnosti a jsou v procesu kontroly.",
+      "footer": "Další e-mail obdržíte po dokončení kontroly. Obvykle to trvá 1–2 pracovní dny."
+    },
+    "kycApproved": {
+      "subject": "KYC schváleno – Totožnost ověřena",
+      "heading": "Totožnost ověřena",
+      "body": "Dobrý den <strong>{{name}}</strong>, vaše totožnost byla úspěšně ověřena!",
+      "footer": "Nyní máte plný přístup ke všem bankovním funkcím včetně převodů, karet a správy příjemců."
+    },
+    "kycRejected": {
+      "subject": "KYC ověření – Vyžadována akce",
+      "heading": "Aktualizace KYC ověření",
+      "body": "Dobrý den <strong>{{name}}</strong>, bohužel vaše ověření totožnosti nebylo schváleno.",
+      "reason": "Důvod",
+      "footer": "Zkontrolujte výše uvedený důvod a znovu odešlete dokumenty z vašeho panelu."
+    },
+    "transferInitiated": {
+      "subject": "Převod čeká – {{reference}}",
+      "heading": "Převod odeslán",
+      "body": "Váš převod byl odeslán a čeká na kontrolu.",
+      "amount": "Částka",
+      "recipient": "Příjemce",
+      "reference": "Reference",
+      "footer": "Budete informováni po zpracování vašeho převodu."
+    },
+    "transferApproved": {
+      "subject": "Převod schválen – {{reference}}",
+      "heading": "Převod schválen",
+      "statusCompleted": "schválen a dokončen",
+      "statusLocks": "schválen, ale vyžaduje další kroky ověření před dokončením",
+      "body": "Váš převod byl <strong>{{status}}</strong>.",
+      "amount": "Částka",
+      "recipient": "Příjemce",
+      "reference": "Reference",
+      "fundsDeducted": "Prostředky byly odečteny z vašeho účtu.",
+      "verificationRequired": "Přihlaste se do panelu a dokončete požadované kroky ověření."
+    },
+    "transferRejected": {
+      "subject": "Převod zamítnut – {{reference}}",
+      "heading": "Převod zamítnut",
+      "body": "Váš převod byl zamítnut.",
+      "amount": "Částka",
+      "recipient": "Příjemce",
+      "reference": "Reference",
+      "reason": "Důvod",
+      "footer": "Pokud si myslíte, že jde o chybu, kontaktujte podporu."
+    },
+    "transferCompleted": {
+      "subject": "Převod dokončen – {{reference}}",
+      "heading": "Převod dokončen",
+      "body": "Váš převod byl úspěšně dokončen.",
+      "amount": "Částka",
+      "recipient": "Příjemce",
+      "reference": "Reference",
+      "fundsDeducted": "Prostředky byly odečteny z vašeho účtu."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Účet zablokován",
+        "message": "Váš bankovní účet byl zablokován administrátorem. Nebudete moci provádět transakce, dokud nebude odblokován. Kontaktujte podporu."
+      },
+      "suspended": {
+        "title": "Účet pozastaven",
+        "message": "Váš bankovní účet byl pozastaven k přezkoumání. Všechny operace účtu jsou dočasně zakázány. Kontaktujte podporu pro více informací."
+      },
+      "active": {
+        "title": "Účet reaktivován",
+        "message": "Váš bankovní účet byl reaktivován. Nyní můžete provádět transakce a normálně přistupovat ke všem funkcím účtu."
+      },
+      "greeting": "Dobrý den <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Účet připsán",
+      "heading": "Účet připsán",
+      "greeting": "Dobrý den <strong>{{name}}</strong>,",
+      "body": "Na váš účet byla připsána částka.",
+      "amount": "Částka",
+      "reason": "Důvod"
+    },
+    "accountDebited": {
+      "subject": "Účet odepsán",
+      "heading": "Účet odepsán",
+      "greeting": "Dobrý den <strong>{{name}}</strong>,",
+      "body": "Z vašeho účtu byl proveden odpis.",
+      "amount": "Částka",
+      "reason": "Důvod",
+      "footer": "Pokud máte dotazy k této transakci, kontaktujte podporu."
+    },
+    "cardCreated": {
+      "subject": "Nová karta {{cardType}} vytvořena",
+      "heading": "Nová karta vytvořena",
+      "body": "Vaše nová virtuální karta byla úspěšně vytvořena.",
+      "cardType": "Typ karty",
+      "cardNumber": "Číslo karty",
+      "footer": "Kartu můžete spravovat v sekci Karty vašeho panelu."
+    },
+    "cardCancelled": {
+      "subject": "Karta zrušena",
+      "heading": "Karta zrušena",
+      "body": "Vaše karta <strong>{{cardType}}</strong> končící na <strong>{{lastFour}}</strong> byla zrušena administrátorem.",
+      "balanceReturned": "<strong>{{amount}}</strong> bylo vráceno na váš bankovní účet.",
+      "footer": "Pokud máte dotazy, kontaktujte podporu."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Karta zmrazena",
+      "reactivatedTitle": "Karta reaktivována",
+      "frozenBody": "Vaše karta <strong>{{cardType}}</strong> končící na <strong>{{lastFour}}</strong> byla zmrazena administrátorem. Nebudete ji moci používat, dokud nebude reaktivována.",
+      "reactivatedBody": "Vaše karta <strong>{{cardType}}</strong> končící na <strong>{{lastFour}}</strong> byla reaktivována administrátorem a je připravena k použití.",
+      "footer": "Pokud máte dotazy, kontaktujte podporu."
+    },
+    "contactConfirmation": {
+      "subject": "Zpráva přijata – {{subject}}",
+      "heading": "Přijali jsme vaši zprávu",
+      "greeting": "Dobrý den <strong>{{name}}</strong>, děkujeme, že jste nás kontaktovali.",
+      "body": "Přijali jsme vaši zprávu ohledně \"<strong>{{subject}}</strong>\" a náš tým vám odpoví co nejdříve.",
+      "urgent": "Mezitím, pokud je vaše žádost naléhavá, zavolejte nám na <strong>{{phone}}</strong>."
+    }
   }
 }

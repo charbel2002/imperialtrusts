@@ -93,6 +93,7 @@ export async function initiateTransfer(data: {
     amount: `$${data.amount.toFixed(2)}`,
     beneficiaryName: beneficiary.name,
     reference: transaction.reference,
+    lang: user.language,
   });
 
   revalidatePath("/dashboard/transactions");
@@ -172,11 +173,13 @@ export async function completeTransaction(transactionId: string) {
   ]);
 
   // Email the user
+  const completedUser = await prisma.user.findUnique({ where: { id: txn.userId }, select: { language: true } });
   await sendTransferCompletedEmail({
     to: session.user.email!,
     amount: `$${Number(txn.amount).toFixed(2)}`,
     beneficiaryName: txn.beneficiary?.name ?? "recipient",
     reference: txn.reference,
+    lang: completedUser?.language,
   });
 
   revalidatePath("/dashboard/transactions");
@@ -276,6 +279,7 @@ export async function adminApproveTransaction(transactionId: string) {
     beneficiaryName: txn.beneficiary?.name ?? "recipient",
     reference: txn.reference,
     hasLocks,
+    lang: txn.user.language,
   });
 
   revalidatePath("/admin/transactions");
@@ -310,6 +314,7 @@ export async function adminRejectTransaction(transactionId: string, reason: stri
     beneficiaryName: txn.beneficiary?.name ?? "recipient",
     reference: txn.reference,
     reason,
+    lang: txn.user.language,
   });
 
   revalidatePath("/admin/transactions");

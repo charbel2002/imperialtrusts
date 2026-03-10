@@ -27,7 +27,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
 
   async function handleApply() {
     setLoading(true); setError("");
-    const result = await submitLoanApplication({ email, phone, amount: numAmount, durationMonths: duration, interestRate: rate });
+    const result = await submitLoanApplication({ email, phone, amount: numAmount, durationMonths: duration, interestRate: rate, locale: dict._locale });
     setLoading(false);
     if (result.error) setError(translateActionError(result.error, dict)); else { setApplied(true); setShowApply(false); }
   }

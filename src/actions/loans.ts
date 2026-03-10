@@ -20,6 +20,7 @@ export async function submitLoanApplication(data: {
   amount: number;
   durationMonths: number;
   interestRate: number;
+  locale?: string;
 }) {
   const validated = loanApplicationSchema.safeParse(data);
   if (!validated.success) {
@@ -52,6 +53,7 @@ export async function submitLoanApplication(data: {
     interestRate,
     monthlyPayment,
     totalRepayment,
+    lang: data.locale,
   });
 
   // Notify admin about the new application
@@ -146,6 +148,7 @@ export async function adminApproveLoan(loanId: string, disburse: boolean) {
     durationMonths: loan.durationMonths,
     monthlyPayment: Number(loan.monthlyPayment),
     disbursed: disburse && !!loan.user?.account,
+    lang: loan.user?.language,
   });
 
   revalidatePath("/admin/loans");
@@ -162,6 +165,7 @@ export async function adminRejectLoan(loanId: string, reason: string) {
 
   const loan = await prisma.loanApplication.findUnique({
     where: { id: loanId },
+    include: { user: { select: { language: true } } },
   });
 
   if (!loan) return { error: "Loan application not found" };
@@ -203,6 +207,7 @@ export async function adminRejectLoan(loanId: string, reason: string) {
     to: loan.email,
     amount: Number(loan.amount),
     reason: reason.trim(),
+    lang: loan.user?.language,
   });
 
   revalidatePath("/admin/loans");

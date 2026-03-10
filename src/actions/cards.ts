@@ -73,6 +73,7 @@ export async function createCard(cardType: "VISA" | "MASTERCARD") {
     to: session.user.email!,
     cardType,
     lastFour: cardNumber.slice(-4),
+    lang: user.language,
   });
 
   revalidatePath("/dashboard/cards");
@@ -233,7 +234,7 @@ export async function adminCancelCard(cardId: string) {
 
   const card = await prisma.card.findUnique({
     where: { id: cardId },
-    include: { user: { select: { id: true, name: true, email: true } } },
+    include: { user: { select: { id: true, name: true, email: true, language: true } } },
   });
   if (!card) return { error: "Card not found" };
   if (card.status === "CANCELLED") return { error: "Card is already cancelled" };
@@ -287,6 +288,7 @@ export async function adminCancelCard(cardId: string) {
     cardType: card.cardType,
     lastFour: card.cardNumber.slice(-4),
     balanceReturned: cardBalance > 0 ? `$${cardBalance.toFixed(2)}` : null,
+    lang: card.user.language,
   });
 
   revalidatePath("/admin/cards");
@@ -301,7 +303,7 @@ export async function adminToggleCardFreeze(cardId: string) {
 
   const card = await prisma.card.findUnique({
     where: { id: cardId },
-    include: { user: { select: { id: true, name: true, email: true } } },
+    include: { user: { select: { id: true, name: true, email: true, language: true } } },
   });
   if (!card) return { error: "Card not found" };
 
@@ -340,6 +342,7 @@ export async function adminToggleCardFreeze(cardId: string) {
     cardType: card.cardType,
     lastFour: card.cardNumber.slice(-4),
     frozen: newStatus === "FROZEN",
+    lang: card.user.language,
   });
 
   revalidatePath("/admin/cards");

@@ -730,5 +730,170 @@
     "otpRequired": "Verification code is required",
     "otpExpired": "Verification code has expired. Please request a new one.",
     "otpInvalid": "Invalid verification code"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Your Login Verification Code",
+      "heading": "Your Login Verification Code",
+      "body": "Use the following one-time code to complete your sign-in. This code is valid for <strong>10 minutes</strong>.",
+      "ignore": "If you did not attempt to sign in, please ignore this email or contact support immediately."
+    },
+    "welcome": {
+      "subject": "Welcome to {{platformName}}",
+      "heading": "Welcome to {{platformName}}!",
+      "greeting": "Hi <strong>{{name}}</strong>, your account has been created successfully.",
+      "body": "To unlock all features — including transfers, cards, and beneficiary management — please complete your KYC verification from your dashboard.",
+      "support": "If you have any questions, don't hesitate to contact our support team."
+    },
+    "loanConfirmation": {
+      "subject": "Loan Application Received",
+      "heading": "Loan Application Received",
+      "body": "Thank you for your application. We have received it and our team will review it shortly.",
+      "amountRequested": "Amount Requested",
+      "duration": "Duration",
+      "months": "months",
+      "interestRate": "Interest Rate",
+      "monthlyPayment": "Monthly Payment",
+      "totalRepayment": "Total Repayment",
+      "footer": "You will receive another email once a decision has been made. If you have questions in the meantime, feel free to contact us."
+    },
+    "loanApproved": {
+      "subject": "Your Loan Has Been Approved",
+      "heading": "Loan Application Approved",
+      "body": "Great news! Your loan application has been <strong>approved</strong>.",
+      "amount": "Amount",
+      "duration": "Duration",
+      "months": "months",
+      "monthlyPayment": "Monthly Payment",
+      "disbursed": "The funds have been disbursed to your account.",
+      "notDisbursed": "Please contact us for the next steps regarding fund disbursement."
+    },
+    "loanRejected": {
+      "subject": "Loan Application Update",
+      "heading": "Loan Application Update",
+      "body": "We regret to inform you that your loan application for <strong>{{amount}}</strong> was not approved at this time.",
+      "reason": "Reason",
+      "footer": "If you believe this decision was made in error, or you would like to discuss alternatives, please contact our support team."
+    },
+    "kycSubmitted": {
+      "subject": "KYC Documents Received",
+      "heading": "KYC Documents Received",
+      "body": "Hi <strong>{{name}}</strong>, we've received your identity verification documents and they are now under review.",
+      "footer": "You'll receive another email once the review is complete. This typically takes 1–2 business days."
+    },
+    "kycApproved": {
+      "subject": "KYC Approved – Identity Verified",
+      "heading": "Identity Verified",
+      "body": "Hi <strong>{{name}}</strong>, your identity has been verified successfully!",
+      "footer": "You now have full access to all banking features including transfers, cards, and beneficiary management."
+    },
+    "kycRejected": {
+      "subject": "KYC Verification – Action Required",
+      "heading": "KYC Verification Update",
+      "body": "Hi <strong>{{name}}</strong>, unfortunately your identity verification was not approved.",
+      "reason": "Reason",
+      "footer": "Please review the reason above and resubmit your documents from your dashboard."
+    },
+    "transferInitiated": {
+      "subject": "Transfer Pending – {{reference}}",
+      "heading": "Transfer Submitted",
+      "body": "Your transfer has been submitted and is pending review.",
+      "amount": "Amount",
+      "recipient": "Recipient",
+      "reference": "Reference",
+      "footer": "You will be notified once your transfer is processed."
+    },
+    "transferApproved": {
+      "subject": "Transfer Approved – {{reference}}",
+      "heading": "Transfer Approved",
+      "statusCompleted": "approved and completed",
+      "statusLocks": "approved but requires additional verification steps before completion",
+      "body": "Your transfer has been <strong>{{status}}</strong>.",
+      "amount": "Amount",
+      "recipient": "Recipient",
+      "reference": "Reference",
+      "fundsDeducted": "The funds have been deducted from your account.",
+      "verificationRequired": "Please log in to your dashboard to complete the required verification steps."
+    },
+    "transferRejected": {
+      "subject": "Transfer Rejected – {{reference}}",
+      "heading": "Transfer Rejected",
+      "body": "Your transfer has been rejected.",
+      "amount": "Amount",
+      "recipient": "Recipient",
+      "reference": "Reference",
+      "reason": "Reason",
+      "footer": "If you believe this was in error, please contact support."
+    },
+    "transferCompleted": {
+      "subject": "Transfer Complete – {{reference}}",
+      "heading": "Transfer Completed",
+      "body": "Your transfer has been completed successfully.",
+      "amount": "Amount",
+      "recipient": "Recipient",
+      "reference": "Reference",
+      "fundsDeducted": "The funds have been deducted from your account."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Account Locked",
+        "message": "Your bank account has been locked by an administrator. You will not be able to perform transactions until it is unlocked. Please contact support for assistance."
+      },
+      "suspended": {
+        "title": "Account Suspended",
+        "message": "Your bank account has been suspended pending review. All account operations are temporarily disabled. Please contact support for more information."
+      },
+      "active": {
+        "title": "Account Reactivated",
+        "message": "Your bank account has been reactivated. You can now perform transactions and access all account features normally."
+      },
+      "greeting": "Hi <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Account Credited",
+      "heading": "Account Credited",
+      "greeting": "Hi <strong>{{name}}</strong>,",
+      "body": "Your account has been credited.",
+      "amount": "Amount",
+      "reason": "Reason"
+    },
+    "accountDebited": {
+      "subject": "Account Debited",
+      "heading": "Account Debited",
+      "greeting": "Hi <strong>{{name}}</strong>,",
+      "body": "A debit has been applied to your account.",
+      "amount": "Amount",
+      "reason": "Reason",
+      "footer": "If you have questions about this transaction, please contact support."
+    },
+    "cardCreated": {
+      "subject": "New {{cardType}} Card Created",
+      "heading": "New Card Created",
+      "body": "Your new virtual card has been created successfully.",
+      "cardType": "Card Type",
+      "cardNumber": "Card Number",
+      "footer": "You can manage your card from the Cards section of your dashboard."
+    },
+    "cardCancelled": {
+      "subject": "Card Cancelled",
+      "heading": "Card Cancelled",
+      "body": "Your <strong>{{cardType}}</strong> card ending in <strong>{{lastFour}}</strong> has been cancelled by an administrator.",
+      "balanceReturned": "<strong>{{amount}}</strong> has been returned to your bank account.",
+      "footer": "If you have questions, please contact support."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Card Frozen",
+      "reactivatedTitle": "Card Reactivated",
+      "frozenBody": "Your <strong>{{cardType}}</strong> card ending in <strong>{{lastFour}}</strong> has been frozen by an administrator. You will not be able to use it until it is reactivated.",
+      "reactivatedBody": "Your <strong>{{cardType}}</strong> card ending in <strong>{{lastFour}}</strong> has been reactivated by an administrator and is ready to use.",
+      "footer": "If you have questions, please contact support."
+    },
+    "contactConfirmation": {
+      "subject": "Message Received – {{subject}}",
+      "heading": "We Received Your Message",
+      "greeting": "Hi <strong>{{name}}</strong>, thank you for reaching out to us.",
+      "body": "We've received your message regarding \"<strong>{{subject}}</strong>\" and our team will get back to you as soon as possible.",
+      "urgent": "In the meantime, if your inquiry is urgent, feel free to call us at <strong>{{phone}}</strong>."
+    }
   }
 }

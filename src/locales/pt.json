@@ -726,5 +726,170 @@
     "ADMIN_DEBIT": "Admin Debit",
     "CARD_TRANSFER": "Card Transfer",
     "LOAN_DISBURSEMENT": "Loan Disbursement"
+  },
+  "emails": {
+    "otp": {
+      "subject": "Seu código de verificação de login",
+      "heading": "Seu código de verificação de login",
+      "body": "Use o código a seguir para concluir seu login. Este código é válido por <strong>10 minutos</strong>.",
+      "ignore": "Se você não tentou fazer login, ignore este e-mail ou entre em contato com o suporte imediatamente."
+    },
+    "welcome": {
+      "subject": "Bem-vindo ao {{platformName}}",
+      "heading": "Bem-vindo ao {{platformName}}!",
+      "greeting": "Olá <strong>{{name}}</strong>, sua conta foi criada com sucesso.",
+      "body": "Para desbloquear todos os recursos — incluindo transferências, cartões e gestão de beneficiários — conclua sua verificação KYC no painel de controle.",
+      "support": "Se tiver alguma dúvida, não hesite em contactar a nossa equipa de suporte."
+    },
+    "loanConfirmation": {
+      "subject": "Pedido de empréstimo recebido",
+      "heading": "Pedido de empréstimo recebido",
+      "body": "Obrigado pelo seu pedido. Recebemos e a nossa equipa irá analisá-lo em breve.",
+      "amountRequested": "Montante solicitado",
+      "duration": "Duração",
+      "months": "meses",
+      "interestRate": "Taxa de juro",
+      "monthlyPayment": "Prestação mensal",
+      "totalRepayment": "Reembolso total",
+      "footer": "Receberá outro e-mail assim que uma decisão for tomada. Se tiver dúvidas entretanto, não hesite em contactar-nos."
+    },
+    "loanApproved": {
+      "subject": "O seu empréstimo foi aprovado",
+      "heading": "Pedido de empréstimo aprovado",
+      "body": "Boas notícias! O seu pedido de empréstimo foi <strong>aprovado</strong>.",
+      "amount": "Montante",
+      "duration": "Duração",
+      "months": "meses",
+      "monthlyPayment": "Prestação mensal",
+      "disbursed": "Os fundos foram transferidos para a sua conta.",
+      "notDisbursed": "Entre em contacto connosco para os próximos passos relativos ao desembolso."
+    },
+    "loanRejected": {
+      "subject": "Atualização do pedido de empréstimo",
+      "heading": "Atualização do pedido de empréstimo",
+      "body": "Lamentamos informar que o seu pedido de empréstimo de <strong>{{amount}}</strong> não foi aprovado neste momento.",
+      "reason": "Motivo",
+      "footer": "Se acredita que esta decisão foi um erro, ou gostaria de discutir alternativas, contacte a nossa equipa de suporte."
+    },
+    "kycSubmitted": {
+      "subject": "Documentos KYC recebidos",
+      "heading": "Documentos KYC recebidos",
+      "body": "Olá <strong>{{name}}</strong>, recebemos os seus documentos de verificação de identidade e estão em análise.",
+      "footer": "Receberá outro e-mail quando a análise estiver concluída. Normalmente demora 1 a 2 dias úteis."
+    },
+    "kycApproved": {
+      "subject": "KYC aprovado – Identidade verificada",
+      "heading": "Identidade verificada",
+      "body": "Olá <strong>{{name}}</strong>, a sua identidade foi verificada com sucesso!",
+      "footer": "Tem agora acesso completo a todas as funcionalidades bancárias, incluindo transferências, cartões e gestão de beneficiários."
+    },
+    "kycRejected": {
+      "subject": "Verificação KYC – Ação necessária",
+      "heading": "Atualização da verificação KYC",
+      "body": "Olá <strong>{{name}}</strong>, infelizmente a sua verificação de identidade não foi aprovada.",
+      "reason": "Motivo",
+      "footer": "Reveja o motivo acima e reenvie os seus documentos a partir do painel de controle."
+    },
+    "transferInitiated": {
+      "subject": "Transferência pendente – {{reference}}",
+      "heading": "Transferência submetida",
+      "body": "A sua transferência foi submetida e está pendente de revisão.",
+      "amount": "Montante",
+      "recipient": "Destinatário",
+      "reference": "Referência",
+      "footer": "Será notificado quando a sua transferência for processada."
+    },
+    "transferApproved": {
+      "subject": "Transferência aprovada – {{reference}}",
+      "heading": "Transferência aprovada",
+      "statusCompleted": "aprovada e concluída",
+      "statusLocks": "aprovada mas requer etapas de verificação adicionais antes da conclusão",
+      "body": "A sua transferência foi <strong>{{status}}</strong>.",
+      "amount": "Montante",
+      "recipient": "Destinatário",
+      "reference": "Referência",
+      "fundsDeducted": "Os fundos foram debitados da sua conta.",
+      "verificationRequired": "Inicie sessão no seu painel de controle para completar as etapas de verificação necessárias."
+    },
+    "transferRejected": {
+      "subject": "Transferência rejeitada – {{reference}}",
+      "heading": "Transferência rejeitada",
+      "body": "A sua transferência foi rejeitada.",
+      "amount": "Montante",
+      "recipient": "Destinatário",
+      "reference": "Referência",
+      "reason": "Motivo",
+      "footer": "Se acredita que foi um erro, contacte o suporte."
+    },
+    "transferCompleted": {
+      "subject": "Transferência concluída – {{reference}}",
+      "heading": "Transferência concluída",
+      "body": "A sua transferência foi concluída com sucesso.",
+      "amount": "Montante",
+      "recipient": "Destinatário",
+      "reference": "Referência",
+      "fundsDeducted": "Os fundos foram debitados da sua conta."
+    },
+    "accountStatus": {
+      "locked": {
+        "title": "Conta bloqueada",
+        "message": "A sua conta bancária foi bloqueada por um administrador. Não poderá realizar transações até que seja desbloqueada. Contacte o suporte para obter ajuda."
+      },
+      "suspended": {
+        "title": "Conta suspensa",
+        "message": "A sua conta bancária foi suspensa para revisão. Todas as operações da conta estão temporariamente desativadas. Contacte o suporte para mais informações."
+      },
+      "active": {
+        "title": "Conta reativada",
+        "message": "A sua conta bancária foi reativada. Pode agora realizar transações e aceder normalmente a todas as funcionalidades da conta."
+      },
+      "greeting": "Olá <strong>{{name}}</strong>,"
+    },
+    "accountCredited": {
+      "subject": "Conta creditada",
+      "heading": "Conta creditada",
+      "greeting": "Olá <strong>{{name}}</strong>,",
+      "body": "A sua conta foi creditada.",
+      "amount": "Montante",
+      "reason": "Motivo"
+    },
+    "accountDebited": {
+      "subject": "Conta debitada",
+      "heading": "Conta debitada",
+      "greeting": "Olá <strong>{{name}}</strong>,",
+      "body": "Um débito foi aplicado à sua conta.",
+      "amount": "Montante",
+      "reason": "Motivo",
+      "footer": "Se tiver dúvidas sobre esta transação, contacte o suporte."
+    },
+    "cardCreated": {
+      "subject": "Novo cartão {{cardType}} criado",
+      "heading": "Novo cartão criado",
+      "body": "O seu novo cartão virtual foi criado com sucesso.",
+      "cardType": "Tipo de cartão",
+      "cardNumber": "Número do cartão",
+      "footer": "Pode gerir o seu cartão na secção Cartões do seu painel de controle."
+    },
+    "cardCancelled": {
+      "subject": "Cartão cancelado",
+      "heading": "Cartão cancelado",
+      "body": "O seu cartão <strong>{{cardType}}</strong> terminado em <strong>{{lastFour}}</strong> foi cancelado por um administrador.",
+      "balanceReturned": "<strong>{{amount}}</strong> foi devolvido à sua conta bancária.",
+      "footer": "Se tiver dúvidas, contacte o suporte."
+    },
+    "cardFreezeToggle": {
+      "frozenTitle": "Cartão congelado",
+      "reactivatedTitle": "Cartão reativado",
+      "frozenBody": "O seu cartão <strong>{{cardType}}</strong> terminado em <strong>{{lastFour}}</strong> foi congelado por um administrador. Não poderá utilizá-lo até que seja reativado.",
+      "reactivatedBody": "O seu cartão <strong>{{cardType}}</strong> terminado em <strong>{{lastFour}}</strong> foi reativado por um administrador e está pronto para usar.",
+      "footer": "Se tiver dúvidas, contacte o suporte."
+    },
+    "contactConfirmation": {
+      "subject": "Mensagem recebida – {{subject}}",
+      "heading": "Recebemos a sua mensagem",
+      "greeting": "Olá <strong>{{name}}</strong>, obrigado por nos contactar.",
+      "body": "Recebemos a sua mensagem sobre \"<strong>{{subject}}</strong>\" e a nossa equipa responderá o mais rapidamente possível.",
+      "urgent": "Entretanto, se a sua questão é urgente, ligue-nos para <strong>{{phone}}</strong>."
+    }
   }
 }

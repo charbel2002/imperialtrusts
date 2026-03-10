@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { NotificationBell } from "./notification-bell";
-import { Home, ArrowUpDown, Send, CreditCard, Users, Shield, User, Bell, LogOut, Menu } from "lucide-react";
+import { Home, ArrowUpDown, Send, CreditCard, Users, Shield, Bell, LogOut, Menu } from "lucide-react";
 
 interface NotificationData { id: string; title: string; message: string; type: string; isRead: boolean; createdAt: Date; }
 
@@ -33,7 +33,6 @@ export function DashboardShell({ user, dict, platformName, unreadCount, recentNo
     { href: "/dashboard/kyc", label: d.kyc || "KYC Verification", icon: Shield },
   ];
   const bottomLinks = [
-    { href: "/dashboard/profile", label: d.profile || "Profile", icon: User },
     { href: "/dashboard/notifications", label: d.notifications || "Notifications", icon: Bell },
   ];
 

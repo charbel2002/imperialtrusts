@@ -21,6 +21,7 @@ export function ContactForm({ dict }: { dict: Record<string, any> }) {
     const result = await submitContactForm({
       name: form.get("name") as string, email: form.get("email") as string,
       subject: form.get("subject") as string, message: form.get("message") as string,
+      locale: dict._locale,
     });
     setLoading(false);
     if (result.error) setError(translateActionError(result.error, dict)); else setSent(true);
