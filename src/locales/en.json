@@ -26,7 +26,17 @@
       "noAccount": "Don't have an account?",
       "createOne": "Create one",
       "registered": "Account created successfully! Sign in to continue.",
-      "error": "Invalid email or password"
+      "error": "Invalid email or password",
+      "otpTitle": "Verify your identity",
+      "otpSubtitle": "Enter the code sent to your email",
+      "otpSent": "A verification code has been sent to your email.",
+      "otpLabel": "Verification Code",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Verifying...",
+      "otpSubmit": "Verify & Sign In",
+      "otpBack": "← Back",
+      "otpResend": "Resend code",
+      "otpResending": "Sending..."
     },
     "register": {
       "title": "Create your account",
@@ -713,6 +723,12 @@
     "kycAlreadyApproved": "Your KYC is already approved",
     "kycAlreadyPending": "Your KYC submission is already under review",
     "insufficientBalanceDynamic": "Insufficient balance. Available: {{amount}}",
-    "insufficientCardBalanceDynamic": "Insufficient card balance. Available: {{amount}}"
+    "insufficientCardBalanceDynamic": "Insufficient card balance. Available: {{amount}}",
+    "emailPasswordRequired": "Email and password are required",
+    "invalidCredentials": "Invalid email or password",
+    "accountDeactivated": "Your account has been deactivated",
+    "otpRequired": "Verification code is required",
+    "otpExpired": "Verification code has expired. Please request a new one.",
+    "otpInvalid": "Invalid verification code"
   }
 }

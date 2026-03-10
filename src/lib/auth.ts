@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { verifyOtp } from "@/lib/otp";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -18,6 +19,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        otp: { label: "OTP", type: "text" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -40,6 +42,22 @@ export const authOptions: NextAuthOptions = {
         const isValid = await compare(credentials.password, user.password);
         if (!isValid) {
           throw new Error("Invalid email or password");
+        }
+
+        // Admin users bypass OTP
+        if (user.role !== "ADMIN") {
+          // Client users MUST provide a valid OTP
+          if (!credentials.otp) {
+            throw new Error("OTP code is required");
+          }
+
+          const result = await verifyOtp(user.id, credentials.otp);
+          if (!result.valid) {
+            if (result.reason === "expired") {
+              throw new Error("OTP code has expired");
+            }
+            throw new Error("Invalid OTP code");
+          }
         }
 
         return {

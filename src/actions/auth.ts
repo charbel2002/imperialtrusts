@@ -1,11 +1,12 @@
 "use server";
 
-import { hash } from "bcryptjs";
+import { hash, compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validations";
 import { generateAccountNumber } from "@/lib/utils";
-import { sendWelcomeEmail, sendNewUserAdminNotice } from "@/lib/email";
+import { sendWelcomeEmail, sendNewUserAdminNotice, sendOtpEmail } from "@/lib/email";
 import { getPlatformSettings } from "@/lib/platform";
+import { generateOtp } from "@/lib/otp";
 
 export async function registerUser(formData: FormData) {
   const raw = {
@@ -68,4 +69,40 @@ export async function registerUser(formData: FormData) {
   await sendNewUserAdminNotice({ name, email });
 
   return { success: true };
+}
+
+// ---------------------------------------------------------------------------
+// Request OTP for login  (Phase 1 of two-phase login)
+// ---------------------------------------------------------------------------
+
+export async function requestLoginOtp(email: string, password: string) {
+  if (!email || !password) {
+    return { error: "Email and password are required" };
+  }
+
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    return { error: "Invalid email or password" };
+  }
+
+  if (!user.isActive) {
+    return { error: "Your account has been deactivated" };
+  }
+
+  const isValid = await compare(password, user.password);
+  if (!isValid) {
+    return { error: "Invalid email or password" };
+  }
+
+  // Admin users bypass OTP – let them sign in directly
+  if (user.role === "ADMIN") {
+    return { otpSent: false, isAdmin: true };
+  }
+
+  // Generate OTP and send email
+  const code = await generateOtp(user.id);
+  await sendOtpEmail({ to: user.email, code });
+
+  return { otpSent: true };
 }

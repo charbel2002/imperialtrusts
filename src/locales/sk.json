@@ -26,7 +26,17 @@
       "noAccount": "Nemáte účet?",
       "createOne": "Vytvoriť",
       "registered": "Account created successfully! Sign in to continue.",
-      "error": "Invalid email or password"
+      "error": "Invalid email or password",
+      "otpTitle": "Overte svoju totožnosť",
+      "otpSubtitle": "Zadajte kód zaslaný na váš email",
+      "otpSent": "Overovací kód bol odoslaný na váš email.",
+      "otpLabel": "Overovací kód",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Overovanie...",
+      "otpSubmit": "Overiť a prihlásiť sa",
+      "otpBack": "← Späť",
+      "otpResend": "Znovu odoslať kód",
+      "otpResending": "Odosielanie..."
     },
     "register": {
       "title": "Vytvorte si účet",
@@ -700,7 +710,13 @@
     "kycAlreadyApproved": "Vasa KYC verifikacia je uz schvalena",
     "kycAlreadyPending": "Vasa KYC ziadost sa uz skuma",
     "insufficientBalanceDynamic": "Nedostatocny zostatok. Dostupne: {{amount}}",
-    "insufficientCardBalanceDynamic": "Nedostatocny zostatok na karte. Dostupne: {{amount}}"
+    "insufficientCardBalanceDynamic": "Nedostatocny zostatok na karte. Dostupne: {{amount}}",
+    "emailPasswordRequired": "Email a heslo sú povinné",
+    "invalidCredentials": "Nesprávny email alebo heslo",
+    "accountDeactivated": "Váš účet bol deaktivovaný",
+    "otpRequired": "Overovací kód je povinný",
+    "otpExpired": "Overovací kód vypršal. Vyžiadajte si nový.",
+    "otpInvalid": "Neplatný overovací kód"
   },
   "transactionTypes": {
     "TRANSFER": "Transfer",

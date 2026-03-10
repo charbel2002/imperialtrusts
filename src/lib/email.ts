@@ -735,3 +735,31 @@ export async function sendContactFormToAdmin(opts: {
 
   await sendEmail({ to: adminEmail, subject: `Contact: ${opts.subject} – from ${opts.name}`, html });
 }
+
+// ---------------------------------------------------------------------------
+// OTP email
+// ---------------------------------------------------------------------------
+
+/** Send a 6-digit OTP code for login verification */
+export async function sendOtpEmail(opts: { to: string; code: string }) {
+  const html = await wrapHtml(`
+    <h2 style="margin:0 0 16px;color:#1e293b;">Your Login Verification Code</h2>
+    <p style="color:#475569;line-height:1.6;">
+      Use the following one-time code to complete your sign-in. This code is valid for <strong>10 minutes</strong>.
+    </p>
+    <div style="margin:24px 0;text-align:center;">
+      <span style="display:inline-block;font-size:32px;font-weight:700;letter-spacing:8px;color:#1e293b;background:#f1f5f9;padding:16px 32px;border-radius:8px;border:2px dashed #cbd5e1;">
+        ${opts.code}
+      </span>
+    </div>
+    <p style="color:#475569;line-height:1.6;">
+      If you did not attempt to sign in, please ignore this email or contact support immediately.
+    </p>
+  `);
+
+  await sendEmail({
+    to: opts.to,
+    subject: "Your Login Verification Code",
+    html,
+  });
+}

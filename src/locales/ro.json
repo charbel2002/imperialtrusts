@@ -26,7 +26,17 @@
       "noAccount": "Nu ai cont?",
       "createOne": "Creează",
       "registered": "Account created successfully! Sign in to continue.",
-      "error": "Invalid email or password"
+      "error": "Invalid email or password",
+      "otpTitle": "Verifică-ți identitatea",
+      "otpSubtitle": "Introdu codul trimis pe email",
+      "otpSent": "Un cod de verificare a fost trimis pe email-ul tău.",
+      "otpLabel": "Cod de verificare",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Verificare...",
+      "otpSubmit": "Verifică și conectează-te",
+      "otpBack": "← Înapoi",
+      "otpResend": "Retrimite codul",
+      "otpResending": "Se trimite..."
     },
     "register": {
       "title": "Creați-vă contul",
@@ -700,7 +710,13 @@
     "kycAlreadyApproved": "Verificarea KYC este deja aprobata",
     "kycAlreadyPending": "Cererea KYC este deja in examinare",
     "insufficientBalanceDynamic": "Sold insuficient. Disponibil: {{amount}}",
-    "insufficientCardBalanceDynamic": "Sold card insuficient. Disponibil: {{amount}}"
+    "insufficientCardBalanceDynamic": "Sold card insuficient. Disponibil: {{amount}}",
+    "emailPasswordRequired": "Emailul și parola sunt obligatorii",
+    "invalidCredentials": "Email sau parolă incorectă",
+    "accountDeactivated": "Contul tău a fost dezactivat",
+    "otpRequired": "Codul de verificare este obligatoriu",
+    "otpExpired": "Codul de verificare a expirat. Solicită unul nou.",
+    "otpInvalid": "Cod de verificare invalid"
   },
   "transactionTypes": {
     "TRANSFER": "Transfer",

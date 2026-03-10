@@ -26,7 +26,17 @@
       "noAccount": "¿No tienes cuenta?",
       "createOne": "Crear una",
       "registered": "¡Cuenta creada! Inicia sesión.",
-      "error": "Correo o contraseña incorrectos"
+      "error": "Correo o contraseña incorrectos",
+      "otpTitle": "Verifica tu identidad",
+      "otpSubtitle": "Introduce el código enviado a tu correo",
+      "otpSent": "Se ha enviado un código de verificación a tu correo.",
+      "otpLabel": "Código de verificación",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Verificando...",
+      "otpSubmit": "Verificar e iniciar sesión",
+      "otpBack": "← Volver",
+      "otpResend": "Reenviar código",
+      "otpResending": "Enviando..."
     },
     "register": {
       "title": "Crea tu cuenta",
@@ -700,7 +710,13 @@
     "kycAlreadyApproved": "Su KYC ya esta aprobado",
     "kycAlreadyPending": "Su solicitud KYC ya esta en revision",
     "insufficientBalanceDynamic": "Saldo insuficiente. Disponible: {{amount}}",
-    "insufficientCardBalanceDynamic": "Saldo de tarjeta insuficiente. Disponible: {{amount}}"
+    "insufficientCardBalanceDynamic": "Saldo de tarjeta insuficiente. Disponible: {{amount}}",
+    "emailPasswordRequired": "El correo y la contraseña son obligatorios",
+    "invalidCredentials": "Correo o contraseña incorrectos",
+    "accountDeactivated": "Su cuenta ha sido desactivada",
+    "otpRequired": "El código de verificación es obligatorio",
+    "otpExpired": "El código de verificación ha expirado. Solicite uno nuevo.",
+    "otpInvalid": "Código de verificación inválido"
   },
   "transactionTypes": {
     "TRANSFER": "Transfer",

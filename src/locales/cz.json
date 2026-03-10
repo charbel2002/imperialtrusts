@@ -26,7 +26,17 @@
       "noAccount": "Nemáte účet?",
       "createOne": "Vytvořit",
       "registered": "Account created successfully! Sign in to continue.",
-      "error": "Invalid email or password"
+      "error": "Invalid email or password",
+      "otpTitle": "Ověřte svou totožnost",
+      "otpSubtitle": "Zadejte kód zaslaný na váš email",
+      "otpSent": "Ověřovací kód byl odeslán na váš email.",
+      "otpLabel": "Ověřovací kód",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Ověřování...",
+      "otpSubmit": "Ověřit a přihlásit se",
+      "otpBack": "← Zpět",
+      "otpResend": "Znovu odeslat kód",
+      "otpResending": "Odesílání..."
     },
     "register": {
       "title": "Vytvořte si účet",
@@ -700,7 +710,13 @@
     "kycAlreadyApproved": "Vase KYC verifikace je jiz schvalena",
     "kycAlreadyPending": "Vase KYC zadost se jiz zkoumo",
     "insufficientBalanceDynamic": "Nedostatecny zustatek. Dostupne: {{amount}}",
-    "insufficientCardBalanceDynamic": "Nedostatecny zustatek na karte. Dostupne: {{amount}}"
+    "insufficientCardBalanceDynamic": "Nedostatecny zustatek na karte. Dostupne: {{amount}}",
+    "emailPasswordRequired": "Email a heslo jsou povinné",
+    "invalidCredentials": "Nesprávný email nebo heslo",
+    "accountDeactivated": "Váš účet byl deaktivován",
+    "otpRequired": "Ověřovací kód je povinný",
+    "otpExpired": "Ověřovací kód vypršel. Vyžádejte si nový.",
+    "otpInvalid": "Neplatný ověřovací kód"
   },
   "transactionTypes": {
     "TRANSFER": "Transfer",

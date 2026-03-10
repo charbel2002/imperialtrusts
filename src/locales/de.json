@@ -26,7 +26,17 @@
       "noAccount": "Noch kein Konto?",
       "createOne": "Erstellen",
       "registered": "Konto erfolgreich erstellt! Melden Sie sich an.",
-      "error": "Ungültige E-Mail oder Passwort"
+      "error": "Ungültige E-Mail oder Passwort",
+      "otpTitle": "Identität bestätigen",
+      "otpSubtitle": "Geben Sie den Code ein, der an Ihre E-Mail gesendet wurde",
+      "otpSent": "Ein Bestätigungscode wurde an Ihre E-Mail gesendet.",
+      "otpLabel": "Bestätigungscode",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Überprüfung...",
+      "otpSubmit": "Bestätigen & Anmelden",
+      "otpBack": "← Zurück",
+      "otpResend": "Code erneut senden",
+      "otpResending": "Wird gesendet..."
     },
     "register": {
       "title": "Konto erstellen",
@@ -700,7 +710,13 @@
     "kycAlreadyApproved": "Ihre KYC ist bereits genehmigt",
     "kycAlreadyPending": "Ihre KYC-Einreichung wird bereits gepruft",
     "insufficientBalanceDynamic": "Unzureichendes Guthaben. Verfugbar: {{amount}}",
-    "insufficientCardBalanceDynamic": "Unzureichendes Kartenguthaben. Verfugbar: {{amount}}"
+    "insufficientCardBalanceDynamic": "Unzureichendes Kartenguthaben. Verfugbar: {{amount}}",
+    "emailPasswordRequired": "E-Mail und Passwort sind erforderlich",
+    "invalidCredentials": "Ungültige E-Mail oder Passwort",
+    "accountDeactivated": "Ihr Konto wurde deaktiviert",
+    "otpRequired": "Bestätigungscode ist erforderlich",
+    "otpExpired": "Der Bestätigungscode ist abgelaufen. Bitte fordern Sie einen neuen an.",
+    "otpInvalid": "Ungültiger Bestätigungscode"
   },
   "transactionTypes": {
     "TRANSFER": "Transfer",

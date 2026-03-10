@@ -29,6 +29,7 @@ model User {
   notifications   Notification[]
   loanApplications LoanApplication[]
   adminLogs       AdminLog[]    @relation("AdminLogs")
+  otpTokens       OtpToken[]
 
   @@map("users")
 }
@@ -286,4 +287,18 @@ model AdminLog {
 
   @@index([targetType, targetId])
   @@map("admin_logs")
+}
+
+model OtpToken {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  code      String   @db.VarChar(6)
+  expiresAt DateTime @map("expires_at")
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("otp_tokens")
 }

@@ -26,7 +26,17 @@
       "noAccount": "खाता नहीं है?",
       "createOne": "बनाएं",
       "registered": "खाता बनाया गया!",
-      "error": "अमान्य ईमेल या पासवर्ड"
+      "error": "अमान्य ईमेल या पासवर्ड",
+      "otpTitle": "अपनी पहचान सत्यापित करें",
+      "otpSubtitle": "अपने ईमेल पर भेजा गया कोड दर्ज करें",
+      "otpSent": "आपके ईमेल पर एक सत्यापन कोड भेजा गया है।",
+      "otpLabel": "सत्यापन कोड",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "सत्यापित हो रहा है...",
+      "otpSubmit": "सत्यापित करें और साइन इन करें",
+      "otpBack": "← वापस",
+      "otpResend": "कोड पुनः भेजें",
+      "otpResending": "भेजा जा रहा है..."
     },
     "register": {
       "title": "अपना खाता बनाएं",
@@ -700,7 +710,13 @@
     "kycAlreadyApproved": "आपका KYC पहले से स्वीकृत है",
     "kycAlreadyPending": "आपका KYC सबमिशन पहले से समीक्षा में है",
     "insufficientBalanceDynamic": "अपर्याप्त शेष। उपलब्ध: {{amount}}",
-    "insufficientCardBalanceDynamic": "अपर्याप्त कार्ड शेष। उपलब्ध: {{amount}}"
+    "insufficientCardBalanceDynamic": "अपर्याप्त कार्ड शेष। उपलब्ध: {{amount}}",
+    "emailPasswordRequired": "ईमेल और पासवर्ड आवश्यक हैं",
+    "invalidCredentials": "अमान्य ईमेल या पासवर्ड",
+    "accountDeactivated": "आपका खाता निष्क्रिय कर दिया गया है",
+    "otpRequired": "सत्यापन कोड आवश्यक है",
+    "otpExpired": "सत्यापन कोड समाप्त हो गया है। कृपया नया अनुरोध करें।",
+    "otpInvalid": "अमान्य सत्यापन कोड"
   },
   "transactionTypes": {
     "TRANSFER": "Transfer",

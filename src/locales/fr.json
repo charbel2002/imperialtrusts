@@ -26,7 +26,17 @@
       "noAccount": "Vous n'avez pas de compte ?",
       "createOne": "Créer un compte",
       "registered": "Compte créé avec succès ! Connectez-vous pour continuer.",
-      "error": "Email ou mot de passe incorrect"
+      "error": "Email ou mot de passe incorrect",
+      "otpTitle": "Vérifiez votre identité",
+      "otpSubtitle": "Entrez le code envoyé à votre email",
+      "otpSent": "Un code de vérification a été envoyé à votre email.",
+      "otpLabel": "Code de vérification",
+      "otpPlaceholder": "000000",
+      "otpVerifying": "Vérification...",
+      "otpSubmit": "Vérifier et se connecter",
+      "otpBack": "← Retour",
+      "otpResend": "Renvoyer le code",
+      "otpResending": "Envoi..."
     },
     "register": {
       "title": "Créez votre compte",
@@ -713,6 +723,12 @@
     "kycAlreadyApproved": "Votre KYC est deja approuve",
     "kycAlreadyPending": "Votre soumission KYC est deja en cours d'examen",
     "insufficientBalanceDynamic": "Solde insuffisant. Disponible : {{amount}}",
-    "insufficientCardBalanceDynamic": "Solde de carte insuffisant. Disponible : {{amount}}"
+    "insufficientCardBalanceDynamic": "Solde de carte insuffisant. Disponible : {{amount}}",
+    "emailPasswordRequired": "L'email et le mot de passe sont requis",
+    "invalidCredentials": "Email ou mot de passe incorrect",
+    "accountDeactivated": "Votre compte a été désactivé",
+    "otpRequired": "Le code de vérification est requis",
+    "otpExpired": "Le code de vérification a expiré. Veuillez en demander un nouveau.",
+    "otpInvalid": "Code de vérification invalide"
   }
 }

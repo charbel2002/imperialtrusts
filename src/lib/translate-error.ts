@@ -18,6 +18,13 @@ const errorMap: Record<string, string> = {
   "Session expired. Please sign in again.": "sessionExpired",
   "An account with this email already exists": "emailExists",
   "User not found": "userNotFound",
+  "Email and password are required": "emailPasswordRequired",
+  "Invalid email or password": "invalidCredentials",
+  "Your account has been deactivated": "accountDeactivated",
+  // OTP
+  "OTP code is required": "otpRequired",
+  "OTP code has expired": "otpExpired",
+  "Invalid OTP code": "otpInvalid",
   // Transactions
   "Transaction not found": "transactionNotFound",
   "Only pending transactions can be cancelled": "onlyPendingCancel",
