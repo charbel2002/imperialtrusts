@@ -111,7 +111,7 @@ export function TransactionProgressTracker({
       progressRef.current = next;
       setProgress(next);
       updateTransactionProgress(transactionId, next);
-    }, 500);
+    }, 300);
 
     return () => clearInterval(interval);
   }, [completed, paused]); // eslint-disable-line react-hooks/exhaustive-deps
