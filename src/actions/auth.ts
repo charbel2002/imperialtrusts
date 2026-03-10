@@ -4,6 +4,7 @@ import { hash } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validations";
 import { generateAccountNumber } from "@/lib/utils";
+import { sendWelcomeEmail, sendNewUserAdminNotice } from "@/lib/email";
 
 export async function registerUser(formData: FormData) {
   const raw = {
@@ -59,6 +60,10 @@ export async function registerUser(formData: FormData) {
       type: "success",
     },
   });
+
+  // Send welcome email to user + notify admin
+  await sendWelcomeEmail({ to: email, name });
+  await sendNewUserAdminNotice({ name, email });
 
   return { success: true };
 }

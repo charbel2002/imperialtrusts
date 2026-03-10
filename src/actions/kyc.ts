@@ -6,6 +6,12 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { kycSubmissionSchema, kycReviewSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
+import {
+  sendKycSubmittedEmail,
+  sendKycSubmittedAdminNotice,
+  sendKycApprovedEmail,
+  sendKycRejectedEmail,
+} from "@/lib/email";
 
 // --- Client: Submit KYC ------------------------------------
 
@@ -84,6 +90,10 @@ export async function submitKyc(formData: FormData) {
     },
   });
 
+  // Email user + admin
+  await sendKycSubmittedEmail({ to: session.user.email!, name: session.user.name || "User" });
+  await sendKycSubmittedAdminNotice({ userName: session.user.name || "User", userEmail: session.user.email! });
+
   revalidatePath("/dashboard/kyc");
   return { success: true };
 }
@@ -132,6 +142,9 @@ export async function approveKyc(kycId: string) {
       description: `Approved KYC for user ${kyc.user.name} (${kyc.user.email})`,
     },
   });
+
+  // Email the user
+  await sendKycApprovedEmail({ to: kyc.user.email, name: kyc.user.name });
 
   revalidatePath("/admin/kyc");
   revalidatePath("/dashboard/kyc");
@@ -185,6 +198,9 @@ export async function rejectKyc(kycId: string, reason: string) {
       description: `Rejected KYC for user ${kyc.user.name} (${kyc.user.email}). Reason: ${reason}`,
     },
   });
+
+  // Email the user
+  await sendKycRejectedEmail({ to: kyc.user.email, name: kyc.user.name, reason });
 
   revalidatePath("/admin/kyc");
   revalidatePath("/dashboard/kyc");

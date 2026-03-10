@@ -1,6 +1,10 @@
 "use server";
 
 import { contactSchema } from "@/lib/validations";
+import {
+  sendContactConfirmationEmail,
+  sendContactFormToAdmin,
+} from "@/lib/email";
 
 export async function submitContactForm(data: {
   name: string;
@@ -13,7 +17,13 @@ export async function submitContactForm(data: {
     return { error: validated.error.errors[0].message };
   }
 
-  // In production: send email via nodemailer/resend/etc.
-  // For now, just return success.
+  const { name, email, subject, message } = validated.data;
+
+  // Send confirmation to the user
+  await sendContactConfirmationEmail({ to: email, name, subject });
+
+  // Forward the message to the admin / support team
+  await sendContactFormToAdmin({ name, email, subject, message });
+
   return { success: true };
 }

@@ -8,6 +8,12 @@ import { getDictionary } from "@/lib/dictionary";
 import { getPlatformSettings } from "@/lib/platform";
 import { transferSchema } from "@/lib/validations";
 import { generateReference } from "@/lib/utils";
+import {
+  sendTransferInitiatedEmail,
+  sendTransferApprovedEmail,
+  sendTransferRejectedEmail,
+  sendTransferCompletedEmail,
+} from "@/lib/email";
 import { revalidatePath } from "next/cache";
 
 
@@ -79,6 +85,14 @@ export async function initiateTransfer(data: {
         .replace("{{amount}}", `$${data.amount.toFixed(2)}`).replace("{{name}}", beneficiary.name).replace("{{ref}}", transaction.reference),
       type: "info",
     },
+  });
+
+  // Email the user
+  await sendTransferInitiatedEmail({
+    to: session.user.email!,
+    amount: `$${data.amount.toFixed(2)}`,
+    beneficiaryName: beneficiary.name,
+    reference: transaction.reference,
   });
 
   revalidatePath("/dashboard/transactions");
@@ -156,6 +170,14 @@ export async function completeTransaction(transactionId: string) {
       },
     }),
   ]);
+
+  // Email the user
+  await sendTransferCompletedEmail({
+    to: session.user.email!,
+    amount: `$${Number(txn.amount).toFixed(2)}`,
+    beneficiaryName: txn.beneficiary?.name ?? "recipient",
+    reference: txn.reference,
+  });
 
   revalidatePath("/dashboard/transactions");
   revalidatePath("/dashboard");
@@ -244,6 +266,15 @@ export async function adminApproveTransaction(transactionId: string) {
   if (!hasLocks) ops.push(prisma.account.update({ where: { id: txn.accountId }, data: { balance: { decrement: Number(txn.amount) } } }));
   await prisma.$transaction(ops);
 
+  // Email the user
+  await sendTransferApprovedEmail({
+    to: txn.user.email,
+    amount: `$${Number(txn.amount).toFixed(2)}`,
+    beneficiaryName: txn.beneficiary?.name ?? "recipient",
+    reference: txn.reference,
+    hasLocks,
+  });
+
   revalidatePath("/admin/transactions");
   revalidatePath("/dashboard/transactions");
   revalidatePath("/dashboard");
@@ -268,6 +299,15 @@ export async function adminRejectTransaction(transactionId: string, reason: stri
     prisma.adminLog.create({ data: { adminId: session.user.id, action: "TRANSACTION_REJECTED", targetType: "Transaction", targetId: transactionId,
       description: `Rejected transfer for ${txn.user.name}. Ref: ${txn.reference}. Reason: ${reason}` } }),
   ]);
+
+  // Email the user
+  await sendTransferRejectedEmail({
+    to: txn.user.email,
+    amount: `$${Number(txn.amount).toFixed(2)}`,
+    beneficiaryName: txn.beneficiary?.name ?? "recipient",
+    reference: txn.reference,
+    reason,
+  });
 
   revalidatePath("/admin/transactions");
   revalidatePath("/dashboard/transactions");

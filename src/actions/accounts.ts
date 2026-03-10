@@ -8,6 +8,11 @@ import { adminCreditDebitSchema } from "@/lib/validations";
 import { generateReference } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { AccountStatus } from "@prisma/client";
+import {
+  sendAccountStatusEmail,
+  sendAccountCreditedEmail,
+  sendAccountDebitedEmail,
+} from "@/lib/email";
 
 // --- Admin: Set Account Status (Lock / Unlock / Suspend) --
 
@@ -86,6 +91,13 @@ export async function setAccountStatus(
     },
   });
 
+  // Email the user about account status change
+  await sendAccountStatusEmail({
+    to: account.user.email,
+    name: account.user.name ?? "Customer",
+    status,
+  });
+
   revalidatePath("/admin/users");
   revalidatePath("/dashboard");
   return { success: true };
@@ -152,6 +164,14 @@ export async function adminCreditAccount(data: {
       },
     }),
   ]);
+
+  // Email the user about the credit
+  await sendAccountCreditedEmail({
+    to: account.user.email,
+    name: account.user.name ?? "Customer",
+    amount: `$${data.amount.toFixed(2)}`,
+    description: data.description,
+  });
 
   revalidatePath("/admin/users");
   revalidatePath("/dashboard");
@@ -222,6 +242,14 @@ export async function adminDebitAccount(data: {
       },
     }),
   ]);
+
+  // Email the user about the debit
+  await sendAccountDebitedEmail({
+    to: account.user.email,
+    name: account.user.name ?? "Customer",
+    amount: `$${data.amount.toFixed(2)}`,
+    description: data.description,
+  });
 
   revalidatePath("/admin/users");
   revalidatePath("/dashboard");

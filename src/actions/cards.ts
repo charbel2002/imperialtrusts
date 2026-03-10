@@ -7,6 +7,11 @@ import { prisma } from "@/lib/prisma";
 import { generateCardNumber, generateCVV, generateReference } from "@/lib/utils";
 import { fundCardSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
+import {
+  sendCardCreatedEmail,
+  sendCardCancelledEmail,
+  sendCardFreezeToggleEmail,
+} from "@/lib/email";
 
 // --- Client: Create Card ------------------------------------
 
@@ -61,6 +66,13 @@ export async function createCard(cardType: "VISA" | "MASTERCARD") {
       message: `Your virtual ${cardType} card ending in ${cardNumber.slice(-4)} has been created successfully.`,
       type: "success",
     },
+  });
+
+  // Email the user
+  await sendCardCreatedEmail({
+    to: session.user.email!,
+    cardType,
+    lastFour: cardNumber.slice(-4),
   });
 
   revalidatePath("/dashboard/cards");
@@ -269,6 +281,14 @@ export async function adminCancelCard(cardId: string) {
 
   await prisma.$transaction(operations);
 
+  // Email the user about cancellation
+  await sendCardCancelledEmail({
+    to: card.user.email,
+    cardType: card.cardType,
+    lastFour: card.cardNumber.slice(-4),
+    balanceReturned: cardBalance > 0 ? `$${cardBalance.toFixed(2)}` : null,
+  });
+
   revalidatePath("/admin/cards");
   return { success: true };
 }
@@ -281,7 +301,7 @@ export async function adminToggleCardFreeze(cardId: string) {
 
   const card = await prisma.card.findUnique({
     where: { id: cardId },
-    include: { user: { select: { id: true, name: true } } },
+    include: { user: { select: { id: true, name: true, email: true } } },
   });
   if (!card) return { error: "Card not found" };
 
@@ -312,6 +332,14 @@ export async function adminToggleCardFreeze(cardId: string) {
       targetId: cardId,
       description: `${newStatus === "FROZEN" ? "Froze" : "Unfroze"} ${card.cardType} card for ${card.user.name}`,
     },
+  });
+
+  // Email the user about freeze/unfreeze
+  await sendCardFreezeToggleEmail({
+    to: card.user.email,
+    cardType: card.cardType,
+    lastFour: card.cardNumber.slice(-4),
+    frozen: newStatus === "FROZEN",
   });
 
   revalidatePath("/admin/cards");
