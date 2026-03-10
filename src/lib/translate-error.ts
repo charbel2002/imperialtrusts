@@ -40,6 +40,7 @@ const errorMap: Record<string, string> = {
   "Card is not active": "cardNotActive",
   "Card is not frozen": "cardNotFrozen",
   "Card must be active to fund": "cardMustBeActive",
+  "Card must be active": "cardMustBeActive",
   "Your bank account must be active": "bankAccountMustBeActive",
   "No bank account found": "noBankAccount",
   "KYC verification required to create cards": "kycRequiredCards",
