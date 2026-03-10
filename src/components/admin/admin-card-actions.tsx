@@ -33,7 +33,7 @@ export function AdminCardActions({ cardId, cardStatus, cardLast4, cardType, user
   }
 
   async function handleCancel() {
-    if (!confirm(`Cancel ${cardType} card **** ${cardLast4} for ${userName}? Any remaining balance will be returned to their account.`)) return;
+    if (!confirm(`Annuler la carte ${cardType} **** ${cardLast4} de ${userName} ? Le solde restant sera recrédité sur son compte.`)) return;
     setLoading("cancel");
     const result = await adminCancelCard(cardId);
     setLoading(null);

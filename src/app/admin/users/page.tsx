@@ -55,18 +55,18 @@ export default async function AdminUsersPage({
           <Users size={20} className="text-accent" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-800 font-heading">User Management</h1>
-          <p className="text-sm text-slate-500">{stats.total} users total</p>
+          <h1 className="text-xl font-bold text-slate-800 font-heading">Gestion des utilisateurs</h1>
+          <p className="text-sm text-slate-500">{stats.total} utilisateurs au total</p>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Total Users", value: stats.total, color: "text-primary" },
-          { label: "Active", value: stats.active, color: "text-emerald-600" },
-          { label: "Locked", value: stats.locked, color: "text-red-600" },
-          { label: "Suspended", value: stats.suspended, color: "text-amber-600" },
+          { label: "Total utilisateurs", value: stats.total, color: "text-primary" },
+          { label: "Actifs", value: stats.active, color: "text-emerald-600" },
+          { label: "Verrouillés", value: stats.locked, color: "text-red-600" },
+          { label: "Suspendus", value: stats.suspended, color: "text-amber-600" },
         ].map((s) => (
           <Card key={s.label}>
             <div className="px-4 py-3">
@@ -86,12 +86,12 @@ export default async function AdminUsersPage({
           <table className="w-full text-sm text-left">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Account</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Balance</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Utilisateur</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Compte</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Solde</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Statut</th>
                 <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">KYC</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Activity</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Activité</th>
                 <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider"></th>
               </tr>
             </thead>
@@ -126,7 +126,7 @@ export default async function AdminUsersPage({
                       }>
                         {user.account?.status ?? "N/A"}
                       </Badge>
-                      {!user.isActive && <Badge variant="danger" className="ml-1">Disabled</Badge>}
+                      {!user.isActive && <Badge variant="danger" className="ml-1">Désactivé</Badge>}
                     </td>
                     <td className="px-6 py-4">
                       <Badge variant={
@@ -134,14 +134,14 @@ export default async function AdminUsersPage({
                         kycStatus === "PENDING" ? "warning" :
                         kycStatus === "REJECTED" ? "danger" : "neutral"
                       }>
-                        {kycStatus === "NONE" ? "None" : kycStatus.charAt(0) + kycStatus.slice(1).toLowerCase()}
+                        {kycStatus === "NONE" ? "Aucun" : kycStatus.charAt(0) + kycStatus.slice(1).toLowerCase()}
                       </Badge>
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-xs text-slate-500">
                         <span>{user._count.transactions} txns</span>
                         <span className="mx-1">-</span>
-                        <span>{user._count.cards} cards</span>
+                        <span>{user._count.cards} cartes</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -149,7 +149,7 @@ export default async function AdminUsersPage({
                         href={`/admin/users/${user.id}`}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-secondary hover:bg-blue-50 transition-colors"
                       >
-                        <Eye size={14} /> View
+                        <Eye size={14} /> Voir
                       </Link>
                     </td>
                   </tr>
@@ -159,7 +159,7 @@ export default async function AdminUsersPage({
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-slate-400">
                     <Users size={40} className="mx-auto mb-3 text-slate-300" />
-                    <p className="text-sm">No users found</p>
+                    <p className="text-sm">Aucun utilisateur trouvé</p>
                   </td>
                 </tr>
               )}

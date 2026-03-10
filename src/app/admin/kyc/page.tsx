@@ -31,8 +31,8 @@ export default async function AdminKycPage() {
             <Shield size={20} className="text-accent" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-800 font-heading">KYC Review</h1>
-            <p className="text-sm text-slate-500">{pending.length} pending review{pending.length !== 1 ? "s" : ""}</p>
+            <h1 className="text-xl font-bold text-slate-800 font-heading">Vérification KYC</h1>
+            <p className="text-sm text-slate-500">{pending.length} en attente de révision</p>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default async function AdminKycPage() {
       {pending.length > 0 && (
         <div className="mb-10">
           <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-4">
-            Pending Review ({pending.length})
+            En attente de révision ({pending.length})
           </h2>
           <div className="space-y-4">
             {pending.map((kyc) => (
@@ -55,7 +55,7 @@ export default async function AdminKycPage() {
         <Card className="mb-10">
           <div className="px-6 py-12 text-center">
             <Shield size={40} className="mx-auto mb-3 text-slate-300" />
-            <p className="text-sm text-slate-500">No pending KYC submissions</p>
+            <p className="text-sm text-slate-500">Aucune soumission KYC en attente</p>
           </div>
         </Card>
       )}
@@ -64,7 +64,7 @@ export default async function AdminKycPage() {
       {reviewed.length > 0 && (
         <div>
           <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-4">
-            Review History ({reviewed.length})
+            Historique des révisions ({reviewed.length})
           </h2>
           <div className="space-y-4">
             {reviewed.map((kyc) => (
@@ -110,22 +110,22 @@ function KycSubmissionCard({ kyc, showActions = true }: {
 
         {/* Details Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <DetailItem icon={User} label="Legal Name" value={kyc.fullLegalName} />
-          <DetailItem icon={Calendar} label="Date of Birth" value={formatDate(kyc.dateOfBirth, "fr", { year: "numeric", month: "short", day: "numeric" })} />
-          <DetailItem icon={FileText} label="National ID" value={kyc.nationalId} />
-          <DetailItem icon={User} label="Address" value={kyc.address.substring(0, 40) + (kyc.address.length > 40 ? "..." : "")} />
+          <DetailItem icon={User} label="Nom légal" value={kyc.fullLegalName} />
+          <DetailItem icon={Calendar} label="Date de naissance" value={formatDate(kyc.dateOfBirth, "fr", { year: "numeric", month: "short", day: "numeric" })} />
+          <DetailItem icon={FileText} label="Pièce d&apos;identité" value={kyc.nationalId} />
+          <DetailItem icon={User} label="Adresse" value={kyc.address.substring(0, 40) + (kyc.address.length > 40 ? "..." : "")} />
         </div>
 
         {/* Documents */}
         <div className="grid sm:grid-cols-2 gap-4 mb-6">
-          <DocViewer label="ID Document" path={kyc.idDocumentPath} icon={FileText} />
-          <DocViewer label="Selfie" path={kyc.selfiePath} icon={Camera} />
+          <DocViewer label="Pièce d&apos;identité" path={kyc.idDocumentPath} icon={FileText} />
+          <DocViewer label="Photo selfie" path={kyc.selfiePath} icon={Camera} />
         </div>
 
         {/* Rejection reason if rejected */}
         {kyc.status === "REJECTED" && kyc.rejectionReason && (
           <div className="p-3 rounded-lg bg-red-50 border border-red-100 mb-4">
-            <p className="text-xs font-medium text-red-700">Rejection Reason</p>
+            <p className="text-xs font-medium text-red-700">Motif de rejet</p>
             <p className="text-sm text-red-600 mt-0.5">{kyc.rejectionReason}</p>
           </div>
         )}
@@ -159,14 +159,14 @@ function DocViewer({ label, path, icon: Icon }: { label: string; path: string; i
         <Icon size={14} className="text-slate-500" />
         <span className="text-xs font-medium text-slate-600">{label}</span>
         <a href={path} target="_blank" rel="noopener noreferrer" className="ml-auto text-xs text-secondary hover:underline">
-          Open
+          Ouvrir
         </a>
       </div>
       <div className="h-40 flex items-center justify-center bg-slate-50/50 p-2">
         {isPdf ? (
           <div className="text-center">
             <div className="w-12 h-14 mx-auto rounded bg-red-100 flex items-center justify-center text-red-500 text-xs font-bold">PDF</div>
-            <p className="text-xs text-slate-400 mt-2">Click &quot;Open&quot; to view</p>
+            <p className="text-xs text-slate-400 mt-2">Cliquez sur &quot;Ouvrir&quot; pour voir</p>
           </div>
         ) : (
           /* eslint-disable-next-line @next/next/no-img-element */

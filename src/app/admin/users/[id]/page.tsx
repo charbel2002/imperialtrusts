@@ -44,7 +44,7 @@ export default async function AdminUserDetailPage({
     <div>
       {/* Back Link */}
       <Link href="/admin/users" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors">
-        <ArrowLeft size={16} /> Back to Users
+        <ArrowLeft size={16} /> Retour aux utilisateurs
       </Link>
 
       {/* User Header */}
@@ -57,10 +57,10 @@ export default async function AdminUserDetailPage({
             <div className="flex items-center gap-3">
               <h1 className="text-xl font-bold text-slate-800 font-heading">{user.name}</h1>
               {user.role === "ADMIN" && <Badge variant="info">Admin</Badge>}
-              {!user.isActive && <Badge variant="danger">Disabled</Badge>}
+              {!user.isActive && <Badge variant="danger">Désactivé</Badge>}
             </div>
             <p className="text-sm text-slate-500">{user.email}</p>
-            <p className="text-xs text-slate-400">Joined {formatDate(user.createdAt, "fr")}</p>
+            <p className="text-xs text-slate-400">Inscrit le {formatDate(user.createdAt, "fr")}</p>
           </div>
         </div>
         {user.role !== "ADMIN" && (
@@ -76,7 +76,7 @@ export default async function AdminUserDetailPage({
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="flex items-center gap-2">
                 <Wallet size={18} className="text-slate-500" />
-                <h2 className="text-base font-semibold text-slate-800 font-heading">Bank Account</h2>
+                <h2 className="text-base font-semibold text-slate-800 font-heading">Compte bancaire</h2>
               </div>
               <Badge variant={
                 account?.status === "ACTIVE" ? "success" :
@@ -90,17 +90,17 @@ export default async function AdminUserDetailPage({
                 <>
                   <div className="grid sm:grid-cols-3 gap-6 mb-6">
                     <div>
-                      <p className="text-xs text-slate-400 uppercase tracking-wider">Account Number</p>
+                      <p className="text-xs text-slate-400 uppercase tracking-wider">Numéro de compte</p>
                       <p className="mt-1 text-sm font-mono font-semibold text-slate-800">{account.accountNumber}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 uppercase tracking-wider">Balance</p>
+                      <p className="text-xs text-slate-400 uppercase tracking-wider">Solde</p>
                       <p className="mt-1 text-xl font-bold text-slate-800 font-heading">
                         {formatCurrency(Number(account.balance), account.currency)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 uppercase tracking-wider">Currency</p>
+                      <p className="text-xs text-slate-400 uppercase tracking-wider">Devise</p>
                       <p className="mt-1 text-sm font-semibold text-slate-800">{account.currency}</p>
                     </div>
                   </div>
@@ -113,7 +113,7 @@ export default async function AdminUserDetailPage({
 
                   {/* Account Status Actions */}
                   <div className="pt-5 border-t border-slate-100">
-                    <h3 className="text-sm font-semibold text-slate-700 mb-3">Account Controls</h3>
+                    <h3 className="text-sm font-semibold text-slate-700 mb-3">Contrôles du compte</h3>
                     <AccountStatusActions
                       accountId={account.id}
                       currentStatus={account.status}
@@ -122,7 +122,7 @@ export default async function AdminUserDetailPage({
                   </div>
                 </>
               ) : (
-                <p className="text-sm text-slate-500">No bank account found for this user.</p>
+                <p className="text-sm text-slate-500">Aucun compte bancaire trouvé pour cet utilisateur.</p>
               )}
             </CardBody>
           </Card>
@@ -131,7 +131,7 @@ export default async function AdminUserDetailPage({
           {account && (
             <Card>
               <CardHeader>
-                <h2 className="text-base font-semibold text-slate-800 font-heading">Credit / Debit Account</h2>
+                <h2 className="text-base font-semibold text-slate-800 font-heading">Créditer / Débiter le compte</h2>
               </CardHeader>
               <CardBody>
                 <CreditDebitForm
@@ -147,13 +147,13 @@ export default async function AdminUserDetailPage({
           {/* Recent Transactions */}
           <Card>
             <CardHeader>
-              <h2 className="text-base font-semibold text-slate-800 font-heading">Recent Transactions</h2>
+              <h2 className="text-base font-semibold text-slate-800 font-heading">Transactions récentes</h2>
             </CardHeader>
             <div className="divide-y divide-slate-50">
               {recentTxns.length === 0 ? (
                 <div className="px-6 py-10 text-center text-slate-400">
                   <Clock size={32} className="mx-auto mb-2 text-slate-300" />
-                  <p className="text-sm">No transactions</p>
+                  <p className="text-sm">Aucune transaction</p>
                 </div>
               ) : (
                 recentTxns.map((txn) => {
@@ -192,17 +192,17 @@ export default async function AdminUserDetailPage({
             <CardBody>
               <div className="flex items-center gap-2 mb-3">
                 <Shield size={16} className="text-slate-400" />
-                <h3 className="text-sm font-semibold text-slate-700">KYC Status</h3>
+                <h3 className="text-sm font-semibold text-slate-700">Statut KYC</h3>
               </div>
               <Badge variant={
                 kycStatus === "APPROVED" ? "success" :
                 kycStatus === "PENDING" ? "warning" :
                 kycStatus === "REJECTED" ? "danger" : "neutral"
               }>
-                {kycStatus === "NONE" ? "Not Submitted" : kycStatus.charAt(0) + kycStatus.slice(1).toLowerCase()}
+                {kycStatus === "NONE" ? "Non soumis" : kycStatus.charAt(0) + kycStatus.slice(1).toLowerCase()}
               </Badge>
               {user.kycDocument?.fullLegalName && (
-                <p className="text-xs text-slate-500 mt-2">Name: {user.kycDocument.fullLegalName}</p>
+                <p className="text-xs text-slate-500 mt-2">Nom : {user.kycDocument.fullLegalName}</p>
               )}
             </CardBody>
           </Card>
@@ -210,14 +210,14 @@ export default async function AdminUserDetailPage({
           {/* Quick Stats */}
           <Card>
             <CardBody>
-              <h3 className="text-sm font-semibold text-slate-700 mb-3">Activity</h3>
+              <h3 className="text-sm font-semibold text-slate-700 mb-3">Activité</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-xs text-slate-500">Transactions</span>
                   <span className="text-xs font-semibold text-slate-800">{user._count.transactions}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-xs text-slate-500">Beneficiaries</span>
+                  <span className="text-xs text-slate-500">Bénéficiaires</span>
                   <span className="text-xs font-semibold text-slate-800">{user._count.beneficiaries}</span>
                 </div>
                 <div className="flex justify-between">
@@ -233,10 +233,10 @@ export default async function AdminUserDetailPage({
             <CardBody>
               <div className="flex items-center gap-2 mb-3">
                 <CreditCard size={16} className="text-slate-400" />
-                <h3 className="text-sm font-semibold text-slate-700">Cards ({user.cards.length})</h3>
+                <h3 className="text-sm font-semibold text-slate-700">Cartes ({user.cards.length})</h3>
               </div>
               {user.cards.length === 0 ? (
-                <p className="text-xs text-slate-400">No cards created</p>
+                <p className="text-xs text-slate-400">Aucune carte créée</p>
               ) : (
                 <div className="space-y-2">
                   {user.cards.map((card) => (

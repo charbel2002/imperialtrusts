@@ -31,7 +31,7 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
     return (
       <Alert variant={done === "approved" ? "success" : "danger"}>
         {done === "approved" ? <CheckCircle size={16} /> : <XCircle size={16} />}
-        <span>Loan application has been {done}.</span>
+        <span>La demande de prêt a été {done === "approved" ? "approuvée" : "rejetée"}.</span>
       </Alert>
     );
   }
@@ -46,7 +46,7 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
   }
 
   async function handleReject() {
-    if (!rejectReason.trim()) { setError("Rejection reason required"); return; }
+    if (!rejectReason.trim()) { setError("Motif de rejet requis"); return; }
     setLoading("reject");
     setError("");
     const result = await adminRejectLoan(loanId, rejectReason.trim());
@@ -60,7 +60,7 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
     return (
       <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-4">
         <div className="flex items-center justify-between">
-          <h4 className="text-sm font-semibold text-emerald-800">Approve Loan</h4>
+          <h4 className="text-sm font-semibold text-emerald-800">Approuver le prêt</h4>
           <button onClick={() => setShowApprove(false)} className="text-slate-400 hover:text-slate-600"><X size={16} /></button>
         </div>
 
@@ -68,11 +68,11 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
 
         <div className="p-3 rounded-lg bg-white border border-emerald-200">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-slate-600">Amount</span>
+            <span className="text-slate-600">Montant</span>
             <span className="font-bold text-emerald-700">{formatCurrency(amount)}</span>
           </div>
           <div className="flex items-center justify-between text-sm mt-1">
-            <span className="text-slate-600">Applicant</span>
+            <span className="text-slate-600">Demandeur</span>
             <span className="font-medium text-slate-800">{userName ?? email}</span>
           </div>
         </div>
@@ -89,17 +89,17 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
             <div>
               <p className="text-sm font-medium text-slate-800 flex items-center gap-1.5">
                 <Banknote size={14} className="text-emerald-600" />
-                Disburse funds to account
+                Verser les fonds sur le compte
               </p>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                Credit {formatCurrency(amount)} to the user&apos;s bank account and create a LOAN_DISBURSEMENT transaction.
+                Créditer {formatCurrency(amount)} sur le compte bancaire et créer une transaction LOAN_DISBURSEMENT.
               </p>
             </div>
           </label>
         ) : (
           <div className="p-3 rounded-lg bg-amber-50 border border-amber-200">
             <p className="text-xs text-amber-700">
-              <strong>No bank account found.</strong> This applicant does not have a registered account. Funds cannot be disbursed automatically.
+              <strong>Aucun compte bancaire trouvé.</strong> Ce demandeur ne possède pas de compte enregistré. Le versement automatique est impossible.
             </p>
           </div>
         )}
@@ -107,9 +107,9 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
         <div className="flex gap-3">
           <Button variant="accent" onClick={handleApprove} loading={loading === "approve"} className="flex-1">
             <ShieldCheck size={14} />
-            Approve{disburse ? " & Disburse" : ""}
+            Approuver{disburse ? " et verser" : ""}
           </Button>
-          <Button variant="ghost" onClick={() => setShowApprove(false)}>Cancel</Button>
+          <Button variant="ghost" onClick={() => setShowApprove(false)}>Annuler</Button>
         </div>
       </div>
     );
@@ -120,12 +120,12 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
     return (
       <div className="p-4 rounded-xl border border-red-200 bg-red-50/50 space-y-3">
         <div className="flex items-center justify-between">
-          <h4 className="text-sm font-semibold text-red-800">Reject Loan - {userName ?? email}</h4>
+          <h4 className="text-sm font-semibold text-red-800">Rejeter le prêt — {userName ?? email}</h4>
           <button onClick={() => setShowReject(false)} className="text-slate-400 hover:text-slate-600"><X size={16} /></button>
         </div>
         {error && <Alert variant="danger" className="!text-xs"><XCircle size={12} className="flex-shrink-0" />{error}</Alert>}
         <textarea
-          placeholder="Explain why the loan application is being rejected..."
+          placeholder="Expliquez pourquoi la demande de prêt est rejetée..."
           value={rejectReason}
           onChange={(e) => setRejectReason(e.target.value)}
           rows={3}
@@ -133,9 +133,9 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
         />
         <div className="flex gap-3">
           <Button variant="danger" onClick={handleReject} loading={loading === "reject"} className="flex-1">
-            <ShieldX size={14} /> Reject Application
+            <ShieldX size={14} /> Rejeter la demande
           </Button>
-          <Button variant="ghost" onClick={() => setShowReject(false)}>Cancel</Button>
+          <Button variant="ghost" onClick={() => setShowReject(false)}>Annuler</Button>
         </div>
       </div>
     );
@@ -147,10 +147,10 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
       {error && <Alert variant="danger" className="!text-xs mb-3"><XCircle size={12} className="flex-shrink-0" />{error}</Alert>}
       <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
         <Button variant="accent" size="sm" onClick={() => { setShowApprove(true); setError(""); }}>
-          <ShieldCheck size={14} /> Approve
+          <ShieldCheck size={14} /> Approuver
         </Button>
         <Button variant="ghost" size="sm" onClick={() => { setShowReject(true); setError(""); }} className="text-red-500 hover:bg-red-50 hover:text-red-600">
-          <ShieldX size={14} /> Reject
+          <ShieldX size={14} /> Rejeter
         </Button>
       </div>
     </div>

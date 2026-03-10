@@ -31,8 +31,8 @@ export default async function AdminLoansPage() {
           <FileText size={20} className="text-accent" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-800 font-heading">Loan Applications</h1>
-          <p className="text-sm text-slate-500">{pending.length} pending review</p>
+          <h1 className="text-xl font-bold text-slate-800 font-heading">Demandes de prêt</h1>
+          <p className="text-sm text-slate-500">{pending.length} en attente de révision</p>
         </div>
       </div>
 
@@ -40,10 +40,10 @@ export default async function AdminLoansPage() {
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
         {[
           { label: "Total", value: loans.length, color: "text-primary" },
-          { label: "Pending", value: pending.length, color: "text-amber-600" },
-          { label: "Approved", value: approved.length, color: "text-emerald-600" },
-          { label: "Rejected", value: rejected.length, color: "text-red-600" },
-          { label: "Approved Volume", value: formatCurrency(totalApproved), color: "text-primary", isText: true },
+          { label: "En attente", value: pending.length, color: "text-amber-600" },
+          { label: "Approuvées", value: approved.length, color: "text-emerald-600" },
+          { label: "Rejetées", value: rejected.length, color: "text-red-600" },
+          { label: "Volume approuvé", value: formatCurrency(totalApproved), color: "text-primary", isText: true },
         ].map((s) => (
           <Card key={s.label}><div className="px-4 py-3">
             <p className="text-[10px] text-slate-400 uppercase tracking-wider">{s.label}</p>
@@ -56,7 +56,7 @@ export default async function AdminLoansPage() {
       {pending.length > 0 && (
         <div className="mb-10">
           <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-4">
-            Pending Review ({pending.length})
+            En attente de révision ({pending.length})
           </h2>
           <div className="space-y-4">
             {pending.map((loan) => (
@@ -70,7 +70,7 @@ export default async function AdminLoansPage() {
         <Card className="mb-10">
           <div className="px-6 py-12 text-center">
             <FileText size={40} className="mx-auto mb-3 text-slate-300" />
-            <p className="text-sm text-slate-500">No pending loan applications</p>
+            <p className="text-sm text-slate-500">Aucune demande de prêt en attente</p>
           </div>
         </Card>
       )}
@@ -79,7 +79,7 @@ export default async function AdminLoansPage() {
       {(approved.length > 0 || rejected.length > 0) && (
         <div>
           <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-4">
-            Review History ({approved.length + rejected.length})
+            Historique des révisions ({approved.length + rejected.length})
           </h2>
           <div className="space-y-4">
             {[...approved, ...rejected]
@@ -112,7 +112,7 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
             </div>
             <div>
               <p className="text-sm font-semibold text-slate-800">
-                {loan.user?.name ?? "Guest Applicant"}
+                {loan.user?.name ?? "Candidat non inscrit"}
               </p>
               <p className="text-xs text-slate-400 flex items-center gap-1">
                 <Mail size={10} /> {loan.email}
@@ -131,15 +131,15 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
 
         {/* Loan Details Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 mb-5">
-          <DetailItem icon={DollarSign} label="Loan Amount" value={formatCurrency(Number(loan.amount))} highlight />
-          <DetailItem icon={Calendar} label="Duration" value={`${loan.durationMonths} months`} />
-          <DetailItem icon={Percent} label="Interest Rate" value={`${Number(loan.interestRate)}% APR`} />
-          <DetailItem icon={Clock} label="Monthly Payment" value={formatCurrency(Number(loan.monthlyPayment))} />
+          <DetailItem icon={DollarSign} label="Montant du prêt" value={formatCurrency(Number(loan.amount))} highlight />
+          <DetailItem icon={Calendar} label="Durée" value={`${loan.durationMonths} mois`} />
+          <DetailItem icon={Percent} label="Taux d'intérêt" value={`${Number(loan.interestRate)}% TAE`} />
+          <DetailItem icon={Clock} label="Mensualité" value={formatCurrency(Number(loan.monthlyPayment))} />
         </div>
 
         {/* Repayment Summary */}
         <div className="flex items-center justify-between p-3 rounded-lg bg-primary/5 border border-primary/10 mb-5">
-          <span className="text-xs text-slate-500">Total Repayment</span>
+          <span className="text-xs text-slate-500">Remboursement total</span>
           <span className="text-sm font-bold text-primary font-heading">
             {formatCurrency(Number(loan.totalRepayment))}
           </span>
@@ -149,11 +149,11 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
         {hasUser && (
           <div className="flex items-center gap-4 text-xs text-slate-400 mb-4">
             <span className="flex items-center gap-1">
-              <User size={10} /> Registered user
+              <User size={10} /> Utilisateur inscrit
             </span>
             {hasAccount && (
               <span className="flex items-center gap-1 text-emerald-600">
-                <DollarSign size={10} /> Has bank account (eligible for disbursement)
+                <DollarSign size={10} /> Possède un compte bancaire (éligible au versement)
               </span>
             )}
           </div>
@@ -161,7 +161,7 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
 
         {!hasUser && (
           <p className="text-xs text-slate-400 mb-4">
-            Guest application - no registered account. Cannot disburse funds automatically.
+            Candidature externe — aucun compte enregistré. Versement automatique impossible.
           </p>
         )}
 
@@ -169,7 +169,7 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
         {loan.adminNote && (
           <div className={`p-3 rounded-lg border mb-4 ${loan.status === "REJECTED" ? "bg-red-50 border-red-100" : "bg-emerald-50 border-emerald-100"}`}>
             <p className={`text-xs font-medium ${loan.status === "REJECTED" ? "text-red-700" : "text-emerald-700"}`}>
-              Admin Note
+              Note admin
             </p>
             <p className={`text-xs mt-0.5 ${loan.status === "REJECTED" ? "text-red-600" : "text-emerald-600"}`}>
               {loan.adminNote}

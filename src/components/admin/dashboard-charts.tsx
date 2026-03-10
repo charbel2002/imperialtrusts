@@ -63,12 +63,12 @@ export function DashboardCharts({ volumeData, txnTypeData, kycData }: Props) {
       {/* === Volume Over Time (Area Chart) === */}
       <Card className="lg:col-span-2">
         <CardHeader>
-          <h3 className="text-sm font-semibold text-slate-800 font-heading">Transaction Volume (30 days)</h3>
+          <h3 className="text-sm font-semibold text-slate-800 font-heading">Volume des transactions (30 jours)</h3>
         </CardHeader>
         <CardBody>
           {volumeData.length === 0 ? (
             <div className="h-64 flex items-center justify-center text-xs text-slate-400">
-              No transaction data in the last 30 days
+              Aucune donnée de transaction sur les 30 derniers jours
             </div>
           ) : (
             <ResponsiveContainer width="100%" height={280}>
@@ -110,12 +110,12 @@ export function DashboardCharts({ volumeData, txnTypeData, kycData }: Props) {
       {/* === KYC Status (Pie Chart) === */}
       <Card>
         <CardHeader>
-          <h3 className="text-sm font-semibold text-slate-800 font-heading">KYC Status</h3>
+          <h3 className="text-sm font-semibold text-slate-800 font-heading">Statut KYC</h3>
         </CardHeader>
         <CardBody>
           {kycData.length === 0 ? (
             <div className="h-64 flex items-center justify-center text-xs text-slate-400">
-              No KYC submissions yet
+              Aucune soumission KYC
             </div>
           ) : (
             <div>
@@ -157,12 +157,12 @@ export function DashboardCharts({ volumeData, txnTypeData, kycData }: Props) {
       {/* === Transaction Types (Bar Chart) === */}
       <Card className="lg:col-span-3">
         <CardHeader>
-          <h3 className="text-sm font-semibold text-slate-800 font-heading">Completed Transactions by Type</h3>
+          <h3 className="text-sm font-semibold text-slate-800 font-heading">Transactions complétées par type</h3>
         </CardHeader>
         <CardBody>
           {txnTypeData.length === 0 ? (
             <div className="h-48 flex items-center justify-center text-xs text-slate-400">
-              No completed transactions yet
+              Aucune transaction complétée
             </div>
           ) : (
             <ResponsiveContainer width="100%" height={240}>
@@ -184,7 +184,7 @@ export function DashboardCharts({ volumeData, txnTypeData, kycData }: Props) {
                   axisLine={false}
                 />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="count" name="Count" radius={[6, 6, 0, 0]} maxBarSize={48}>
+                <Bar dataKey="count" name="Nombre" radius={[6, 6, 0, 0]} maxBarSize={48}>
                   {txnTypeData.map((_, i) => (
                     <Cell key={i} fill={barColors[i % barColors.length]} />
                   ))}

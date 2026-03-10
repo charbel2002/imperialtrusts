@@ -76,7 +76,7 @@ export function AdminTransactionActions({
 
   // ── Handlers ─────────────────────────────────────────────
   async function handleApprove() {
-    if (!confirm(`Approve transfer of ${formatCurrency(amount, currency)} for ${userName}?`)) return;
+    if (!confirm(`Approuver le virement de ${formatCurrency(amount, currency)} pour ${userName} ?`)) return;
     setLoading("approve");
     setError("");
     const r = await adminApproveTransaction(transactionId);
@@ -90,7 +90,7 @@ export function AdminTransactionActions({
   }
 
   async function handleReject() {
-    if (!rejectReason.trim()) { setError("Reason required"); return; }
+    if (!rejectReason.trim()) { setError("Motif requis"); return; }
     setLoading("reject");
     setError("");
     const r = await adminRejectTransaction(transactionId, rejectReason.trim());
@@ -105,7 +105,7 @@ export function AdminTransactionActions({
   }
 
   async function handleAddLock() {
-    if (!lockMotif.trim() || !lockCode.trim()) { setError("Motif and code required"); return; }
+    if (!lockMotif.trim() || !lockCode.trim()) { setError("Motif et code requis"); return; }
     setLoading("lock");
     setError("");
     const r = await adminAddTransactionLock({
@@ -152,7 +152,7 @@ export function AdminTransactionActions({
             <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
               <ShieldX size={12} className="text-red-600" />
             </div>
-            <span className="text-xs font-semibold text-slate-700">Reject {reference}</span>
+            <span className="text-xs font-semibold text-slate-700">Rejeter {reference}</span>
           </div>
           <button onClick={() => { setPanel("actions"); setError(""); }} className="text-slate-400 hover:text-slate-600">
             <X size={14} />
@@ -165,14 +165,14 @@ export function AdminTransactionActions({
           </div>
         )}
         <textarea
-          placeholder="Rejection reason..."
+          placeholder="Motif du rejet..."
           value={rejectReason}
           onChange={(e) => setRejectReason(e.target.value)}
           rows={2}
           className="w-full px-3 py-2 border border-red-200 rounded-lg text-xs resize-none focus:outline-none focus:ring-2 focus:ring-red-300/50 focus:border-red-300 bg-white"
         />
         <Button size="sm" variant="danger" onClick={handleReject} loading={loading === "reject"} className="w-full !text-xs">
-          <ShieldX size={12} /> Reject Transaction
+          <ShieldX size={12} /> Rejeter la transaction
         </Button>
       </div>
     );
@@ -187,7 +187,7 @@ export function AdminTransactionActions({
             <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center">
               <Lock size={12} className="text-amber-600" />
             </div>
-            <span className="text-xs font-semibold text-slate-700">Add Lock — {reference}</span>
+            <span className="text-xs font-semibold text-slate-700">Ajouter un verrou — {reference}</span>
           </div>
           <button onClick={() => { setPanel("actions"); setError(""); }} className="text-slate-400 hover:text-slate-600">
             <X size={14} />
@@ -200,20 +200,20 @@ export function AdminTransactionActions({
           </div>
         )}
         <input
-          placeholder="Motif / Reason..."
+          placeholder="Motif / Raison..."
           value={lockMotif}
           onChange={(e) => setLockMotif(e.target.value)}
           className="w-full px-3 py-2 border border-amber-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-amber-300/50 focus:border-amber-300 bg-white"
         />
         <input
-          placeholder="Security code (e.g. TX-8294)"
+          placeholder="Code de sécurité (ex. TX-8294)"
           value={lockCode}
           onChange={(e) => setLockCode(e.target.value)}
           className="w-full px-3 py-2 border border-amber-200 rounded-lg text-xs font-mono focus:outline-none focus:ring-2 focus:ring-amber-300/50 focus:border-amber-300 bg-white"
         />
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="text-[10px] text-slate-500 font-medium">Checkpoint at</label>
+            <label className="text-[10px] text-slate-500 font-medium">Point de contrôle à</label>
             <span className="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">{lockPercentage}%</span>
           </div>
           <input
@@ -234,7 +234,7 @@ export function AdminTransactionActions({
           </div>
         </div>
         <Button size="sm" className="w-full !text-xs bg-amber-500 hover:bg-amber-600 text-white" onClick={handleAddLock} loading={loading === "lock"}>
-          <Lock size={12} /> Add Lock at {lockPercentage}%
+          <Lock size={12} /> Ajouter un verrou à {lockPercentage}%
         </Button>
       </div>
     );
@@ -266,7 +266,7 @@ export function AdminTransactionActions({
             loading={loading === "approve"}
             className="!text-xs bg-emerald-600 hover:bg-emerald-700 text-white !px-3"
           >
-            <ShieldCheck size={12} /> Approve
+            <ShieldCheck size={12} /> Approuver
           </Button>
         )}
         {canReject && (
@@ -276,7 +276,7 @@ export function AdminTransactionActions({
             onClick={() => { setPanel("reject"); setError(""); }}
             className="!text-xs !border-red-300 !text-red-600 hover:!bg-red-50 !px-3"
           >
-            <ShieldX size={12} /> Reject
+            <ShieldX size={12} /> Rejeter
           </Button>
         )}
         {canLock && (
@@ -286,11 +286,11 @@ export function AdminTransactionActions({
             onClick={() => { setPanel("lock"); setError(""); }}
             className="!text-xs !border-amber-300 !text-amber-700 hover:!bg-amber-50 !px-3"
           >
-            <Lock size={12} /> Lock
+            <Lock size={12} /> Verrou
           </Button>
         )}
         {isTerminal && !hasLocks && (
-          <span className="text-xs text-slate-400 italic">No actions available</span>
+          <span className="text-xs text-slate-400 italic">Aucune action disponible</span>
         )}
       </div>
 
@@ -303,9 +303,9 @@ export function AdminTransactionActions({
           >
             <Lock size={10} />
             <span>
-              {locks.length} lock{locks.length > 1 ? "s" : ""}
+              {locks.length} verrou{locks.length > 1 ? "s" : ""}
               {" "}
-              <span className="text-slate-400">({resolvedCount}/{locks.length} resolved)</span>
+              <span className="text-slate-400">({resolvedCount}/{locks.length} résolus)</span>
             </span>
             {showLocks ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
           </button>
@@ -339,12 +339,12 @@ export function AdminTransactionActions({
                   <button
                     onClick={() => handleCopy(lock.id, lock.securityCode)}
                     className="flex items-center gap-1 px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-slate-300 text-[10px] font-mono text-slate-600 transition-colors"
-                    title="Copy security code"
+                    title="Copier le code de sécurité"
                   >
                     {copiedId === lock.id ? (
                       <>
                         <Check size={10} className="text-emerald-500" />
-                        <span className="text-emerald-600">Copied</span>
+                        <span className="text-emerald-600">Copié</span>
                       </>
                     ) : (
                       <>
@@ -356,7 +356,7 @@ export function AdminTransactionActions({
 
                   {/* Status badge */}
                   <Badge variant={lock.isResolved ? "success" : "warning"} className="!text-[9px] !px-1.5 !py-0.5">
-                    {lock.isResolved ? "Resolved" : "Pending"}
+                    {lock.isResolved ? "Résolu" : "En attente"}
                   </Badge>
                 </div>
               ))}

@@ -26,8 +26,8 @@ export default async function AdminSettingsPage() {
           <Settings size={20} className="text-accent" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-800 font-heading">System Settings</h1>
-          <p className="text-sm text-slate-500">Configure platform behavior and limits</p>
+          <h1 className="text-xl font-bold text-slate-800 font-heading">Paramètres système</h1>
+          <p className="text-sm text-slate-500">Configurer le comportement et les limites de la plateforme</p>
         </div>
       </div>
 

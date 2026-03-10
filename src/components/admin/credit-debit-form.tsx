@@ -30,13 +30,13 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
 
     const numAmount = parseFloat(amount);
     if (isNaN(numAmount) || numAmount <= 0) {
-      setError("Please enter a valid positive amount");
+      setError("Veuillez saisir un montant positif valide");
       setLoading(false);
       return;
     }
 
     if (!description.trim()) {
-      setError("Description is required");
+      setError("La description est requise");
       setLoading(false);
       return;
     }
@@ -54,7 +54,7 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
       setError(result.error);
     } else {
       setSuccess(
-        `Successfully ${mode === "credit" ? "credited" : "debited"} ${formatCurrency(numAmount, currency)} ${mode === "credit" ? "to" : "from"} ${userName}'s account.`
+        `${formatCurrency(numAmount, currency)} ${mode === "credit" ? "crédité(e) avec succès sur" : "débité(e) avec succès du"} compte de ${userName}.`
       );
       setAmount("");
       setDescription("");
@@ -72,7 +72,7 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
             mode === "credit" ? "bg-white text-emerald-700 shadow-sm" : "text-slate-500 hover:text-slate-700"
           )}
         >
-          <Plus size={16} /> Credit
+          <Plus size={16} /> Crédit
         </button>
         <button
           onClick={() => { setMode("debit"); setError(""); setSuccess(""); }}
@@ -81,14 +81,14 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
             mode === "debit" ? "bg-white text-red-700 shadow-sm" : "text-slate-500 hover:text-slate-700"
           )}
         >
-          <Minus size={16} /> Debit
+          <Minus size={16} /> Débit
         </button>
       </div>
 
       {/* Current Balance Note */}
       <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 mb-5">
         <div className="flex items-center justify-between">
-          <span className="text-xs text-slate-500">Current Balance</span>
+          <span className="text-xs text-slate-500">Solde actuel</span>
           <span className="text-sm font-bold text-slate-800">{formatCurrency(currentBalance, currency)}</span>
         </div>
       </div>
@@ -107,7 +107,7 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">
-            Amount ({currency})
+            Montant ({currency})
           </label>
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">$</span>
@@ -125,11 +125,11 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
         </div>
 
         <Input
-          label="Description / Reason"
+          label="Description / Motif"
           placeholder={
             mode === "credit"
-              ? "e.g., Deposit, Bonus, Refund, Loan disbursement..."
-              : "e.g., Correction, Fee deduction, Penalty..."
+              ? "ex. Dépôt, Bonus, Remboursement, Versement de prêt..."
+              : "ex. Correction, Déduction de frais, Pénalité..."
           }
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -143,9 +143,9 @@ export function CreditDebitForm({ accountId, userName, currentBalance, currency 
           className="w-full"
         >
           {mode === "credit" ? (
-            <><Plus size={16} /> Credit {amount ? formatCurrency(parseFloat(amount) || 0, currency) : "Account"}</>
+            <><Plus size={16} /> Créditer {amount ? formatCurrency(parseFloat(amount) || 0, currency) : "le compte"}</>
           ) : (
-            <><Minus size={16} /> Debit {amount ? formatCurrency(parseFloat(amount) || 0, currency) : "Account"}</>
+            <><Minus size={16} /> Débiter {amount ? formatCurrency(parseFloat(amount) || 0, currency) : "le compte"}</>
           )}
         </Button>
       </form>

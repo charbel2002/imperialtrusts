@@ -28,8 +28,8 @@ export function AccountStatusActions({ accountId, currentStatus, userName }: Pro
     if (result.error) {
       setError(result.error);
     } else {
-      const labels = { ACTIVE: "activated", LOCKED: "locked", SUSPENDED: "suspended" };
-      setSuccess(`Account for ${userName} has been ${labels[status]}.`);
+      const labels = { ACTIVE: "activé", LOCKED: "verrouillé", SUSPENDED: "suspendu" };
+      setSuccess(`Le compte de ${userName} a été ${labels[status]}.`);
     }
   }
 
@@ -54,7 +54,7 @@ export function AccountStatusActions({ accountId, currentStatus, userName }: Pro
             onClick={() => handleStatusChange("ACTIVE")}
             loading={loading === "ACTIVE"}
           >
-            <Unlock size={14} /> Activate Account
+            <Unlock size={14} /> Activer le compte
           </Button>
         )}
 
@@ -65,7 +65,7 @@ export function AccountStatusActions({ accountId, currentStatus, userName }: Pro
             onClick={() => handleStatusChange("LOCKED")}
             loading={loading === "LOCKED"}
           >
-            <Lock size={14} /> Lock Account
+            <Lock size={14} /> Verrouiller le compte
           </Button>
         )}
 
@@ -77,15 +77,15 @@ export function AccountStatusActions({ accountId, currentStatus, userName }: Pro
             onClick={() => handleStatusChange("SUSPENDED")}
             loading={loading === "SUSPENDED"}
           >
-            <ShieldOff size={14} /> Suspend Account
+            <ShieldOff size={14} /> Suspendre le compte
           </Button>
         )}
       </div>
 
       <p className="text-xs text-slate-400 mt-3">
-        {currentStatus === "LOCKED" && "Locked accounts cannot perform any transactions."}
-        {currentStatus === "SUSPENDED" && "Suspended accounts are under review. All operations are disabled."}
-        {currentStatus === "ACTIVE" && "Account is fully operational."}
+        {currentStatus === "LOCKED" && "Les comptes verrouillés ne peuvent effectuer aucune transaction."}
+        {currentStatus === "SUSPENDED" && "Les comptes suspendus sont en cours de révision. Toutes les opérations sont désactivées."}
+        {currentStatus === "ACTIVE" && "Le compte est pleinement opérationnel."}
       </p>
     </div>
   );

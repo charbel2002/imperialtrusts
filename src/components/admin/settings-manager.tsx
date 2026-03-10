@@ -31,7 +31,7 @@ interface Props {
 
 // Setting metadata for labels + descriptions + grouping
 const settingMeta: Record<string, { label: string; description: string; group: string }> = {
-  kyc_required: { label: "KYC Required", description: "When enabled, users must complete identity verification before sending funds, creating cards, or managing beneficiaries.", group: "security" },
+  kyc_required: { label: "KYC requis", description: "Lorsqu'activé, les utilisateurs doivent compléter la vérification d'identité avant d'envoyer des fonds, créer des cartes ou gérer les bénéficiaires.", group: "security" },
   platform_name: { label: "Nom de la plateforme", description: "Le nom affiché sur toute la plateforme et dans les e-mails.", group: "platform" },
   platform_tagline: { label: "Slogan", description: "Le slogan affiché à côté du nom de la plateforme.", group: "platform" },
   platform_logo_url: { label: "URL du logo", description: "Chemin ou URL vers le logo de la plateforme. Téléchargez d'abord via /api/upload.", group: "platform" },
@@ -40,18 +40,18 @@ const settingMeta: Record<string, { label: string; description: string; group: s
   platform_address: { label: "Adresse", description: "Adresse physique affichée dans le pied de page et la page de contact.", group: "platform" },
   platform_mail_from: { label: "E-mail d'envoi", description: "Adresse e-mail utilisée comme expéditeur pour les notifications.", group: "platform" },
   platform_mail_name: { label: "Nom de l'expéditeur", description: "Nom affiché dans les e-mails envoyés aux utilisateurs.", group: "platform" },
-  default_currency: { label: "Default Currency", description: "Currency code for new accounts (e.g., USD, EUR, GBP).", group: "general" },
-  transfer_fee_percentage: { label: "Transfer Fee (%)", description: "Percentage fee applied to outgoing transfers.", group: "transactions" },
-  min_transfer_amount: { label: "Min Transfer Amount", description: "Minimum allowed transfer amount.", group: "transactions" },
-  max_transfer_amount: { label: "Max Transfer Amount", description: "Maximum allowed transfer amount per transaction.", group: "transactions" },
+  default_currency: { label: "Devise par défaut", description: "Code devise pour les nouveaux comptes (ex. USD, EUR, GBP).", group: "general" },
+  transfer_fee_percentage: { label: "Frais de virement (%)", description: "Pourcentage de frais appliqué aux virements sortants.", group: "transactions" },
+  min_transfer_amount: { label: "Montant min. de virement", description: "Montant minimum autorisé pour un virement.", group: "transactions" },
+  max_transfer_amount: { label: "Montant max. de virement", description: "Montant maximum autorisé par transaction.", group: "transactions" },
 };
 
 const groups = [
   { id: "platform", label: "Identité de la plateforme", icon: Building2, color: "text-primary" },
-  { id: "security", label: "Security & Verification", icon: Shield, color: "text-amber-600" },
-  { id: "general", label: "General Settings", icon: Globe, color: "text-secondary" },
-  { id: "transactions", label: "Transaction Limits", icon: DollarSign, color: "text-accent" },
-  { id: "custom", label: "Custom Settings", icon: Settings, color: "text-slate-500" },
+  { id: "security", label: "Sécurité et vérification", icon: Shield, color: "text-amber-600" },
+  { id: "general", label: "Paramètres généraux", icon: Globe, color: "text-secondary" },
+  { id: "transactions", label: "Limites de transaction", icon: DollarSign, color: "text-accent" },
+  { id: "custom", label: "Paramètres personnalisés", icon: Settings, color: "text-slate-500" },
 ];
 
 export function SettingsManager({ settings: initial }: Props) {
@@ -92,7 +92,7 @@ export function SettingsManager({ settings: initial }: Props) {
     } else {
       setSettings((prev) => prev.map((s) => (s.key === key ? { ...s, value, updatedAt: new Date().toISOString() } : s)));
       setEditedValues((prev) => { const n = { ...prev }; delete n[key]; return n; });
-      setSuccess(`"${key}" updated successfully`);
+      setSuccess(`"${key}" mis à jour avec succès`);
       setTimeout(() => setSuccess(""), 3000);
     }
   }
@@ -107,13 +107,13 @@ export function SettingsManager({ settings: initial }: Props) {
     if (result.error) setError(result.error);
     else {
       setSettings((prev) => prev.map((s) => (s.key === key ? { ...s, value: newVal, updatedAt: new Date().toISOString() } : s)));
-      setSuccess(`"${key}" ${newVal === "true" ? "enabled" : "disabled"}`);
+      setSuccess(`"${key}" ${newVal === "true" ? "activé" : "désactivé"}`);
       setTimeout(() => setSuccess(""), 3000);
     }
   }
 
   async function handleReset() {
-    if (!confirm("Reset all settings to factory defaults? This will overwrite your current configuration.")) return;
+    if (!confirm("Réinitialiser tous les paramètres par défaut ? Cela écrasera votre configuration actuelle.")) return;
     setResetting(true);
     setError("");
     const result = await resetSettingsToDefaults();
@@ -123,7 +123,7 @@ export function SettingsManager({ settings: initial }: Props) {
   }
 
   async function handleAddSetting() {
-    if (!newKey.trim()) { setError("Key is required"); return; }
+    if (!newKey.trim()) { setError("La clé est requise"); return; }
     setAddLoading(true);
     setError("");
     const result = await createSetting(newKey.trim(), newValue, newType);
@@ -164,10 +164,10 @@ export function SettingsManager({ settings: initial }: Props) {
       {/* Top Actions */}
       <div className="flex flex-wrap gap-3 mb-8">
         <Button size="sm" variant="ghost" onClick={() => setShowAddForm(true)} className="text-secondary">
-          <Plus size={14} /> Add Setting
+          <Plus size={14} /> Ajouter un paramètre
         </Button>
         <Button size="sm" variant="ghost" onClick={handleReset} loading={resetting} className="text-amber-600 hover:bg-amber-50">
-          <RotateCcw size={14} /> Reset to Defaults
+          <RotateCcw size={14} /> Réinitialiser par défaut
         </Button>
       </div>
 
@@ -176,18 +176,18 @@ export function SettingsManager({ settings: initial }: Props) {
         <Card className="mb-6">
           <CardBody>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-slate-800">Add Custom Setting</h3>
+              <h3 className="text-sm font-semibold text-slate-800">Ajouter un paramètre personnalisé</h3>
               <button onClick={() => setShowAddForm(false)} className="text-slate-400 hover:text-slate-600"><X size={16} /></button>
             </div>
             <div className="grid sm:grid-cols-4 gap-4">
               <Input
-                label="Key"
+                label="Clé"
                 placeholder="e.g., maintenance_mode"
                 value={newKey}
                 onChange={(e) => setNewKey(e.target.value.toLowerCase().replace(/[^a-z_]/g, ""))}
               />
               <Input
-                label="Value"
+                label="Valeur"
                 placeholder="Setting value"
                 value={newValue}
                 onChange={(e) => setNewValue(e.target.value)}
@@ -199,15 +199,15 @@ export function SettingsManager({ settings: initial }: Props) {
                   onChange={(e) => setNewType(e.target.value)}
                   className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary"
                 >
-                  <option value="string">String</option>
-                  <option value="boolean">Boolean</option>
-                  <option value="integer">Integer</option>
-                  <option value="float">Float</option>
+                  <option value="string">Texte</option>
+                  <option value="boolean">Booléen</option>
+                  <option value="integer">Entier</option>
+                  <option value="float">Décimal</option>
                 </select>
               </div>
               <div className="flex items-end">
                 <Button onClick={handleAddSetting} loading={addLoading} size="sm" className="w-full">
-                  <Plus size={14} /> Create
+                  <Plus size={14} /> Créer
                 </Button>
               </div>
             </div>
@@ -248,7 +248,7 @@ export function SettingsManager({ settings: initial }: Props) {
                             {meta?.label ?? setting.key}
                           </p>
                           {isCustom && (
-                            <span className="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full">custom</span>
+                            <span className="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full">personnalisé</span>
                           )}
                         </div>
                         {meta?.description && (
@@ -256,7 +256,7 @@ export function SettingsManager({ settings: initial }: Props) {
                         )}
                         <p className="text-[10px] text-slate-400 mt-1">
                           Key: <code className="font-mono bg-slate-100 px-1 rounded">{setting.key}</code>
-                          {" - "}Last updated: {timeAgo(new Date(setting.updatedAt))}
+                          {" - "}Dernière mise à jour : {timeAgo(new Date(setting.updatedAt))}
                         </p>
                       </div>
 

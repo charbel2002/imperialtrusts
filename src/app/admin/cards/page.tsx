@@ -31,8 +31,8 @@ export default async function AdminCardsPage() {
           <CreditCard size={20} className="text-accent" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-800 font-heading">Card Management</h1>
-          <p className="text-sm text-slate-500">{stats.total} cards issued</p>
+          <h1 className="text-xl font-bold text-slate-800 font-heading">Gestion des cartes</h1>
+          <p className="text-sm text-slate-500">{stats.total} cartes émises</p>
         </div>
       </div>
 
@@ -40,10 +40,10 @@ export default async function AdminCardsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
         {[
           { label: "Total", value: stats.total, color: "text-primary" },
-          { label: "Active", value: stats.active, color: "text-emerald-600" },
-          { label: "Frozen", value: stats.frozen, color: "text-blue-600" },
-          { label: "Cancelled", value: stats.cancelled, color: "text-red-600" },
-          { label: "Total Balance", value: formatCurrency(stats.totalBalance), color: "text-primary", isText: true },
+          { label: "Actives", value: stats.active, color: "text-emerald-600" },
+          { label: "Gelées", value: stats.frozen, color: "text-blue-600" },
+          { label: "Annulées", value: stats.cancelled, color: "text-red-600" },
+          { label: "Solde total", value: formatCurrency(stats.totalBalance), color: "text-primary", isText: true },
         ].map((s) => (
           <Card key={s.label}><div className="px-4 py-3">
             <p className="text-[10px] text-slate-400 uppercase tracking-wider">{s.label}</p>
@@ -60,12 +60,12 @@ export default async function AdminCardsPage() {
           <table className="w-full text-sm text-left">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Card</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Balance</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Expires</th>
-                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Created</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Carte</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Utilisateur</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Solde</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Statut</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Expiration</th>
+                <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Créée le</th>
                 <th className="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider"></th>
               </tr>
             </thead>
@@ -124,7 +124,7 @@ export default async function AdminCardsPage() {
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-slate-400">
                     <CreditCard size={40} className="mx-auto mb-3 text-slate-300" />
-                    <p className="text-sm">No cards issued yet</p>
+                    <p className="text-sm">Aucune carte émise</p>
                   </td>
                 </tr>
               )}

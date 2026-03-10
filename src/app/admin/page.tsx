@@ -79,9 +79,9 @@ export default async function AdminDashboardPage() {
   }));
 
   const kycData = [
-    { name: "Approved", value: kycApproved, color: "#10B981" },
-    { name: "Pending", value: kycPending, color: "#F59E0B" },
-    { name: "Rejected", value: kycRejected, color: "#EF4444" },
+    { name: "Approuvés", value: kycApproved, color: "#10B981" },
+    { name: "En attente", value: kycPending, color: "#F59E0B" },
+    { name: "Rejetés", value: kycRejected, color: "#EF4444" },
   ].filter((d) => d.value > 0);
 
   // Group last 30 days transactions by day
@@ -103,8 +103,8 @@ export default async function AdminDashboardPage() {
           <LayoutDashboard size={20} className="text-accent" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-800 font-heading">Admin Dashboard</h1>
-          <p className="text-sm text-slate-500">Platform overview and key metrics</p>
+          <h1 className="text-xl font-bold text-slate-800 font-heading">Tableau de bord</h1>
+          <p className="text-sm text-slate-500">Vue d&apos;ensemble et indicateurs clés</p>
         </div>
       </div>
 
@@ -113,7 +113,7 @@ export default async function AdminDashboardPage() {
         <Alert variant="warning" className="mb-6">
           <AlertTriangle size={18} className="flex-shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="font-medium">Pending review items</p>
+            <p className="font-medium">Éléments en attente de révision</p>
             <div className="flex flex-wrap gap-3 mt-1.5 text-xs">
               {pendingTransactions > 0 && (
                 <Link href="/admin/transactions" className="underline hover:no-underline">
@@ -122,12 +122,12 @@ export default async function AdminDashboardPage() {
               )}
               {kycPending > 0 && (
                 <Link href="/admin/kyc" className="underline hover:no-underline">
-                  {kycPending} KYC submission{kycPending !== 1 ? "s" : ""}
+                  {kycPending} soumission{kycPending !== 1 ? "s" : ""} KYC
                 </Link>
               )}
               {loansPending > 0 && (
                 <Link href="/admin/loans" className="underline hover:no-underline">
-                  {loansPending} loan application{loansPending !== 1 ? "s" : ""}
+                  {loansPending} demande{loansPending !== 1 ? "s" : ""} de prêt
                 </Link>
               )}
             </div>
@@ -137,17 +137,17 @@ export default async function AdminDashboardPage() {
 
       {/* === KPI CARDS === */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-        <StatCard icon={Users} label="Total Users" value={userCount} sub={`${activeAccounts} active`} color="text-primary" />
-        <StatCard icon={DollarSign} label="Platform Balance" value={formatCurrency(platformBalance)} sub={`${lockedAccounts} locked accts`} color="text-emerald-600" />
+        <StatCard icon={Users} label="Utilisateurs" value={userCount} sub={`${activeAccounts} actifs`} color="text-primary" />
+        <StatCard icon={DollarSign} label="Solde plateforme" value={formatCurrency(platformBalance)} sub={`${lockedAccounts} comptes verrouillés`} color="text-emerald-600" />
         <StatCard icon={ArrowUpDown} label="Transactions" value={transactionCount} sub={`${formatCurrency(txnVolume)} volume`} color="text-secondary" />
-        <StatCard icon={TrendingUp} label="Loan Volume" value={formatCurrency(loanVolume)} sub={`${loansApproved} approved`} color="text-accent" />
+        <StatCard icon={TrendingUp} label="Volume de prêts" value={formatCurrency(loanVolume)} sub={`${loansApproved} approuvés`} color="text-accent" />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-        <StatCard icon={CreditCard} label="Cards Issued" value={cardCount} sub={`${activeCards} active`} color="text-primary" />
-        <StatCard icon={Shield} label="KYC Verified" value={kycApproved} sub={`${kycPending} pending`} color="text-emerald-600" />
-        <StatCard icon={Clock} label="Pending Txns" value={pendingTransactions + processingTransactions} sub="awaiting review" color="text-amber-600" />
-        <StatCard icon={UserCheck} label="Active Accounts" value={activeAccounts} sub={`of ${userCount} total`} color="text-secondary" />
+        <StatCard icon={CreditCard} label="Cartes émises" value={cardCount} sub={`${activeCards} actives`} color="text-primary" />
+        <StatCard icon={Shield} label="KYC vérifiés" value={kycApproved} sub={`${kycPending} en attente`} color="text-emerald-600" />
+        <StatCard icon={Clock} label="Txns en attente" value={pendingTransactions + processingTransactions} sub="en attente de révision" color="text-amber-600" />
+        <StatCard icon={UserCheck} label="Comptes actifs" value={activeAccounts} sub={`sur ${userCount} au total`} color="text-secondary" />
       </div>
 
       {/* === CHARTS === */}
@@ -162,14 +162,14 @@ export default async function AdminDashboardPage() {
         {/* Recent Transactions */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-800 font-heading">Recent Completed Transactions</h3>
+            <h3 className="text-sm font-semibold text-slate-800 font-heading">Transactions récentes complétées</h3>
             <Link href="/admin/transactions" className="text-xs text-secondary hover:underline flex items-center gap-1">
-              View all <ArrowRight size={12} />
+              Voir tout <ArrowRight size={12} />
             </Link>
           </CardHeader>
           <div className="divide-y divide-slate-50">
             {recentTransactions.length === 0 ? (
-              <div className="px-6 py-8 text-center text-xs text-slate-400">No completed transactions</div>
+              <div className="px-6 py-8 text-center text-xs text-slate-400">Aucune transaction complétée</div>
             ) : (
               recentTransactions.map((txn) => (
                 <div key={txn.id} className="px-5 py-3 flex items-center justify-between">
@@ -192,14 +192,14 @@ export default async function AdminDashboardPage() {
         {/* Admin Activity Log */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-800 font-heading">Admin Activity</h3>
+            <h3 className="text-sm font-semibold text-slate-800 font-heading">Activité admin</h3>
             <Link href="/admin/logs" className="text-xs text-secondary hover:underline flex items-center gap-1">
-              View all <ArrowRight size={12} />
+              Voir tout <ArrowRight size={12} />
             </Link>
           </CardHeader>
           <div className="divide-y divide-slate-50">
             {recentLogs.length === 0 ? (
-              <div className="px-6 py-8 text-center text-xs text-slate-400">No activity yet</div>
+              <div className="px-6 py-8 text-center text-xs text-slate-400">Aucune activité</div>
             ) : (
               recentLogs.map((log) => (
                 <div key={log.id} className="px-5 py-3 flex items-start gap-3">

@@ -42,8 +42,8 @@ export default async function AdminTransactionsPage() {
           <ArrowUpDown size={20} className="text-accent" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-800 font-heading">Transaction Management</h1>
-          <p className="text-sm text-slate-500">{stats.pending} pending - {stats.locked} locked</p>
+          <h1 className="text-xl font-bold text-slate-800 font-heading">Gestion des transactions</h1>
+          <p className="text-sm text-slate-500">{stats.pending} en attente - {stats.locked} verrouillées</p>
         </div>
       </div>
 
@@ -51,10 +51,10 @@ export default async function AdminTransactionsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
         {[
           { label: "Total", value: stats.total, color: "text-primary" },
-          { label: "Pending", value: stats.pending, color: "text-amber-600" },
-          { label: "Locked", value: stats.locked, color: "text-red-600" },
-          { label: "Completed", value: stats.completed, color: "text-emerald-600" },
-          { label: "Rejected", value: stats.rejected, color: "text-red-500" },
+          { label: "En attente", value: stats.pending, color: "text-amber-600" },
+          { label: "Verrouillées", value: stats.locked, color: "text-red-600" },
+          { label: "Complétées", value: stats.completed, color: "text-emerald-600" },
+          { label: "Rejetées", value: stats.rejected, color: "text-red-500" },
         ].map((s) => (
           <Card key={s.label}><div className="px-4 py-3">
             <p className="text-[10px] text-slate-400 uppercase tracking-wider">{s.label}</p>
@@ -69,12 +69,12 @@ export default async function AdminTransactionsPage() {
           <table className="w-full text-sm text-left">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Reference</th>
-                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">User</th>
+                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Référence</th>
+                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Utilisateur</th>
                 <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Type</th>
-                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Amount</th>
-                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">To</th>
-                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Montant</th>
+                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Destinataire</th>
+                <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Statut</th>
                 <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Date</th>
                 <th className="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
               </tr>
@@ -111,7 +111,7 @@ export default async function AdminTransactionsPage() {
                       <Badge variant={statusVariant(txn.status)}>{txn.status}</Badge>
                       {txn.locks.length > 0 && (
                         <span className="ml-1 text-[9px] text-slate-400">
-                          ({txn.locks.filter((l) => l.isResolved).length}/{txn.locks.length} locks)
+                          ({txn.locks.filter((l) => l.isResolved).length}/{txn.locks.length} verrous)
                         </span>
                       )}
                     </td>
@@ -144,7 +144,7 @@ export default async function AdminTransactionsPage() {
                 <tr>
                   <td colSpan={8} className="px-6 py-12 text-center text-slate-400">
                     <ArrowUpDown size={40} className="mx-auto mb-3 text-slate-300" />
-                    <p className="text-sm">No transactions yet</p>
+                    <p className="text-sm">Aucune transaction</p>
                   </td>
                 </tr>
               )}

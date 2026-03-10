@@ -6,10 +6,10 @@ import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const statusFilters = [
-  { value: "all", label: "All" },
-  { value: "active", label: "Active" },
-  { value: "locked", label: "Locked" },
-  { value: "suspended", label: "Suspended" },
+  { value: "all", label: "Tous" },
+  { value: "active", label: "Actifs" },
+  { value: "locked", label: "Verrouillés" },
+  { value: "suspended", label: "Suspendus" },
 ];
 
 export function UserSearchFilter({
@@ -44,7 +44,7 @@ export function UserSearchFilter({
         <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
         <input
           type="text"
-          placeholder="Search by name, email, or account number..."
+          placeholder="Rechercher par nom, e-mail ou numéro de compte..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg text-sm bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary"

@@ -16,8 +16,8 @@ export function UserToggleActive({ userId, isActive, userName }: Props) {
   const [loading, setLoading] = useState(false);
 
   async function handleToggle() {
-    const action = active ? "deactivate" : "activate";
-    if (!confirm(`Are you sure you want to ${action} ${userName}'s account?`)) return;
+    const action = active ? "désactiver" : "activer";
+    if (!confirm(`Êtes-vous sûr de vouloir ${action} le compte de ${userName} ?`)) return;
 
     setLoading(true);
     const result = await toggleUserActive(userId);
@@ -36,7 +36,7 @@ export function UserToggleActive({ userId, isActive, userName }: Props) {
       loading={loading}
       className={active ? "text-red-500 hover:bg-red-50 hover:text-red-600" : ""}
     >
-      {active ? <><UserX size={16} /> Deactivate User</> : <><UserCheck size={16} /> Activate User</>}
+      {active ? <><UserX size={16} /> Désactiver l&apos;utilisateur</> : <><UserCheck size={16} /> Activer l&apos;utilisateur</>}
     </Button>
   );
 }
