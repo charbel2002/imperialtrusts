@@ -5,6 +5,7 @@ import { useDict } from "@/components/shared/dict-provider";
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { submitKyc } from "@/actions/kyc";
+import { translateActionError } from "@/lib/translate-error";
 import { Input, Textarea, Alert } from "@/components/ui/index";
 import { Button } from "@/components/ui/button";
 import {
@@ -137,7 +138,7 @@ export function KycForm({ defaultValues }: Props) {
     setLoading(false);
 
     if (result.error) {
-      setError(result.error);
+      setError(translateActionError(result.error, dict));
     } else {
       router.refresh();
     }

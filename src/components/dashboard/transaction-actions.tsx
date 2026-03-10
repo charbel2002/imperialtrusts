@@ -4,6 +4,7 @@ import { useDict } from "@/components/shared/dict-provider";
 
 import { useState } from "react";
 import { cancelTransaction } from "@/actions/transactions";
+import { translateActionError } from "@/lib/translate-error";
 import { TransactionProgressTracker } from "./transaction-progress-tracker";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
@@ -53,7 +54,7 @@ export function TransactionActions({
     setError("");
     const result = await cancelTransaction(transactionId);
     setCancelling(false);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
     else setCancelled(true);
   }
 

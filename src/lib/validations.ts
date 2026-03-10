@@ -30,17 +30,17 @@ export const contactSchema = z.object({
 
 export const loanApplicationSchema = z.object({
   email: z.string().email("validation.invalidEmailShort"),
-  amount: z.number().min(500).max(500000),
-  durationMonths: z.number().int().min(3).max(120),
+  amount: z.number().min(500, "validation.loanAmountMin").max(500000, "validation.loanAmountMax"),
+  durationMonths: z.number().int().min(3, "validation.durationMin").max(120, "validation.durationMax"),
   interestRate: z.number().min(0).max(30),
 });
 
 export const beneficiarySchema = z.object({
-  name: z.string().min(2),
-  bankName: z.string().min(2),
-  accountNumber: z.string().min(4),
+  name: z.string().min(2, "validation.nameMin"),
+  bankName: z.string().min(2, "validation.bankNameRequired"),
+  accountNumber: z.string().min(4, "validation.accountNumberMin"),
   swift: z.string().optional(),
-  country: z.string().min(2),
+  country: z.string().min(2, "validation.countryRequired"),
 });
 
 export const transferSchema = z.object({

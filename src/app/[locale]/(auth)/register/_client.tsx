@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { registerUser } from "@/actions/auth";
+import { translateActionError } from "@/lib/translate-error";
 import { Input, Alert } from "@/components/ui/index";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
@@ -29,9 +30,10 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [t, setT] = useState<any>(null);
+  const [fullDict, setFullDict] = useState<any>({});
 
   useEffect(() => {
-    (dicts[locale] || dicts.en)().then(d => setT(d.auth.register));
+    (dicts[locale] || dicts.en)().then(d => { setT(d.auth.register); setFullDict(d); });
   }, [locale]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -42,7 +44,7 @@ export default function RegisterPage() {
     form.set("language", locale);
     const result = await registerUser(form);
     setLoading(false);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, fullDict));
     else router.push(`/${locale}/login?registered=true`);
   }
 

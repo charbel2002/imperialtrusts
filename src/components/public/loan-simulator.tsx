@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { calculateMonthlyPayment, formatCurrency } from "@/lib/utils";
+import { translateActionError } from "@/lib/translate-error";
 import { submitLoanApplication } from "@/actions/loans";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
@@ -27,7 +28,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
     setLoading(true); setError("");
     const result = await submitLoanApplication({ email, amount: numAmount, durationMonths: duration, interestRate: rate });
     setLoading(false);
-    if (result.error) setError(result.error); else { setApplied(true); setShowApply(false); }
+    if (result.error) setError(translateActionError(result.error, dict)); else { setApplied(true); setShowApply(false); }
   }
 
   if (applied) {

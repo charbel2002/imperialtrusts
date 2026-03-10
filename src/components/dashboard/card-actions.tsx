@@ -4,6 +4,7 @@ import { useDict } from "@/components/shared/dict-provider";
 
 import { useState } from "react";
 import { freezeCard, unfreezeCard, fundCard, withdrawFromCard } from "@/actions/cards";
+import { translateActionError } from "@/lib/translate-error";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
 import { formatCurrency } from "@/lib/utils";
@@ -52,7 +53,7 @@ export function CardActions({
     setSuccess("");
     const result = isActive ? await freezeCard(cardId) : await unfreezeCard(cardId);
     setLoading(null);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
     else setSuccess(isActive ? (tc.frozen || "Card frozen") + " v" : (tc.unfreeze || "Card unfrozen") + " v");
   }
 
@@ -64,7 +65,7 @@ export function CardActions({
     setSuccess("");
     const result = await fundCard({ cardId, amount: num });
     setLoading(null);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
     else { setSuccess((tc.addedToCard || "{{amount}} added to card").replace("{{amount}}", formatCurrency(num, currency))); setAmount(""); setShowFund(false); }
   }
 
@@ -76,7 +77,7 @@ export function CardActions({
     setSuccess("");
     const result = await withdrawFromCard({ cardId, amount: num });
     setLoading(null);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
     else { setSuccess((tc.withdrawnToAccount || "{{amount}} withdrawn to account").replace("{{amount}}", formatCurrency(num, currency))); setAmount(""); setShowWithdraw(false); }
   }
 

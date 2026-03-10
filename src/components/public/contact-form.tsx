@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { submitContactForm } from "@/actions/contact";
+import { translateActionError } from "@/lib/translate-error";
 import { Input, Textarea, Alert } from "@/components/ui/index";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
@@ -22,7 +23,7 @@ export function ContactForm({ dict }: { dict: Record<string, any> }) {
       subject: form.get("subject") as string, message: form.get("message") as string,
     });
     setLoading(false);
-    if (result.error) setError(result.error); else setSent(true);
+    if (result.error) setError(translateActionError(result.error, dict)); else setSent(true);
   }
 
   if (sent) {

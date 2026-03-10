@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useDict } from "@/components/shared/dict-provider";
 import { resolveTransactionLock, completeTransaction, updateTransactionProgress } from "@/actions/transactions";
+import { translateActionError } from "@/lib/translate-error";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
 import { formatCurrency } from "@/lib/utils";
@@ -122,7 +123,7 @@ export function TransactionProgressTracker({
     const result = await completeTransaction(transactionId);
     if (result.error) {
       setCompleting(false);
-      setError(result.error);
+      setError(translateActionError(result.error, dict));
     } else {
       // Brief pause so the user registers the finalizing state
       await new Promise((r) => setTimeout(r, 800));
@@ -322,7 +323,7 @@ function LockResolver({
     setLoading(false);
 
     if (result.error) {
-      setLocalError(result.error);
+      setLocalError(translateActionError(result.error, dict));
     } else {
       onResolved(lock.id);
     }

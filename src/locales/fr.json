@@ -668,7 +668,14 @@
     "addressMin": "L'adresse doit contenir au moins 5 caracteres",
     "nationalIdRequired": "Le numero d'identite est requis",
     "accountRequired": "Le compte est requis",
-    "descriptionRequired": "La description est requise"
+    "descriptionRequired": "La description est requise",
+    "loanAmountMin": "Le montant du pret doit etre d'au moins 500 €",
+    "loanAmountMax": "Le montant du pret ne peut pas depasser 500 000 €",
+    "durationMin": "La duree doit etre d'au moins 3 mois",
+    "durationMax": "La duree ne peut pas depasser 120 mois",
+    "bankNameRequired": "Le nom de la banque est requis",
+    "accountNumberMin": "Le numero de compte doit contenir au moins 4 caracteres",
+    "countryRequired": "Le pays est requis"
   },
   "errors": {
     "unauthorized": "Non autorise",
@@ -679,6 +686,30 @@
     "alreadyResolved": "Deja resolu",
     "invalidSecurityCode": "Code de securite invalide",
     "insufficientBalance": "Solde insuffisant",
-    "accountInactive": "Le compte n'est pas actif"
+    "accountInactive": "Le compte n'est pas actif",
+    "emailExists": "Un compte avec cet e-mail existe deja",
+    "userNotFound": "Utilisateur introuvable",
+    "onlyPendingCancel": "Seules les transactions en attente peuvent etre annulees",
+    "lockNotFound": "Verrou introuvable",
+    "txnNotProcessing": "La transaction n'est pas en cours de traitement",
+    "locksNotResolved": "Tous les verrous de securite doivent etre resolus d'abord",
+    "accountMustBeActive": "Votre compte doit etre actif pour envoyer des virements",
+    "kycRequiredTransfers": "Verification KYC requise pour envoyer des fonds",
+    "kycRequiredBeneficiaries": "Verification KYC requise pour gerer les beneficiaires",
+    "beneficiaryDuplicate": "Un beneficiaire avec ce numero de compte et cette banque existe deja",
+    "beneficiaryPendingTxns": "Impossible de supprimer un beneficiaire avec des transactions en cours",
+    "cardNotFound": "Carte introuvable",
+    "cardNotActive": "La carte n'est pas active",
+    "cardNotFrozen": "La carte n'est pas gelee",
+    "cardMustBeActive": "La carte doit etre active pour etre alimentee",
+    "bankAccountMustBeActive": "Votre compte bancaire doit etre actif",
+    "noBankAccount": "Aucun compte bancaire trouve",
+    "kycRequiredCards": "Verification KYC requise pour creer des cartes",
+    "accountMustBeActiveCards": "Votre compte doit etre actif pour creer des cartes",
+    "kycDocsRequired": "Le document d'identite et le selfie sont requis",
+    "kycAlreadyApproved": "Votre KYC est deja approuve",
+    "kycAlreadyPending": "Votre soumission KYC est deja en cours d'examen",
+    "insufficientBalanceDynamic": "Solde insuffisant. Disponible : {{amount}}",
+    "insufficientCardBalanceDynamic": "Solde de carte insuffisant. Disponible : {{amount}}"
   }
 }

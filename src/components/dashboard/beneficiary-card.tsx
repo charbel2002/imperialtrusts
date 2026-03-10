@@ -4,6 +4,7 @@ import { useDict } from "@/components/shared/dict-provider";
 
 import { useState } from "react";
 import { deleteBeneficiary } from "@/actions/beneficiaries";
+import { translateActionError } from "@/lib/translate-error";
 import { BeneficiaryFormModal } from "./beneficiary-form-modal";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
@@ -36,7 +37,7 @@ export function BeneficiaryCard({ beneficiary }: Props) {
     setError("");
     const result = await deleteBeneficiary(beneficiary.id);
     setDeleting(false);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
   }
 
   return (

@@ -5,6 +5,7 @@ import { useDict } from "@/components/shared/dict-provider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { initiateTransfer } from "@/actions/transactions";
+import { translateActionError } from "@/lib/translate-error";
 import { Input, Textarea, Alert } from "@/components/ui/index";
 import { Button } from "@/components/ui/button";
 import { formatCurrency, cn } from "@/lib/utils";
@@ -53,7 +54,7 @@ export function TransferForm({ beneficiaries, maxAmount, currency }: Props) {
     });
     setLoading(false);
 
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
     else setSuccess({ reference: result.reference! });
   }
 

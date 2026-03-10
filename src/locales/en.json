@@ -668,7 +668,14 @@
     "addressMin": "Address must be at least 5 characters",
     "nationalIdRequired": "National ID is required",
     "accountRequired": "Account is required",
-    "descriptionRequired": "Description is required"
+    "descriptionRequired": "Description is required",
+    "loanAmountMin": "Loan amount must be at least €500",
+    "loanAmountMax": "Loan amount cannot exceed €500,000",
+    "durationMin": "Duration must be at least 3 months",
+    "durationMax": "Duration cannot exceed 120 months",
+    "bankNameRequired": "Bank name is required",
+    "accountNumberMin": "Account number must be at least 4 characters",
+    "countryRequired": "Country is required"
   },
   "errors": {
     "unauthorized": "Unauthorized",
@@ -679,6 +686,30 @@
     "alreadyResolved": "Already resolved",
     "invalidSecurityCode": "Invalid security code",
     "insufficientBalance": "Insufficient balance",
-    "accountInactive": "Account is not active"
+    "accountInactive": "Account is not active",
+    "emailExists": "An account with this email already exists",
+    "userNotFound": "User not found",
+    "onlyPendingCancel": "Only pending transactions can be cancelled",
+    "lockNotFound": "Lock not found",
+    "txnNotProcessing": "Transaction is not processing",
+    "locksNotResolved": "All security locks must be resolved first",
+    "accountMustBeActive": "Your account must be active to send transfers",
+    "kycRequiredTransfers": "KYC verification required to send funds",
+    "kycRequiredBeneficiaries": "KYC verification required to manage beneficiaries",
+    "beneficiaryDuplicate": "A beneficiary with this account number and bank already exists",
+    "beneficiaryPendingTxns": "Cannot delete beneficiary with pending transactions",
+    "cardNotFound": "Card not found",
+    "cardNotActive": "Card is not active",
+    "cardNotFrozen": "Card is not frozen",
+    "cardMustBeActive": "Card must be active to fund",
+    "bankAccountMustBeActive": "Your bank account must be active",
+    "noBankAccount": "No bank account found",
+    "kycRequiredCards": "KYC verification required to create cards",
+    "accountMustBeActiveCards": "Your account must be active to create cards",
+    "kycDocsRequired": "Both ID document and selfie are required",
+    "kycAlreadyApproved": "Your KYC is already approved",
+    "kycAlreadyPending": "Your KYC submission is already under review",
+    "insufficientBalanceDynamic": "Insufficient balance. Available: {{amount}}",
+    "insufficientCardBalanceDynamic": "Insufficient card balance. Available: {{amount}}"
   }
 }

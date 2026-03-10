@@ -4,6 +4,7 @@ import { useDict } from "@/components/shared/dict-provider";
 
 import { useState } from "react";
 import { createCard } from "@/actions/cards";
+import { translateActionError } from "@/lib/translate-error";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
 import { cn } from "@/lib/utils";
@@ -24,7 +25,7 @@ export function CreateCardModal() {
     setError("");
     const result = await createCard(cardType);
     setLoading(false);
-    if (result.error) setError(result.error);
+    if (result.error) setError(translateActionError(result.error, dict));
     else { setSuccess(true); setTimeout(() => { setOpen(false); setSuccess(false); }, 1500); }
   }
 

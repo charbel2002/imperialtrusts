@@ -4,6 +4,7 @@ import { useDict } from "@/components/shared/dict-provider";
 
 import { useState } from "react";
 import { createBeneficiary, updateBeneficiary } from "@/actions/beneficiaries";
+import { translateActionError } from "@/lib/translate-error";
 import { Input, Alert } from "@/components/ui/index";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -60,7 +61,7 @@ export function BeneficiaryFormModal({ mode, defaultValues, onClose, onSuccess }
     setLoading(false);
 
     if (result.error) {
-      setError(result.error);
+      setError(translateActionError(result.error, dict));
     } else {
       onSuccess();
     }
