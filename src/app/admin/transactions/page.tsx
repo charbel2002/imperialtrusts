@@ -126,8 +126,15 @@ export default async function AdminTransactionsPage() {
                         userName={txn.user.name}
                         amount={Number(txn.amount)}
                         currency={txn.currency}
-                        maxLockPercentage={txn.locks.length > 0 ? Math.max(...txn.locks.map((l) => l.percentage)) : 0}
                         currentProgress={txn.progress}
+                        locks={txn.locks.map((l) => ({
+                          id: l.id,
+                          motif: l.motif,
+                          securityCode: l.securityCode,
+                          percentage: l.percentage,
+                          isResolved: l.isResolved,
+                          createdAt: l.createdAt,
+                        }))}
                       />
                     </td>
                   </tr>
