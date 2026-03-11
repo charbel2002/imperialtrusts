@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { formatCurrency } from "@/lib/utils";
 import { Badge, Card, CardBody } from "@/components/ui/index";
 import { AdminLoanActions } from "@/components/admin/admin-loan-actions";
-import { FileText, DollarSign, Clock, Calendar, Percent, Mail, Phone, User } from "lucide-react";
+import { FileText, Euro, Clock, Calendar, Percent, Mail, Phone, User } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Demandes de prêt" };
@@ -136,7 +136,7 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
 
         {/* Loan Details Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 mb-5">
-          <DetailItem icon={DollarSign} label="Montant du prêt" value={formatCurrency(Number(loan.amount))} highlight />
+          <DetailItem icon={Euro} label="Montant du prêt" value={formatCurrency(Number(loan.amount))} highlight />
           <DetailItem icon={Calendar} label="Durée" value={`${loan.durationMonths} mois`} />
           <DetailItem icon={Percent} label="Taux d'intérêt" value={`${Number(loan.interestRate)}% TAE`} />
           <DetailItem icon={Clock} label="Mensualité" value={formatCurrency(Number(loan.monthlyPayment))} />
@@ -158,7 +158,7 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
             </span>
             {hasAccount && (
               <span className="flex items-center gap-1 text-emerald-600">
-                <DollarSign size={10} /> Possède un compte bancaire (éligible au versement)
+                <Euro size={10} /> Possède un compte bancaire (éligible au versement)
               </span>
             )}
           </div>

@@ -45,7 +45,7 @@ export async function registerUser(formData: FormData) {
         create: {
           accountNumber: generateAccountNumber(),
           balance: 0,
-          currency: "USD",
+          currency: "EUR",
           status: "ACTIVE",
         },
       },

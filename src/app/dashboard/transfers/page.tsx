@@ -46,7 +46,7 @@ export default async function TransfersPage() {
           {beneficiaries.length === 0 ? (
             <div className="text-center py-8"><p className="text-sm text-slate-500 mb-4">{t.noBeneficiaries}</p>
             <Link href={`/dashboard/beneficiaries`} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium">{t.addBeneficiary}</Link></div>
-          ) : (<TransferForm beneficiaries={beneficiaries.map((b) => ({ id: b.id, name: b.name, bankName: b.bankName, accountNumber: b.accountNumber, country: b.country }))} maxAmount={Number(user?.account?.balance ?? 0)} currency={user?.account?.currency ?? "USD"} />)}
+          ) : (<TransferForm beneficiaries={beneficiaries.map((b) => ({ id: b.id, name: b.name, bankName: b.bankName, accountNumber: b.accountNumber, country: b.country }))} maxAmount={Number(user?.account?.balance ?? 0)} currency={user?.account?.currency ?? "EUR"} />)}
         </CardBody></Card>
       )}
     </div>

@@ -90,7 +90,7 @@ export function DashboardCharts({ volumeData, txnTypeData, kycData }: Props) {
                   tick={{ fontSize: 10, fill: "#94a3b8" }}
                   tickLine={false}
                   axisLine={false}
-                  tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
+                  tickFormatter={(v) => `€${(v / 1000).toFixed(0)}k`}
                 />
                 <Tooltip content={<CustomTooltip />} />
                 <Area

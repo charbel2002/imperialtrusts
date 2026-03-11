@@ -72,7 +72,7 @@ export default async function DashboardPage() {
         <div className="col-span-1 md:col-span-2 rounded-xl bg-gradient-to-br from-primary to-secondary-700 text-white p-8">
           <p className="text-sm text-slate-300 mb-1">{t.balance || "Available Balance"}</p>
           <h2 className="text-3xl font-bold font-heading tracking-tight">
-            {formatCurrency(Number(account?.balance ?? 0), account?.currency ?? "USD")}
+            {formatCurrency(Number(account?.balance ?? 0), account?.currency ?? "EUR")}
           </h2>
           <div className="mt-4 flex items-center gap-3 text-sm text-slate-300">
             <span>{t.account || "Account"}: {account?.accountNumber ?? "-"}</span>

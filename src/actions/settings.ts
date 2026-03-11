@@ -141,7 +141,7 @@ export async function resetSettingsToDefaults() {
     platform_address: { value: "350 Fifth Avenue, Suite 3200, New York, NY 10118", type: "string" },
     platform_mail_from: { value: "noreply@bankvault.com", type: "string" },
     platform_mail_name: { value: "BankVault Notifications", type: "string" },
-    default_currency: { value: "USD", type: "string" },
+    default_currency: { value: "EUR", type: "string" },
     transfer_fee_percentage: { value: "0.5", type: "float" },
     min_transfer_amount: { value: "1", type: "float" },
     max_transfer_amount: { value: "50000", type: "float" },

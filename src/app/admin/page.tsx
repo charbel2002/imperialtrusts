@@ -6,7 +6,7 @@ import { DashboardCharts } from "@/components/admin/dashboard-charts";
 import {
   LayoutDashboard, Users, Wallet, CreditCard, ArrowUpDown,
   Shield, FileText, AlertTriangle, ArrowRight, Clock,
-  TrendingUp, DollarSign, UserCheck, Activity,
+  TrendingUp, Euro, UserCheck, Activity,
 } from "lucide-react";
 
 export default async function AdminDashboardPage() {
@@ -138,7 +138,7 @@ export default async function AdminDashboardPage() {
       {/* === KPI CARDS === */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <StatCard icon={Users} label="Utilisateurs" value={userCount} sub={`${activeAccounts} actifs`} color="text-primary" />
-        <StatCard icon={DollarSign} label="Solde plateforme" value={formatCurrency(platformBalance)} sub={`${lockedAccounts} comptes verrouillés`} color="text-emerald-600" />
+        <StatCard icon={Euro} label="Solde plateforme" value={formatCurrency(platformBalance)} sub={`${lockedAccounts} comptes verrouillés`} color="text-emerald-600" />
         <StatCard icon={ArrowUpDown} label="Transactions" value={transactionCount} sub={`${formatCurrency(txnVolume)} volume`} color="text-secondary" />
         <StatCard icon={TrendingUp} label="Volume de prêts" value={formatCurrency(loanVolume)} sub={`${loansApproved} approuvés`} color="text-accent" />
       </div>
@@ -175,7 +175,7 @@ export default async function AdminDashboardPage() {
                 <div key={txn.id} className="px-5 py-3 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                      <DollarSign size={14} />
+                      <Euro size={14} />
                     </div>
                     <div>
                       <p className="text-xs font-medium text-slate-700">{txn.user.name}</p>

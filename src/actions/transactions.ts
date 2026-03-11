@@ -54,7 +54,7 @@ export async function initiateTransfer(data: {
     return { error: "Your account must be active to send transfers" };
   }
   if (Number(user.account.balance) < data.amount) {
-    return { error: `Insufficient balance. Available: $${Number(user.account.balance).toFixed(2)}` };
+    return { error: `Insufficient balance. Available: €${Number(user.account.balance).toFixed(2)}` };
   }
 
   const beneficiary = await prisma.beneficiary.findFirst({
@@ -82,7 +82,7 @@ export async function initiateTransfer(data: {
       userId: session.user.id,
       title: nd1.transferInitiated || "Transfer Initiated",
       message: (nd1.transferInitiatedMsg || "Your transfer of {{amount}} to {{name}} has been submitted. Reference: {{ref}}")
-        .replace("{{amount}}", `$${data.amount.toFixed(2)}`).replace("{{name}}", beneficiary.name).replace("{{ref}}", transaction.reference),
+        .replace("{{amount}}", `€${data.amount.toFixed(2)}`).replace("{{name}}", beneficiary.name).replace("{{ref}}", transaction.reference),
       type: "info",
     },
   });
@@ -90,7 +90,7 @@ export async function initiateTransfer(data: {
   // Email the user
   await sendTransferInitiatedEmail({
     to: session.user.email!,
-    amount: `$${data.amount.toFixed(2)}`,
+    amount: `€${data.amount.toFixed(2)}`,
     beneficiaryName: beneficiary.name,
     reference: transaction.reference,
     lang: user.language,
@@ -166,7 +166,7 @@ export async function completeTransaction(transactionId: string) {
         userId: txn.userId,
         title: nd2.transferCompleted || "Transfer Completed",
         message: (nd2.transferCompletedMsg || "Your transfer of {{amount}} to {{name}} has been completed. Reference: {{ref}}")
-          .replace("{{amount}}", `$${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{ref}}", txn.reference),
+          .replace("{{amount}}", `€${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{ref}}", txn.reference),
         type: "success",
       },
     }),
@@ -176,7 +176,7 @@ export async function completeTransaction(transactionId: string) {
   const completedUser = await prisma.user.findUnique({ where: { id: txn.userId }, select: { language: true } });
   await sendTransferCompletedEmail({
     to: session.user.email!,
-    amount: `$${Number(txn.amount).toFixed(2)}`,
+    amount: `€${Number(txn.amount).toFixed(2)}`,
     beneficiaryName: txn.beneficiary?.name ?? "recipient",
     reference: txn.reference,
     lang: completedUser?.language,
@@ -241,7 +241,7 @@ export async function adminApproveTransaction(transactionId: string) {
   if (!txn) return { error: "Transaction not found" };
   if (txn.status !== "PENDING") return { error: "Only pending transactions can be approved" };
   if (Number(txn.account.balance) < Number(txn.amount)) {
-    return { error: `Insufficient balance. Available: $${Number(txn.account.balance).toFixed(2)}` };
+    return { error: `Insufficient balance. Available: €${Number(txn.account.balance).toFixed(2)}` };
   }
 
   const nd3 = await getNotifDict(txn.userId);
@@ -258,15 +258,15 @@ export async function adminApproveTransaction(transactionId: string) {
         title: hasLocks ? (nd3.transferApprovedLocks || "Transfer Approved - Verification Required") : (nd3.transferCompleted || "Transfer Completed"),
         message: hasLocks
           ? (nd3.transferApprovedLocksMsg || "Your transfer of {{amount}} to {{name}} has been approved but requires verification. Reference: {{ref}}")
-              .replace("{{amount}}", `$${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{ref}}", txn.reference)
+              .replace("{{amount}}", `€${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{ref}}", txn.reference)
           : (nd3.transferCompletedMsg || "Your transfer of {{amount}} to {{name}} has been completed. Reference: {{ref}}")
-              .replace("{{amount}}", `$${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{ref}}", txn.reference),
+              .replace("{{amount}}", `€${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{ref}}", txn.reference),
         type: hasLocks ? "info" : "success",
       },
     }),
     prisma.adminLog.create({
       data: { adminId: session.user.id, action: "TRANSACTION_APPROVED", targetType: "Transaction", targetId: transactionId,
-        description: `Approved transfer $${Number(txn.amount).toFixed(2)} for ${txn.user.name}. Ref: ${txn.reference}` },
+        description: `Approved transfer €${Number(txn.amount).toFixed(2)} for ${txn.user.name}. Ref: ${txn.reference}` },
     }),
   ];
   if (!hasLocks) ops.push(prisma.account.update({ where: { id: txn.accountId }, data: { balance: { decrement: Number(txn.amount) } } }));
@@ -275,7 +275,7 @@ export async function adminApproveTransaction(transactionId: string) {
   // Email the user
   await sendTransferApprovedEmail({
     to: txn.user.email,
-    amount: `$${Number(txn.amount).toFixed(2)}`,
+    amount: `€${Number(txn.amount).toFixed(2)}`,
     beneficiaryName: txn.beneficiary?.name ?? "recipient",
     reference: txn.reference,
     hasLocks,
@@ -302,7 +302,7 @@ export async function adminRejectTransaction(transactionId: string, reason: stri
     prisma.transaction.update({ where: { id: transactionId }, data: { status: "REJECTED", adminNote: reason, processedAt: new Date() } }),
     prisma.notification.create({ data: { userId: txn.userId, title: nd4.transferRejected || "Transfer Rejected",
       message: (nd4.transferRejectedMsg || "Your transfer of {{amount}} to {{name}} was rejected. Reason: {{reason}}")
-        .replace("{{amount}}", `$${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{reason}}", reason), type: "danger" } }),
+        .replace("{{amount}}", `€${Number(txn.amount).toFixed(2)}`).replace("{{name}}", txn.beneficiary?.name ?? "recipient").replace("{{reason}}", reason), type: "danger" } }),
     prisma.adminLog.create({ data: { adminId: session.user.id, action: "TRANSACTION_REJECTED", targetType: "Transaction", targetId: transactionId,
       description: `Rejected transfer for ${txn.user.name}. Ref: ${txn.reference}. Reason: ${reason}` } }),
   ]);
@@ -310,7 +310,7 @@ export async function adminRejectTransaction(transactionId: string, reason: stri
   // Email the user
   await sendTransferRejectedEmail({
     to: txn.user.email,
-    amount: `$${Number(txn.amount).toFixed(2)}`,
+    amount: `€${Number(txn.amount).toFixed(2)}`,
     beneficiaryName: txn.beneficiary?.name ?? "recipient",
     reference: txn.reference,
     reason,

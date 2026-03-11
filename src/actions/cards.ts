@@ -287,7 +287,7 @@ export async function adminCancelCard(cardId: string) {
     to: card.user.email,
     cardType: card.cardType,
     lastFour: card.cardNumber.slice(-4),
-    balanceReturned: cardBalance > 0 ? `$${cardBalance.toFixed(2)}` : null,
+    balanceReturned: cardBalance > 0 ? `€${cardBalance.toFixed(2)}` : null,
     lang: card.user.language,
   });
 

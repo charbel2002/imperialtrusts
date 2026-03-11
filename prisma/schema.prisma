@@ -47,7 +47,7 @@ model Account {
   accountNumber String        @unique @map("account_number")
   iban          String?       @unique
   balance       Decimal       @default(0) @db.Decimal(16, 2)
-  currency      String        @default("USD") @db.VarChar(3)
+  currency      String        @default("EUR") @db.VarChar(3)
   status        AccountStatus @default(ACTIVE)
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @updatedAt @map("updated_at")
@@ -123,7 +123,7 @@ model Transaction {
   beneficiaryId String?           @map("beneficiary_id")
   type          TransactionType
   amount        Decimal           @db.Decimal(16, 2)
-  currency      String            @default("USD") @db.VarChar(3)
+  currency      String            @default("EUR") @db.VarChar(3)
   description   String?           @db.Text
   reference     String            @unique
   status        TransactionStatus @default(INITIALIZED)

@@ -80,7 +80,7 @@ export default async function CardsPage() {
                   <div><p className="text-xs text-slate-400 uppercase tracking-wider">{card.cardType} - **** {card.cardNumber.slice(-4)}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{formatCurrency(Number(card.balance), account?.currency)}</p></div>
                   <Badge variant={card.status === "ACTIVE" ? "success" : card.status === "FROZEN" ? "info" : card.status === "CANCELLED" ? "danger" : "neutral"}>{(tc as any)[card.status.toLowerCase()] || card.status}</Badge>
                 </div>
-                <CardActions cardId={card.id} cardStatus={card.status} cardLast4={card.cardNumber.slice(-4)} cardBalance={Number(card.balance)} accountBalance={Number(account?.balance ?? 0)} cvv={card.cvv} currency={account?.currency ?? "USD"} />
+                <CardActions cardId={card.id} cardStatus={card.status} cardLast4={card.cardNumber.slice(-4)} cardBalance={Number(card.balance)} accountBalance={Number(account?.balance ?? 0)} cvv={card.cvv} currency={account?.currency ?? "EUR"} />
               </CardBody></Card>
             </div>
           ))}

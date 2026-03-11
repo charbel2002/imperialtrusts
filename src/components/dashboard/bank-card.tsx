@@ -29,7 +29,7 @@ export function BankCard({
   holderName,
   expirationDate,
   balance,
-  currency = "USD",
+  currency = "EUR",
   status,
   showFull = false,
   size = "md",

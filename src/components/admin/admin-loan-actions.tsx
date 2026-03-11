@@ -7,7 +7,7 @@ import { Alert } from "@/components/ui/index";
 import { formatCurrency } from "@/lib/utils";
 import {
   CheckCircle, XCircle, X, ShieldCheck, ShieldX,
-  Banknote, DollarSign,
+  Banknote, Euro,
 } from "lucide-react";
 
 interface Props {

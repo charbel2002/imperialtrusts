@@ -92,7 +92,7 @@ export async function adminApproveLoan(loanId: string, disburse: boolean) {
         action: "LOAN_APPROVED",
         targetType: "LoanApplication",
         targetId: loanId,
-        description: `Approved loan of $${Number(loan.amount).toFixed(2)} for ${loan.email}${disburse ? " with disbursement" : ""}`,
+        description: `Approved loan of €${Number(loan.amount).toFixed(2)} for ${loan.email}${disburse ? " with disbursement" : ""}`,
       },
     }),
   ];
@@ -121,7 +121,7 @@ export async function adminApproveLoan(loanId: string, disburse: boolean) {
         data: {
           userId: loan.user.id,
           title: "Loan Approved & Disbursed",
-          message: `Your loan of $${Number(loan.amount).toFixed(2)} has been approved and disbursed to your account. Monthly payment: $${Number(loan.monthlyPayment).toFixed(2)} for ${loan.durationMonths} months.`,
+          message: `Your loan of €${Number(loan.amount).toFixed(2)} has been approved and disbursed to your account. Monthly payment: €${Number(loan.monthlyPayment).toFixed(2)} for ${loan.durationMonths} months.`,
           type: "success",
         },
       })

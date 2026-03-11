@@ -359,7 +359,7 @@
     "unfreeze": "Unfreeze",
     "createTitle": "Create Virtual Card",
     "createDesc": "Choose your card network. Your virtual card will be created instantly.",
-    "createInfo": "Card will be created with $0.00 balance. You can fund it from your bank account after creation.",
+    "createInfo": "Card will be created with €0.00 balance. You can fund it from your bank account after creation.",
     "cardCreated": "Card Created!",
     "createBtn": "Create {{type}} Card",
     "cardReadyMsg": "Your new {{type}} card is ready."
@@ -443,7 +443,7 @@
     "kycRequiredDesc": "Nejprve ověřte identitu.",
     "createTitle": "Vytvořit virtuální kartu",
     "createDesc": "Vyberte síť.",
-    "createInfo": "Karta s $0.00.",
+    "createInfo": "Karta s €0.00.",
     "fund": "Dobít",
     "withdraw": "Vybrat",
     "freeze": "Zmrazit",

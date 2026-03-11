@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input, Alert, Card, CardBody, CardHeader } from "@/components/ui/index";
 import { cn, timeAgo } from "@/lib/utils";
 import {
-  Settings, Shield, DollarSign, Globe, Plus, Trash2,
+  Settings, Shield, Euro, Globe, Plus, Trash2,
   Save, RotateCcw, CheckCircle, XCircle, X, AlertTriangle,
   ToggleLeft, ToggleRight, Building2,
 } from "lucide-react";
@@ -50,7 +50,7 @@ const groups = [
   { id: "platform", label: "Identité de la plateforme", icon: Building2, color: "text-primary" },
   { id: "security", label: "Sécurité et vérification", icon: Shield, color: "text-amber-600" },
   { id: "general", label: "Paramètres généraux", icon: Globe, color: "text-secondary" },
-  { id: "transactions", label: "Limites de transaction", icon: DollarSign, color: "text-accent" },
+  { id: "transactions", label: "Limites de transaction", icon: Euro, color: "text-accent" },
   { id: "custom", label: "Paramètres personnalisés", icon: Settings, color: "text-slate-500" },
 ];
 

@@ -170,7 +170,7 @@ export async function adminCreditAccount(data: {
   await sendAccountCreditedEmail({
     to: account.user.email,
     name: account.user.name ?? "Customer",
-    amount: `$${data.amount.toFixed(2)}`,
+    amount: `€${data.amount.toFixed(2)}`,
     description: data.description,
     lang: account.user.language,
   });
@@ -249,7 +249,7 @@ export async function adminDebitAccount(data: {
   await sendAccountDebitedEmail({
     to: account.user.email,
     name: account.user.name ?? "Customer",
-    amount: `$${data.amount.toFixed(2)}`,
+    amount: `€${data.amount.toFixed(2)}`,
     description: data.description,
     lang: account.user.language,
   });

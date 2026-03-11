@@ -21,7 +21,7 @@ async function main() {
         create: {
           accountNumber: "BNK" + Math.random().toString().slice(2, 12),
           balance: 0,
-          currency: "USD",
+          currency: "EUR",
           status: AccountStatus.ACTIVE,
         },
       },
@@ -45,7 +45,7 @@ async function main() {
         create: {
           accountNumber: "BNK" + Math.random().toString().slice(2, 12),
           balance: 5000.0,
-          currency: "USD",
+          currency: "EUR",
           status: AccountStatus.ACTIVE,
         },
       },
@@ -63,7 +63,7 @@ async function main() {
     { key: "platform_address", value: "350 Fifth Avenue, Suite 3200, New York, NY 10118", type: "string" },
     { key: "platform_mail_from", value: "noreply@bankvault.com", type: "string" },
     { key: "platform_mail_name", value: "BankVault Notifications", type: "string" },
-    { key: "default_currency", value: "USD", type: "string" },
+    { key: "default_currency", value: "EUR", type: "string" },
     { key: "transfer_fee_percentage", value: "0.5", type: "float" },
     { key: "min_transfer_amount", value: "1", type: "float" },
     { key: "max_transfer_amount", value: "50000", type: "float" },
