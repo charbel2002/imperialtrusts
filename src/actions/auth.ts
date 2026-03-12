@@ -17,6 +17,7 @@ export async function registerUser(formData: FormData) {
   };
 
   const language = (formData.get("language") as string) || "en";
+  const currency = (formData.get("currency") as string) || "EUR";
 
   const validated = registerSchema.safeParse(raw);
   if (!validated.success) {
@@ -45,7 +46,7 @@ export async function registerUser(formData: FormData) {
         create: {
           accountNumber: generateAccountNumber(),
           balance: 0,
-          currency: "EUR",
+          currency: currency,
           status: "ACTIVE",
         },
       },

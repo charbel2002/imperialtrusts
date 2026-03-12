@@ -4,6 +4,7 @@ import { formatCurrency, timeAgo, formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { Badge, Card, CardBody, CardHeader } from "@/components/ui/index";
 import { AccountStatusActions } from "@/components/admin/account-status-actions";
+import { AccountCurrencyActions } from "@/components/admin/account-currency-actions";
 import { CreditDebitForm } from "@/components/admin/credit-debit-form";
 import { UserToggleActive } from "@/components/admin/user-toggle-active";
 import {
@@ -117,6 +118,15 @@ export default async function AdminUserDetailPage({
                     <AccountStatusActions
                       accountId={account.id}
                       currentStatus={account.status}
+                      userName={user.name}
+                    />
+                  </div>
+
+                  {/* Account Currency Actions */}
+                  <div className="pt-5 border-t border-slate-100">
+                    <AccountCurrencyActions
+                      accountId={account.id}
+                      currentCurrency={account.currency}
                       userName={user.name}
                     />
                   </div>

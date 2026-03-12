@@ -48,7 +48,12 @@
       "submit": "Konto erstellen",
       "creating": "Wird erstellt...",
       "hasAccount": "Bereits ein Konto?",
-      "signIn": "Anmelden"
+      "signIn": "Anmelden",
+      "currency": "Kontowährung",
+      "selectCurrency": "Wählen Sie Ihre bevorzugte Währung",
+      "euro": "Euro (EUR)",
+      "usd": "US-Dollar (USD)",
+      "chf": "Schweizer Franken (CHF)"
     },
     "forgotPassword": {
       "title": "Passwort zurücksetzen",
@@ -215,7 +220,9 @@
     "infoReview": "Schnelle Prüfung",
     "infoReviewDesc": "Unser Team prüft Anträge innerhalb von 24 Stunden.",
     "phoneLabel": "WhatsApp / Telefonnummer",
-    "phonePlaceholder": "+49 170 1234567"
+    "phonePlaceholder": "+49 170 1234567",
+    "currencyLabel": "Währung",
+    "selectCurrency": "Währung wählen"
   },
   "legal": {
     "title": "Rechtliche Hinweise",

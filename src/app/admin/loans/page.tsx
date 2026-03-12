@@ -136,17 +136,17 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
 
         {/* Loan Details Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 mb-5">
-          <DetailItem icon={Euro} label="Montant du prêt" value={formatCurrency(Number(loan.amount))} highlight />
+          <DetailItem icon={Euro} label="Montant du prêt" value={formatCurrency(Number(loan.amount), loan.currency ?? "EUR")} highlight />
           <DetailItem icon={Calendar} label="Durée" value={`${loan.durationMonths} mois`} />
           <DetailItem icon={Percent} label="Taux d'intérêt" value={`${Number(loan.interestRate)}% TAE`} />
-          <DetailItem icon={Clock} label="Mensualité" value={formatCurrency(Number(loan.monthlyPayment))} />
+          <DetailItem icon={Clock} label="Mensualité" value={formatCurrency(Number(loan.monthlyPayment), loan.currency ?? "EUR")} />
         </div>
 
         {/* Repayment Summary */}
         <div className="flex items-center justify-between p-3 rounded-lg bg-primary/5 border border-primary/10 mb-5">
           <span className="text-xs text-slate-500">Remboursement total</span>
           <span className="text-sm font-bold text-primary font-heading">
-            {formatCurrency(Number(loan.totalRepayment))}
+            {formatCurrency(Number(loan.totalRepayment), loan.currency ?? "EUR")}
           </span>
         </div>
 
@@ -188,6 +188,7 @@ function LoanCard({ loan, showActions = true }: { loan: any; showActions?: boole
             loanId={loan.id}
             email={loan.email}
             amount={Number(loan.amount)}
+            currency={loan.currency ?? "EUR"}
             hasAccount={hasAccount}
             userName={loan.user?.name}
           />

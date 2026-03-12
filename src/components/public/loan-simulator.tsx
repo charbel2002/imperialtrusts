@@ -7,6 +7,7 @@ import { submitLoanApplication } from "@/actions/loans";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/index";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { SUPPORTED_CURRENCIES, CURRENCY_SYMBOLS, type SupportedCurrency } from "@/lib/currencies";
 
 export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   const t = dict.loanSim;
@@ -19,6 +20,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   const [applied, setApplied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [currency, setCurrency] = useState<SupportedCurrency>("EUR");
 
   const numAmount = typeof amount === "number" ? amount : 0;
   const monthly = calculateMonthlyPayment(numAmount, duration, rate);
@@ -27,7 +29,7 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
 
   async function handleApply() {
     setLoading(true); setError("");
-    const result = await submitLoanApplication({ email, phone, amount: numAmount, durationMonths: duration, interestRate: rate, locale: dict._locale });
+    const result = await submitLoanApplication({ email, phone, amount: numAmount, durationMonths: duration, interestRate: rate, currency, locale: dict._locale });
     setLoading(false);
     if (result.error) setError(translateActionError(result.error, dict)); else { setApplied(true); setShowApply(false); }
   }
@@ -47,7 +49,18 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
   return (
     <div className="grid lg:grid-cols-5 gap-10">
       <div className="lg:col-span-3 space-y-8">
-        <SliderField label={t.amount} prefix="€" value={numAmount} onChange={(v) => setAmount(v)} min={500} max={500000} step={500} color="#1E40AF" rawValue={amount === "" ? "" : undefined} onRawChange={(raw) => { if (raw === "") setAmount(""); else setAmount(Number(raw)); }} />
+        <div>
+          <label className="text-sm font-medium text-slate-700 mb-2 block">{t.currencyLabel || "Currency"}</label>
+          <div className="flex gap-2">
+            {SUPPORTED_CURRENCIES.map((c) => (
+              <button key={c} type="button" onClick={() => setCurrency(c)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${currency === c ? "bg-primary text-white border-primary" : "bg-white text-slate-600 border-slate-200 hover:border-primary/40"}`}>
+                {CURRENCY_SYMBOLS[c]} {c}
+              </button>
+            ))}
+          </div>
+        </div>
+        <SliderField label={t.amount} prefix={CURRENCY_SYMBOLS[currency]} value={numAmount} onChange={(v) => setAmount(v)} min={500} max={500000} step={500} color="#1E40AF" rawValue={amount === "" ? "" : undefined} onRawChange={(raw) => { if (raw === "") setAmount(""); else setAmount(Number(raw)); }} />
         <SliderField label={t.duration} suffix={t.months} value={duration} onChange={setDuration} min={3} max={120} step={1} color="#1E40AF" />
         <div>
           <div className="flex items-center justify-between mb-2">
@@ -64,11 +77,11 @@ export function LoanSimulator({ dict }: { dict: Record<string, any> }) {
       <div className="lg:col-span-2">
         <div className="rounded-2xl bg-gradient-to-br from-primary to-secondary-700 p-8 text-white sticky top-24">
           <p className="text-sm text-slate-400 uppercase tracking-wider mb-1">{t.monthly}</p>
-          <p className="text-4xl font-bold tracking-tight font-heading">{formatCurrency(monthly, "EUR")}</p>
+          <p className="text-4xl font-bold tracking-tight font-heading">{formatCurrency(monthly, currency)}</p>
           <div className="mt-8 space-y-4">
-            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.loanAmount}</span><span className="text-sm font-semibold">{formatCurrency(numAmount, "EUR")}</span></div>
-            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalInterest}</span><span className="text-sm font-semibold text-accent">{formatCurrency(interest, "EUR")}</span></div>
-            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalRepayment}</span><span className="text-sm font-bold text-lg">{formatCurrency(total, "EUR")}</span></div>
+            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.loanAmount}</span><span className="text-sm font-semibold">{formatCurrency(numAmount, currency)}</span></div>
+            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalInterest}</span><span className="text-sm font-semibold text-accent">{formatCurrency(interest, currency)}</span></div>
+            <div className="flex justify-between items-center py-3 border-t border-white/10"><span className="text-sm text-slate-400">{t.totalRepayment}</span><span className="text-sm font-bold text-lg">{formatCurrency(total, currency)}</span></div>
           </div>
           {showApply ? (
             <div className="mt-6 pt-6 border-t border-white/10">

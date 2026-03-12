@@ -238,6 +238,7 @@ model LoanApplication {
   email          String
   phone          String?
   amount         Decimal        @db.Decimal(16, 2)
+  currency       String         @default("EUR") @db.VarChar(3)
   durationMonths Int            @map("duration_months")
   interestRate   Decimal        @map("interest_rate") @db.Decimal(5, 2)
   monthlyPayment Decimal        @map("monthly_payment") @db.Decimal(16, 2)

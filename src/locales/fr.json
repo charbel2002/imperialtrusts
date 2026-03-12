@@ -48,7 +48,12 @@
       "submit": "Créer le compte",
       "creating": "Création en cours...",
       "hasAccount": "Vous avez déjà un compte ?",
-      "signIn": "Se connecter"
+      "signIn": "Se connecter",
+      "currency": "Devise du compte",
+      "selectCurrency": "Choisissez votre devise préférée",
+      "euro": "Euro (EUR)",
+      "usd": "Dollar US (USD)",
+      "chf": "Franc suisse (CHF)"
     },
     "forgotPassword": {
       "title": "Réinitialiser votre mot de passe",
@@ -215,7 +220,9 @@
     "infoReview": "Révision rapide",
     "infoReviewDesc": "Notre équipe examine les demandes sous 24 heures.",
     "phoneLabel": "WhatsApp / Numéro de téléphone",
-    "phonePlaceholder": "+33 6 12 34 56 78"
+    "phonePlaceholder": "+33 6 12 34 56 78",
+    "currencyLabel": "Devise",
+    "selectCurrency": "Choisir une devise"
   },
   "legal": {
     "title": "Mentions légales",

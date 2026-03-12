@@ -317,3 +317,63 @@ export async function updateUserLanguage(userId: string, language: string) {
   revalidatePath("/admin/users");
   return { success: true };
 }
+
+// --- Admin: Set Account Currency ----------------------------
+
+export async function setAccountCurrency(
+  accountId: string,
+  currency: "EUR" | "USD" | "CHF"
+) {
+  const session = await getAdminSession();
+  if (!session) return { error: "Unauthorized" };
+
+  const validCurrencies = ["EUR", "USD", "CHF"];
+  if (!validCurrencies.includes(currency)) return { error: "Invalid currency" };
+
+  const account = await prisma.account.findUnique({
+    where: { id: accountId },
+    include: { user: { select: { id: true, name: true, email: true } } },
+  });
+
+  if (!account) return { error: "Account not found" };
+
+  if (account.currency === currency) {
+    return { error: `Account currency is already ${currency}` };
+  }
+
+  const previousCurrency = account.currency;
+
+  await prisma.account.update({
+    where: { id: accountId },
+    data: { currency },
+  });
+
+  // Notify user
+  await prisma.notification.create({
+    data: {
+      userId: account.user.id,
+      title: "Account Currency Changed",
+      message: `Your account currency has been changed from ${previousCurrency} to ${currency} by an administrator.`,
+      type: "info",
+    },
+  });
+
+  // Admin log
+  await prisma.adminLog.create({
+    data: {
+      adminId: session.user.id,
+      action: "ACCOUNT_CURRENCY_CHANGED",
+      targetType: "Account",
+      targetId: accountId,
+      description: `Changed account currency from ${previousCurrency} to ${currency} for ${account.user.name} (${account.user.email})`,
+      metadata: {
+        previousCurrency,
+        newCurrency: currency,
+        accountNumber: account.accountNumber,
+      },
+    },
+  });
+
+  revalidatePath("/admin/users");
+  return { success: true };
+}

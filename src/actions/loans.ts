@@ -20,6 +20,7 @@ export async function submitLoanApplication(data: {
   amount: number;
   durationMonths: number;
   interestRate: number;
+  currency?: string;
   locale?: string;
 }) {
   const validated = loanApplicationSchema.safeParse(data);
@@ -37,6 +38,7 @@ export async function submitLoanApplication(data: {
       email,
       phone,
       amount,
+      currency: data.currency || "EUR",
       durationMonths,
       interestRate,
       monthlyPayment,

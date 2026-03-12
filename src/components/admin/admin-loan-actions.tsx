@@ -14,11 +14,12 @@ interface Props {
   loanId: string;
   email: string;
   amount: number;
+  currency?: string;
   hasAccount: boolean;
   userName?: string;
 }
 
-export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }: Props) {
+export function AdminLoanActions({ loanId, email, amount, currency = "EUR", hasAccount, userName }: Props) {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [done, setDone] = useState<string | null>(null);
@@ -69,7 +70,7 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
         <div className="p-3 rounded-lg bg-white border border-emerald-200">
           <div className="flex items-center justify-between text-sm">
             <span className="text-slate-600">Montant</span>
-            <span className="font-bold text-emerald-700">{formatCurrency(amount)}</span>
+            <span className="font-bold text-emerald-700">{formatCurrency(amount, currency)}</span>
           </div>
           <div className="flex items-center justify-between text-sm mt-1">
             <span className="text-slate-600">Demandeur</span>
@@ -92,7 +93,7 @@ export function AdminLoanActions({ loanId, email, amount, hasAccount, userName }
                 Verser les fonds sur le compte
               </p>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                Créditer {formatCurrency(amount)} sur le compte bancaire et créer une transaction LOAN_DISBURSEMENT.
+                Créditer {formatCurrency(amount, currency)} sur le compte bancaire et créer une transaction LOAN_DISBURSEMENT.
               </p>
             </div>
           </label>

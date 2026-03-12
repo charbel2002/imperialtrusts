@@ -34,6 +34,7 @@ export const loanApplicationSchema = z.object({
   amount: z.number().min(500, "validation.loanAmountMin").max(500000, "validation.loanAmountMax"),
   durationMonths: z.number().int().min(3, "validation.durationMin").max(120, "validation.durationMax"),
   interestRate: z.number().min(0).max(30),
+  currency: z.enum(["EUR", "USD", "CHF"]).optional().default("EUR"),
 });
 
 export const beneficiarySchema = z.object({
