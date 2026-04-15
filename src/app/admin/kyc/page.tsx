@@ -11,7 +11,7 @@ export default async function AdminKycPage() {
   const submissions = await prisma.kycDocument.findMany({
     include: {
       user: {
-        select: { id: true, name: true, email: true, createdAt: true },
+        select: { id: true, name: true, email: true, language: true, createdAt: true, account: { select: { id: true, currency: true } } },
       },
     },
     orderBy: [
@@ -132,7 +132,14 @@ function KycSubmissionCard({ kyc, showActions = true }: {
 
         {/* Actions */}
         {isPending && showActions && (
-          <KycReviewActions kycId={kyc.id} userName={kyc.user.name} />
+          <KycReviewActions
+            kycId={kyc.id}
+            userName={kyc.user.name}
+            userId={kyc.user.id}
+            userLanguage={kyc.user.language || "en"}
+            accountId={kyc.user.account?.id}
+            accountCurrency={kyc.user.account?.currency}
+          />
         )}
       </div>
     </Card>
