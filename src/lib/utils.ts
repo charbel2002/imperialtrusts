@@ -74,7 +74,8 @@ export function timeAgo(date: Date, locale?: string): string {
 const intlLocaleMap: Record<string, string> = {
   en: "en-US", fr: "fr-FR", de: "de-DE", es: "es-ES",
   it: "it-IT", pt: "pt-BR", hi: "hi-IN", sk: "sk-SK",
-  ro: "ro-RO", cz: "cs-CZ",
+  ro: "ro-RO", cz: "cs-CZ", fi: "fi-FI", el: "el-GR",
+  hu: "hu-HU",
 };
 
 export function getIntlLocale(locale: string): string {

@@ -13,6 +13,9 @@ const dictionaries: Record<string, () => Promise<Record<string, any>>> = {
   pt: () => import("@/locales/pt.json").then((m) => m.default),
   ro: () => import("@/locales/ro.json").then((m) => m.default),
   cz: () => import("@/locales/cz.json").then((m) => m.default),
+  fi: () => import("@/locales/fi.json").then((m) => m.default),
+  el: () => import("@/locales/el.json").then((m) => m.default),
+  hu: () => import("@/locales/hu.json").then((m) => m.default),
 };
 
 /**

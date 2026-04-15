@@ -296,7 +296,7 @@ export async function updateUserLanguage(userId: string, language: string) {
   const session = await getAdminSession();
   if (!session) return { error: "Unauthorized" };
 
-  const validLangs = ["en", "fr", "de", "es", "it", "hi", "sk", "pt", "ro", "cz"];
+  const validLangs = ["en", "fr", "de", "es", "it", "hi", "sk", "pt", "ro", "cz", "fi", "el", "hu"];
   if (!validLangs.includes(language)) return { error: "Invalid language" };
 
   const user = await prisma.user.findUnique({ where: { id: userId } });
